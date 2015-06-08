@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+table.dynamicTable, table.checkbox
+{
+	display: table;
+	width: 100%;
+}
+
+table.dynamicTable thead, table.dynamicTable tbody, table.checkbox thead, table.checkbox tbody
+{
+/* 	float: left; */
+	width: 100%;
+}
+
+table.dynamicTable tbody, table.checkbox tbody
+{
+	overflow: auto;
+	/* Giving height to make the tbscroll */
+	/* Giving height dynamically is recommended */
+	max-height: 265px;
+/* 	  display:block; */
+}
+
+table.dynamicTable tr, table.checkbox tr
+{
+	width: 100%;
+/*  	display: table; */
+	/* Keeping the texts of both thead and tbody in same alignment */
+	text-align: left;
+}
+
+/* table.dynamicTable th, table.tableSection td */
+/* { */
+/* 	width: 33%; */
+/* } */
+
+table.dynamicTable tr>td:last-child
+{
+	/* removing fraction of width i.e 2% to align the tbody columns with thead columns. */
+	/* It is must as we need to consider the tbody scroll width too */
+	/* if the width is in pixels, then (width - 18px) would be enough */
+/* 	width: 31%; */
+}
+
+/* for older browsers (IE8), if you know number of columns in your table */
+/* table.dynamicTable tr>td:first-child+td+td, table.checkbox tr>td:first-child+td+td */
+/* { */
+/* 	width: 31%; */
+/* } */
+
+.highlight
+{
+	background-color: Gray;
+}
+
+table tbody tr:hover
+{
+	cursor: pointer;
+}

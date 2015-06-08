@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The core configuration file for the framework is the default (struts.xml) file and should reside on the classpath of the webapp (generally /WEB-INF/classes). -->
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- devMode equals debug information and reload everything for every request -->
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
+
+	<package name="faultinjector" extends="struts-default">
+
+		<default-action-ref name="loadexperiments" />
+
+		<action name="loadexperiments" class="faultinjector.action.LoadExperimentsAction" method="execute">
+			<result name="success">/user_main.jsp</result>
+		</action>
+
+		<action name="showexperiment" class="faultinjector.action.ShowExperimentAction" method="execute">
+			<result name="success">/experiment_details.jsp</result>
+		</action>
+
+		<action name="editexperiment" class="faultinjector.action.EditExperimentAction" method="execute">
+			<result name="success">/edit_experiment.jsp</result>
+		</action>
+
+		<action name="saveexperiment" class="faultinjector.action.SaveExperimentAction" method="execute">
+			<result name="success" type="redirectAction">loadexperiments</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">editexperiment</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+
+		<action name="deleteexperiment" class="faultinjector.action.DeleteExperimentAction" method="execute">
+			<result name="success" type="redirectAction">loadexperiments</result>
+		</action>
+
+		<action name="clearnewexperimentforward" class="faultinjector.action.ClearNewExperimentAction" method="execute">
+			<result name="success" type="redirectAction">createexperiment1</result>
+		</action>
+
+		<action name="createexperiment1" class="faultinjector.action.CreateExperiment1Action" method="execute">
+			<result name="success" type="redirectAction">loadtargets</result>
+			<result name="input">/new_experiment_1.jsp</result>
+		</action>
+
+		<action name="clearnewexperimentbackward" class="faultinjector.action.ClearNewExperimentAction" method="execute">
+			<result name="success" type="redirectAction">loadexperiments</result>
+		</action>
+
+		<action name="loadtargets" class="faultinjector.action.LoadTargetsAction" method="execute">
+			<result name="success">/new_experiment_2.jsp</result>
+		</action>
+
+		<action name="showtarget" class="faultinjector.action.ShowTargetAction" method="execute">
+			<result name="success">/target_details.jsp</result>
+		</action>
+
+		<action name="edittarget" class="faultinjector.action.EditTargetAction" method="execute">
+			<result name="success">/edit_target.jsp</result>
+		</action>
+
+		<action name="savetarget" class="faultinjector.action.SaveTargetAction" method="execute">
+			<result name="success" type="redirectAction">loadtargets</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">edittarget</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+
+		<action name="deletetarget" class="faultinjector.action.DeleteTargetAction" method="execute">
+			<result name="success" type="redirectAction">loadtargets</result>
+		</action>
+
+		<action name="createtarget" class="faultinjector.action.CreateTargetAction" method="execute">
+			<result name="success" type="redirectAction">loadtargets</result>
+			<result name="input">/new_target.jsp</result>
+		</action>
+
+		<action name="createexperiment2" class="faultinjector.action.CreateExperiment2Action" method="execute">
+			<result name="success" type="redirectAction">loadworkloads</result>
+		</action>
+
+		<action name="loadworkloads" class="faultinjector.action.LoadWorkloadsAction" method="execute">
+			<result name="success">/new_experiment_3.jsp</result>
+		</action>
+
+		<action name="showworkload" class="faultinjector.action.ShowWorkloadAction" method="execute">
+			<result name="success">/workload_details.jsp</result>
+		</action>
+
+		<action name="editworkload" class="faultinjector.action.EditWorkloadAction" method="execute">
+			<result name="success">/edit_workload.jsp</result>
+		</action>
+
+		<action name="saveworkload" class="faultinjector.action.SaveWorkloadAction" method="execute">
+			<result name="success" type="redirectAction">loadworkloads</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">editworkload</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+
+		<action name="deleteworkload" class="faultinjector.action.DeleteWorkloadAction" method="execute">
+			<result name="success" type="redirectAction">loadworkloads</result>
+		</action>
+
+		<action name="createworkload" class="faultinjector.action.CreateWorkloadAction" method="execute">
+			<result name="success" type="redirectAction">loadworkloads</result>
+			<result name="input">/new_workload.jsp</result>
+		</action>
+
+		<action name="createexperiment3" class="faultinjector.action.CreateExperiment3Action" method="execute">
+			<result name="success" type="redirectAction">loadfaultloads</result>
+			<!-- <result name="input">/new_experiment_3.jsp</result> -->
+		</action>
+		
+		<action name="createexperiment40" class="faultinjector.action.CreateExperiment41Action" method="execute">
+			<result name="success">loadworkloads</result>
+			<!-- <result name="input">/new_experiment_3.jsp</result> -->
+		</action>
+
+		<action name="loadfaultloads" class="faultinjector.action.LoadFaultloadsAction" method="execute">
+			<result name="success">/new_experiment_4.jsp</result>
+		</action>
+
+		<action name="showfaultload" class="faultinjector.action.ShowFaultloadAction" method="execute">
+			<result name="success">/faultload_details.jsp</result>
+		</action>
+
+		<action name="cleareditfaultload" class="faultinjector.action.ClearEditFaultloadAction" method="execute">
+			<result name="success" type="redirectAction">editfaultload1</result>
+		</action>
+		
+		<action name="editfaultload1" class="faultinjector.action.EditFaultload1Action" method="execute">
+			<result name="success">/edit_faultload_1.jsp</result>
+		</action>
+		
+		<action name="editfaultload21" class="faultinjector.action.EditFaultload21Action" method="execute">
+			<result name="success" type="redirectAction">
+				<param name="actionName">editfaultload22</param>
+				<param name="id">${id}</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">editfaultload1</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+		
+		<action name="editfaultload22" class="faultinjector.action.EditFaultload22Action" method="execute">
+			<result name="success">/edit_faultload_2.jsp</result>
+		</action>
+		
+		<action name="editfaultload31" class="faultinjector.action.EditFaultload31Action" method="execute">
+			<result name="success"  type="redirectAction">
+				<param name="actionName">editfaultload32</param>
+				<param name="id">${id}</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">editfaultload22</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+		
+		<action name="editfaultload32" class="faultinjector.action.EditFaultload32Action" method="execute">
+			<result name="success">/edit_faultload_3.jsp</result>
+		</action>
+		
+		<action name="editfaultload41" class="faultinjector.action.EditFaultload41Action" method="execute">
+			<result name="success" type="redirectAction">editfaultload42</result>
+		</action>
+
+		<action name="editfaultload42" class="faultinjector.action.EditFaultload42Action" method="execute">
+			<result name="success">/edit_faultload_4.jsp</result>
+		</action>
+
+		<action name="editfaultload5" class="faultinjector.action.EditFaultload5Action" method="execute">
+			<result name="success" type="redirectAction">loadfaultloads</result>
+			<result name="input" type="redirectAction">editfaultload42</result>
+		</action>
+
+		<action name="deletefaultload" class="faultinjector.action.DeleteFaultloadAction" method="execute">
+			<result name="success" type="redirectAction">loadfaultloads</result>
+		</action>
+
+		<action name="clearnewfaultloadforward" class="faultinjector.action.ClearNewFaultloadAction" method="execute">
+			<result name="success" type="redirectAction">createfaultload1</result>
+		</action>
+
+		<action name="createfaultload1" class="faultinjector.action.CreateFaultload1Action" method="execute">
+			<result name="success">/new_faultload_2.jsp</result>
+			<result name="input">/new_faultload_1.jsp</result>
+		</action>
+
+		<action name="clearnewfaultloadbackward" class="faultinjector.action.ClearNewFaultloadAction" method="execute">
+			<result name="success" type="redirectAction">loadfaultloads</result>
+		</action>
+
+		<action name="createfaultload21" class="faultinjector.action.CreateFaultload21Action" method="execute">
+			<result name="success" type="redirectAction">createfaultload22</result>
+			<result name="input">/new_faultload_2.jsp</result>
+		</action>
+
+		<action name="createfaultload22" class="faultinjector.action.CreateFaultload22Action" method="execute">
+			<result name="success">/new_faultload_3.jsp</result>
+		</action>
+
+		<action name="createfaultload31" class="faultinjector.action.CreateFaultload31Action" method="execute">
+			<!-- <result name="success">/new_faultload_4.jsp</result> -->
+			<result name="success" type="redirectAction">createfaultload32</result>
+			<result name="input">/new_faultload_3.jsp</result>
+		</action>
+
+		<action name="createfaultload32" class="faultinjector.action.CreateFaultload32Action" method="execute">
+			<result name="success">/new_faultload_4.jsp</result>
+		</action>
+
+		<action name="createfaultload4" class="faultinjector.action.CreateFaultload4Action" method="execute">
+			<result name="success" type="redirectAction">loadfaultloads</result>
+<!-- 			<result name="input">/new_faultload_4.jsp</result> -->
+			<result name="input" type="redirectAction">createfaultload32</result>
+		</action>
+
+		<action name="createexperiment41" class="faultinjector.action.CreateExperiment41Action" method="execute">
+			<result name="success" type="redirectAction">createexperiment42</result>
+			<!-- <result name="input">/new_experiment_3.jsp</result> -->
+		</action>
+		
+		<action name="createexperiment42" class="faultinjector.action.CreateExperiment42Action" method="execute">
+			<result name="success" type="redirectAction">loadexperiments</result>
+			<!-- <result name="input">/new_experiment_3.jsp</result> -->
+		</action>
+
+	</package>
+</struts>
