@@ -46,7 +46,7 @@ public interface Persistable
 
 	public void deleteFaultload(int id);
 
-	public int[] createFaultload(Faultload f);
+	public int createFaultload(Faultload f);
 
 	public List<Register> findAllRegisters();
 

@@ -39,7 +39,8 @@
 <!-- test browser flexbox support and load legacy grid if unsupported -->
 <script type="text/javascript" src="http://cdn.ink.sapo.pt/3.1.7/js/modernizr.js"></script>
 <script type="text/javascript">
-	Modernizr.load({
+	Modernizr.load(
+	{
 		test : Modernizr.flexbox,
 		nope : 'http://cdn.ink.sapo.pt/3.1.7/css/ink-legacy.min.css'
 	});
@@ -251,27 +252,25 @@ footer {
 	<script src="js/my-jquery.js"></script>
 
 	<script type="text/javascript">
-		var check10, check11, value = $('input[name=hardwareFaultType]:checked')
-				.val();
+		var check10, check11, value = $('input[name=hardwareFaultType]:checked').val();
 
-		if (value == "m") {
+		if (value == "m")
+		{
 			$('#memstart').attr("disabled", false);
 			$('#memend').attr("disabled", false);
-		} else {
+		} else
+		{
 			$('#memstart').attr("disabled", true);
 			$('#memend').attr("disabled", true);
 		}
 
-		if ($('#numberfaults').val().match(/^\d+$/)
-				&& $('#numberfaults').val() > 0) {
+		if ($('#numberfaults').val().match(/^\d+$/) && $('#numberfaults').val() > 0)
+		{
 			if ($('#memstart').is(':disabled') && $('#memend').is(':disabled'))
 				check10 = "true";
-			else {
-				if ($('#memstart').val().match(/^\d+$/)
-						&& $('#memend').val().match(/^\d+$/)
-						&& $('#memstart').val() > 0
-						&& parseInt($('#memstart').val()) <= parseInt($(
-								'#memend').val()))
+			else
+			{
+				if ($('#memstart').val().match(/^\d+$/) && $('#memend').val().match(/^\d+$/) && $('#memstart').val() > 0 && parseInt($('#memstart').val()) <= parseInt($('#memend').val()))
 					check10 = "true";
 				else
 					check10 = "false";
@@ -279,11 +278,7 @@ footer {
 		} else
 			check10 = "false";
 
-		if ($('#bitstart').val().match(/^\d+$/)
-				&& $('#bitend').val().match(/^\d+$/)
-				&& $('#bitstart').val() >= 0
-				&& parseInt($('#bitstart').val()) <= parseInt($('#bitend')
-						.val()))
+		if ($('#bitstart').val().match(/^\d+$/) && $('#bitend').val().match(/^\d+$/) && $('#bitstart').val() >= 0 && parseInt($('#bitstart').val()) <= parseInt($('#bitend').val()))
 			check11 = "true";
 		else
 			check11 = "false";
@@ -293,54 +288,44 @@ footer {
 		else
 			$('#next').attr("disabled", true);
 
-		$("#page_2")
-				.on(
-						"input change",
-						function() {
-							value = $('input[name=hardwareFaultType]:checked')
-									.val();
+		$("#page_2").on("input change", function()
+		{
+			value = $('input[name=hardwareFaultType]:checked').val();
 
-							if (value == "m") {
-								$('#memstart').attr("disabled", false);
-								$('#memend').attr("disabled", false);
-							} else {
-								$('#memstart').attr("disabled", true);
-								$('#memend').attr("disabled", true);
-							}
+			if (value == "m")
+			{
+				$('#memstart').attr("disabled", false);
+				$('#memend').attr("disabled", false);
+			} else
+			{
+				$('#memstart').attr("disabled", true);
+				$('#memend').attr("disabled", true);
+			}
 
-							if ($('#numberfaults').val().match(/^\d+$/)
-									&& $('#numberfaults').val() > 0) {
-								if ($('#memstart').is(':disabled')
-										&& $('#memend').is(':disabled'))
-									check10 = "true";
-								else {
-									if ($('#memstart').val().match(/^\d+$/)
-											&& $('#memend').val()
-													.match(/^\d+$/)
-											&& $('#memstart').val() > 0
-											&& parseInt($('#memstart').val()) <= parseInt($(
-													'#memend').val()))
-										check10 = "true";
-									else
-										check10 = "false";
-								}
-							} else
-								check10 = "false";
+			if ($('#numberfaults').val().match(/^\d+$/) && $('#numberfaults').val() > 0)
+			{
+				if ($('#memstart').is(':disabled') && $('#memend').is(':disabled'))
+					check10 = "true";
+				else
+				{
+					if ($('#memstart').val().match(/^\d+$/) && $('#memend').val().match(/^\d+$/) && $('#memstart').val() > 0 && parseInt($('#memstart').val()) <= parseInt($('#memend').val()))
+						check10 = "true";
+					else
+						check10 = "false";
+				}
+			} else
+				check10 = "false";
 
-							if ($('#bitstart').val().match(/^\d+$/)
-									&& $('#bitend').val().match(/^\d+$/)
-									&& $('#bitstart').val() >= 0
-									&& parseInt($('#bitstart').val()) <= parseInt($(
-											'#bitend').val()))
-								check11 = "true";
-							else
-								check11 = "false";
+			if ($('#bitstart').val().match(/^\d+$/) && $('#bitend').val().match(/^\d+$/) && $('#bitstart').val() >= 0 && parseInt($('#bitstart').val()) <= parseInt($('#bitend').val()))
+				check11 = "true";
+			else
+				check11 = "false";
 
-							if (check10 == "true" && check11 == "true")
-								$('#next').attr("disabled", false);
-							else
-								$('#next').attr("disabled", true);
-						});
+			if (check10 == "true" && check11 == "true")
+				$('#next').attr("disabled", false);
+			else
+				$('#next').attr("disabled", true);
+		});
 	</script>
 </body>
 </html>

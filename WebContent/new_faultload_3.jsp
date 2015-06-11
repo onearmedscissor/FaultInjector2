@@ -143,14 +143,14 @@ footer {
 											</div>
 										</div>
 									</td>
-									<td class="all-100"><a href="#" class="large align-left"><s:property value="name" /></a></td>
+									<td class="all-100"><a class="large align-left"><s:property value="name" /></a></td>
 								</tr>
 							</s:iterator>
 						</s:if>
 					</tbody>
 				</table>
 
-				<a href="#" class="ink-button all-40 double-bottom-space" id="all">Select all</a>
+				<button class="ink-button all-40 double-bottom-space" id="all">Select all</button>
 			</div>
 			<div class="all-30"></div>
 		</div>

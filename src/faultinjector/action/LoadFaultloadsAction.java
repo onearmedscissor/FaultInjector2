@@ -30,26 +30,27 @@ public class LoadFaultloadsAction extends ActionSupport implements SessionAware
 
 		for (Faultload fl : this.faultloads)
 		{
-			System.out.println("Faultload ID = " + fl.getFl_id());
-			System.out.println("Faultload NAME = " + fl.getName());
-			System.out.println("Faultload CREATION DATE = " + fl.getCreation_date());
-			System.out.println("Faultload DESCRIPTION = " + fl.getDescription());
-			System.out.println("Faultload MEMORY RANGE BEGINNING = " + fl.getMem_range_beg());
-			System.out.println("Faultload MEMORY RANGE END = " + fl.getMem_range_end());
-			System.out.println("Faultload NUMBER OF FAULTS = " + fl.getN_faults());
-			System.out.println("Faultload TIME INTERVAL = " + fl.getTime_interval());
+			System.out.println("Faultload ID = "+fl.getFl_id());
+			System.out.println("Faultload NAME = "+fl.getName());
+			System.out.println("Faultload CREATION DATE = "+fl.getCreation_date());
+			System.out.println("Faultload DESCRIPTION = "+fl.getDescription());
+			System.out.println("Faultload MEMORY RANGE BEGINNING = "+fl.getMem_range_beg());
+			System.out.println("Faultload MEMORY RANGE END = "+fl.getMem_range_end());
+			System.out.println("Faultload NUMBER OF FAULTS = "+fl.getN_faults());
+			System.out.println("Faultload TIME INTERVAL = "+fl.getTime_interval());
 
 			injectionRuns = fl.getInjectionRuns();
 
 			for (Injection_Run i : injectionRuns)
-				System.out.println("Faultload OUTPUT FILENAME = " + i.getOutput_filename());
+				System.out.println("Faultload OUTPUT FILENAME = "+i.getOutput_filename());
 
 			faults = fl.getFaults();
 
 			for (Fault f : faults)
-				System.out.println("Faultload FAULT ID = " + f.getFault_id());
+				System.out.println("Faultload FAULT ID = "+f.getFault_id());
 
-			System.out.println("Faultload EXPERIMENT NAME = " + fl.getExperiment().getName());
+			if (fl.getExperiment()!=null)
+				System.out.println("Faultload EXPERIMENT NAME = "+fl.getExperiment().getName());
 
 			System.out.println();
 		}

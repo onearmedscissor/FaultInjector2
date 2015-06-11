@@ -320,7 +320,7 @@ footer {
 					$('#accessdata').attr("disabled", true);
 					$('#dataaddress').attr("disabled", true);
 	
-					if ($('#timestart').val().match(/^\d+$/) && $('#timestart').val() > 0 && $('#timeend').val().match(/^\d+$/) && $('#timeend').val() > 0 && (parseInt($('#timestart').val()) < parseInt($('#timeend').val())))
+					if ($('#timestart').val().match(/^\d+$/) && $('#timestart').val() >= 0 && $('#timeend').val().match(/^\d+$/) && $('#timeend').val() >= 0 && (parseInt($('#timestart').val()) <= parseInt($('#timeend').val())))
 						check22 = "true";
 					else
 						check22 = "false";

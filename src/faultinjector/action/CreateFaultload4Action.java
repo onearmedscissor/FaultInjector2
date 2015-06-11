@@ -13,12 +13,9 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.bean.ExperimentBean;
 import faultinjector.bean.FaultloadBean;
-import faultinjector.entity.Experiment;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.HardwareFault;
 import faultinjector.entity.Register;
-import faultinjector.entity.Target;
-import faultinjector.entity.Workload;
 import faultinjector.service.ExperimentService;
 
 public class CreateFaultload4Action extends ActionSupport implements SessionAware
@@ -32,7 +29,7 @@ public class CreateFaultload4Action extends ActionSupport implements SessionAwar
 	private int processId, timeStart, timeEnd, codeAddress, dataAddress;
 	private String triggerType, accessCode, accessData;
 	private List<String> accessTypes;
-	private int[] ids;
+	private int id;
 
 	// public CreateFaultload4Action()
 	// {
@@ -55,16 +52,7 @@ public class CreateFaultload4Action extends ActionSupport implements SessionAwar
 
 		// experimentBean.setFaultloadIds(fids);
 
-		Experiment experiment = new Experiment();
 
-		experiment.setName(experimentBean.getName());
-		experiment.setDescription(experimentBean.getDescription());
-
-		Target t = this.getExperimentService().findTarget(experimentBean.getTargetId());
-		experiment.setTarget(t);
-
-		Workload w = this.getExperimentService().findWorkload(experimentBean.getWorkloadId());
-		experiment.getTarget().addWorkload(w);
 
 		// for (int n = 0; n < fids.length; n++)
 		// {
@@ -75,8 +63,7 @@ public class CreateFaultload4Action extends ActionSupport implements SessionAwar
 		// }
 
 		/*
-		 * 2. Then, assign the newly created experiment to the new faultload
-		 * being created, and then finish creating it
+		 * 2. Then, assign the newly created experiment to the new faultload being created, and then finish creating it
 		 */
 
 		if (!session.containsKey("faultloadBean"))
@@ -87,39 +74,39 @@ public class CreateFaultload4Action extends ActionSupport implements SessionAwar
 		else
 			faultloadBean = (FaultloadBean) session.get("faultloadBean");
 
-		faultloadBean.setKernelMode(faultMode);
-		faultloadBean.setProcessId(processId);
-		faultloadBean.setTriggerType(triggerType);
-
-		switch (triggerType)
-		{
-			case "tp":
-			{
-				faultloadBean.setTemporalTriggerStart(timeStart);
-				faultloadBean.setTemporalTriggerEnd(timeEnd);
-			}
-				break;
-			case "sc":
-			{
-				if (accessCode.equals("write"))
-					faultloadBean.setReadAddress(false);
-				else
-					faultloadBean.setReadAddress(true);
-
-				faultloadBean.setMemoryAddress(codeAddress);
-			}
-				break;
-			case "sd":
-			{
-				if (accessData.equals("write"))
-					faultloadBean.setReadAddress(false);
-				else
-					faultloadBean.setReadAddress(true);
-
-				faultloadBean.setMemoryAddress(dataAddress);
-			}
-				break;
-		}
+		// faultloadBean.setKernelMode(faultMode);
+		// faultloadBean.setProcessId(processId);
+		// faultloadBean.setTriggerType(triggerType);
+		//
+		// switch (triggerType)
+		// {
+		// case "tp":
+		// {
+		// faultloadBean.setTemporalTriggerStart(timeStart);
+		// faultloadBean.setTemporalTriggerEnd(timeEnd);
+		// }
+		// break;
+		// case "sc":
+		// {
+		// if (accessCode.equals("write"))
+		// faultloadBean.setReadAddress(false);
+		// else
+		// faultloadBean.setReadAddress(true);
+		//
+		// faultloadBean.setMemoryAddress(codeAddress);
+		// }
+		// break;
+		// case "sd":
+		// {
+		// if (accessData.equals("write"))
+		// faultloadBean.setReadAddress(false);
+		// else
+		// faultloadBean.setReadAddress(true);
+		//
+		// faultloadBean.setMemoryAddress(dataAddress);
+		// }
+		// break;
+		// }
 
 		Faultload faultload = new Faultload();
 
@@ -148,44 +135,42 @@ public class CreateFaultload4Action extends ActionSupport implements SessionAwar
 		}
 
 		faultload.setRegisters(regs);
-		// faultload.setExperiment(experiment);
-		experiment.addFaultload(faultload);
 
 		HardwareFault hardwareFault = new HardwareFault();
 		hardwareFault.setHw_fault_type(faultloadBean.getHardwareFaultType());
 		hardwareFault.setBit_flip(faultloadBean.getBitFlip());
 		hardwareFault.setBitStart(faultloadBean.getBitsChangeStart());
 		hardwareFault.setBitEnd(faultloadBean.getBitsChangeEnd());
-		hardwareFault.setKernel_mode(faultloadBean.getKernelMode());
-		hardwareFault.setPid(faultloadBean.getProcessId());
-		hardwareFault.setTrigger_type(faultloadBean.getTriggerType());
+		hardwareFault.setKernel_mode(faultMode);
+		hardwareFault.setPid(processId);
+		hardwareFault.setTrigger_type(triggerType);
 
 		switch (hardwareFault.getTrigger_type())
 		{
 			case "tp":
 			{
-				hardwareFault.setTime_start(faultloadBean.getTemporalTriggerStart());
-				hardwareFault.setTime_end(faultloadBean.getTemporalTriggerEnd());
+				hardwareFault.setTime_start(timeStart);
+				hardwareFault.setTime_end(timeEnd);
 			}
 				break;
 			case "sc":
 			{
-				if (faultloadBean.getReadAddress().equals("write"))
+				if (accessCode.equals("write"))
 					hardwareFault.setRead_address(false);
 				else
 					hardwareFault.setRead_address(true);
 
-				hardwareFault.setMem_address(faultloadBean.getMemoryAddress());
+				hardwareFault.setMem_address(codeAddress);
 			}
 				break;
 			case "sd":
 			{
 				if (accessData.equals("write"))
-					faultloadBean.setReadAddress(false);
+					hardwareFault.setRead_address(false);
 				else
-					faultloadBean.setReadAddress(true);
+					hardwareFault.setRead_address(true);
 
-				hardwareFault.setMem_address(faultloadBean.getMemoryAddress());
+				hardwareFault.setMem_address(dataAddress);
 			}
 				break;
 		}
@@ -195,16 +180,14 @@ public class CreateFaultload4Action extends ActionSupport implements SessionAwar
 
 		// this.getExperimentService().createExperiment(experiment);
 
-		ids = this.getExperimentService().createFaultload(faultload);
+		id = this.getExperimentService().createFaultload(faultload);
 
-		System.out.println("ID NOVA FAULTLOAD 3 -> " + ids[0]);
-		System.out.println("ID NOVA EXPERIMENT 3 -> " + ids[1]);
+		System.out.println("ID NOVA FAULTLOAD 3 -> " + id);
 
-		String[] fids = { Integer.toString(ids[0]) };
+		String[] fids = { Integer.toString(id) };
 		experimentBean.setFaultloadIds(fids);
-		experimentBean.setId(ids[1]);
 
-		System.out.println("NEW EXPERIMENT 4-------------------------------");
+		System.out.println("NEW EXPERIMENT 4 [BEAN]-------------------------------");
 		System.out.println("New experiment NAME = " + experimentBean.getName());
 		System.out.println("New experiment DESCRIPTION = " + experimentBean.getDescription());
 		System.out.println("New experiment SELECTED TARGET ID = " + experimentBean.getTargetId());
@@ -212,34 +195,34 @@ public class CreateFaultload4Action extends ActionSupport implements SessionAwar
 		System.out.println("New experiment SELECTED FAULTLOAD(S) ID(S) = " + Arrays.toString(experimentBean.getFaultloadIds()));
 
 		System.out.println("NEW FAULTLOAD 4-------------------------------");
-		System.out.println("New faultload NAME = " + faultloadBean.getName());
-		System.out.println("New faultload DESCRIPTION = " + faultloadBean.getDescription());
-		System.out.println("New faultload TIME INTERVAL = " + faultloadBean.getTimeInterval());
+		System.out.println("New faultload NAME = " + faultload.getName());
+		System.out.println("New faultload DESCRIPTION = " + faultload.getDescription());
+		System.out.println("New faultload TIME INTERVAL = " + faultload.getTime_interval());
 
-		System.out.println("New faultload HARDWARE FAULT TYPE = " + faultloadBean.getHardwareFaultType());
-		System.out.println("New faultload MEMORY FAULT RANGE = " + faultloadBean.getMemoryFaultRangeStart() + " - " + faultloadBean.getMemoryFaultRangeEnd());
-		System.out.println("New faultload NUMBER OF FAULTS = " + faultloadBean.getNumberFaults());
+		System.out.println("New faultload HARDWARE FAULT TYPE = " + hardwareFault.getHw_fault_type());
+		System.out.println("New faultload MEMORY FAULT RANGE = " + faultload.getMem_range_beg() + " - " + faultload.getMem_range_end());
+		System.out.println("New faultload NUMBER OF FAULTS = " + faultload.getN_faults());
 		System.out.println("New faultload 1.1 FAULT MODEL____________________________________");
-		System.out.println("New faultload FAULT CLASS: IS BIT-FLIP? = " + faultloadBean.getBitFlip());
-		System.out.println("New faultload BITS TO CHANGE = " + faultloadBean.getBitsChangeStart() + " - " + faultloadBean.getBitsChangeEnd());
-		System.out.println("New faultload SELECTED REGISTER(S) ID(S) = " + Arrays.toString(faultloadBean.getRegisterIds()));
+		System.out.println("New faultload FAULT CLASS: IS BIT-FLIP? = " + hardwareFault.getBit_flip());
+		System.out.println("New faultload BITS TO CHANGE = " + hardwareFault.getBitStart() + " - " + hardwareFault.getBitEnd());
+		System.out.println("New faultload SELECTED REGISTER(S) ID(S) = " + faultload.getRegisters());
 
 		System.out.println("New faultload 2.1 FAULT TRIGGER____________________________________");
-		System.out.println("New faultload MODE: KERNEL? = " + faultloadBean.getKernelMode());
-		System.out.println("New faultload PROCESS ID = " + faultloadBean.getProcessId());
+		System.out.println("New faultload MODE: KERNEL? = " + hardwareFault.getKernel_mode());
+		System.out.println("New faultload PROCESS ID = " + hardwareFault.getPid());
 		System.out.println("New faultload 2.2 FAULT TRIGGER TYPE____________________________________");
-		System.out.println("New faultload TRIGGER TYPE = " + faultloadBean.getTriggerType());
+		System.out.println("New faultload TRIGGER TYPE = " + hardwareFault.getTrigger_type());
 
-		switch (faultloadBean.getTriggerType())
+		switch (hardwareFault.getTrigger_type())
 		{
 			case "tp":
-				System.out.println("New faultload TEMPORAL BETWEEN = " + faultloadBean.getTemporalTriggerStart() + " AND " + faultloadBean.getTemporalTriggerEnd());
+				System.out.println("New faultload TEMPORAL BETWEEN = " + hardwareFault.getTime_start() + " AND " + hardwareFault.getTime_end());
 				break;
 			case "sc":
-				System.out.println("New faultload SPATIAL (CODE SEGMENT) = " + faultloadBean.getReadAddress() + " ON ADDRESS " + faultloadBean.getMemoryAddress());
+				System.out.println("New faultload SPATIAL (CODE SEGMENT) = " + hardwareFault.getRead_address() + " ON ADDRESS " + hardwareFault.getMem_address());
 				break;
 			case "sd":
-				System.out.println("New faultload SPATIAL (DATA SEGMENT) = " + faultloadBean.getReadAddress() + " ON ADDRESS " + faultloadBean.getMemoryAddress());
+				System.out.println("New faultload SPATIAL (DATA SEGMENT) = " + hardwareFault.getRead_address() + " ON ADDRESS " + hardwareFault.getMem_address());
 				break;
 		}
 
@@ -255,10 +238,10 @@ public class CreateFaultload4Action extends ActionSupport implements SessionAwar
 		{
 			case "tp":
 			{
-				if (timeStart < 0 || timeEnd <= timeStart)
+				if (timeStart < 0 || timeEnd < timeStart)
 					addFieldError("faultloadBean.temporalTriggerStart", "Faultload temporal trigger time start is required and must be positive! Also, time start must be greater than time end!");
 
-				if (timeEnd < 0 || timeEnd <= timeStart)
+				if (timeEnd < 0 || timeEnd < timeStart)
 					addFieldError("faultloadBean.temporalTriggerEnd", "Faultload temporal trigger time end is required and must be positive! Also, time start must be greater than time end!");
 
 				break;

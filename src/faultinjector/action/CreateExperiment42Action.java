@@ -45,42 +45,22 @@ public class CreateExperiment42Action extends ActionSupport implements SessionAw
 		et = em.getTransaction();
 		et.begin();
 
-		if (experimentBean.getId() != -1) // if the experiment has already been
-											// created when creating a new
-											// faultload
+		experiment = new Experiment();
+
+		experiment.setName(experimentBean.getName());
+		experiment.setDescription(experimentBean.getDescription());
+
+		Target t = this.getExperimentService().findTarget(experimentBean.getTargetId());
+		experiment.setTarget(t);
+
+		Workload w = this.getExperimentService().findWorkload(experimentBean.getWorkloadId());
+		experiment.getTarget().addWorkload(w);
+
+		for (int n = 0; n < fids.length; n++)
 		{
-			experiment = this.getExperimentService().findExperiment(experimentBean.getId());
+			Faultload f = this.getExperimentService().findFaultload(Integer.parseInt(fids[n]));
 
-			experiment.getFaultloads().clear(); // cleans the already chosen
-												// faultloads
-
-			for (int n = 0; n < fids.length; n++)
-			{
-				Faultload f = this.getExperimentService().findFaultload(Integer.parseInt(fids[n]));
-
-				experiment.addFaultload(f);
-			}
-		}
-		else
-		// truly a new experiment
-		{
-			experiment = new Experiment();
-
-			experiment.setName(experimentBean.getName());
-			experiment.setDescription(experimentBean.getDescription());
-
-			Target t = this.getExperimentService().findTarget(experimentBean.getTargetId());
-			experiment.setTarget(t);
-
-			Workload w = this.getExperimentService().findWorkload(experimentBean.getWorkloadId());
-			experiment.getTarget().addWorkload(w);
-
-			for (int n = 0; n < fids.length; n++)
-			{
-				Faultload f = this.getExperimentService().findFaultload(Integer.parseInt(fids[n]));
-
-				experiment.addFaultload(f);
-			}
+			experiment.addFaultload(f);
 		}
 
 		et.commit();
