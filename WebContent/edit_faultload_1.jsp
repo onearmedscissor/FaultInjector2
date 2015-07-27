@@ -121,7 +121,7 @@ footer {
 			<div class="all-100">
 				<form action="editfaultload21" id="page_1" class="ink-form all-100 small-100 tiny-100" method="post">
 					<fieldset>
-						<s:hidden name="id" value="%{faultload.fl_id}" />
+						<s:hidden name="id" value="%{faultload.faultloadId}" />
 
 						<div class="control-group column-group gutters required">
 							<label for="name" class="all-20 align-right">Name</label>
@@ -142,7 +142,7 @@ footer {
 						<div class="control-group column-group gutters required">
 							<label for="timeinterval" class="all-20 align-right">Time interval (ms)</label>
 							<div class="control all-50">
-								<s:textfield id="timeinterval" name="timeInterval" value="%{faultload.time_interval}" />
+								<s:textfield id="timeinterval" name="timeInterval" value="%{faultload.timeInterval}" />
 							</div>
 							<div class="all-30"></div>
 						</div>

@@ -3,15 +3,15 @@ package faultinjector.bean;
 public class FaultloadBean
 {
 	private String name, description, triggerType;
-	private int timeInterval, memoryFaultRangeStart, memoryFaultRangeEnd, numberFaults, bitsChangeStart, bitsChangeEnd, processId, temporalTriggerStart, temporalTriggerEnd, memoryAddress;
-	private char hardwareFaultType;
-	private boolean bitFlip, kernelMode, readAddress;
+	private int timeInterval, hardwareFaultTypeId, memoryFaultRangeStart, memoryFaultRangeEnd, numberFaults, bitsChangeStart, bitsChangeEnd, faultClassId, faultModeId, processId, temporalTriggerStart, temporalTriggerEnd, memoryAddress;
+	private boolean readAddress;
 	private String[] registerIds;
-
-	private static final String READ = "read", WRITE = "write";
 
 	public FaultloadBean()
 	{
+		faultClassId = 0;
+		faultModeId = 0;
+		hardwareFaultTypeId = 0;
 	}
 
 	public String getName()
@@ -94,24 +94,34 @@ public class FaultloadBean
 		this.bitsChangeEnd = bitsChangeEnd;
 	}
 
-	public char getHardwareFaultType()
+	public int getHardwareFaultTypeId()
 	{
-		return hardwareFaultType;
+		return hardwareFaultTypeId;
 	}
 
-	public void setHardwareFaultType(char hardwareFaultType)
+	public void setHardwareFaultTypeId(int hardwareFaultTypeId)
 	{
-		this.hardwareFaultType = hardwareFaultType;
+		this.hardwareFaultTypeId = hardwareFaultTypeId;
 	}
 
-	public boolean getBitFlip()
+	public int getFaultClassId()
 	{
-		return bitFlip;
+		return faultClassId;
 	}
 
-	public void setBitFlip(boolean bitFlip)
+	public void setFaultClassId(int faultClassId)
 	{
-		this.bitFlip = bitFlip;
+		this.faultClassId = faultClassId;
+	}
+
+	public int getFaultModeId()
+	{
+		return faultModeId;
+	}
+
+	public void setFaultModeId(int faultModeId)
+	{
+		this.faultModeId = faultModeId;
 	}
 
 	public String[] getRegisterIds()
@@ -172,24 +182,6 @@ public class FaultloadBean
 	public void setMemoryAddress(int memoryAddress)
 	{
 		this.memoryAddress = memoryAddress;
-	}
-
-	public boolean getKernelMode()
-	{
-		return kernelMode;
-	}
-
-	public void setKernelMode(boolean kernelMode)
-	{
-		this.kernelMode = kernelMode;
-	}
-
-	public String getReadAddress()
-	{
-		if (readAddress)
-			return READ;
-		else
-			return WRITE;
 	}
 
 	public void setReadAddress(boolean readAddress)

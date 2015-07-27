@@ -124,14 +124,15 @@ footer {
 						<div class="control-group column-group gutters required">
 							<p class="label all-20 align-right push-middle">Hardware fault type</p>
 							<ul id="hwfaulttype" class="control unstyled all-80 inline">
-								<s:if test="%{#session.faultloadBean.hardwareFaultType == 'r'}">
-									<li><input type="radio" id="reg" name="hardwareFaultType" value="r" checked><label for="reg">register</label></li>
-									<li><input type="radio" id="mem" name="hardwareFaultType" value="m"><label for="mem">memory</label></li>
-								</s:if>
-								<s:else>
-									<li><input type="radio" id="reg" name="hardwareFaultType" value="r"><label for="reg">register</label></li>
-									<li><input type="radio" id="mem" name="hardwareFaultType" value="m" checked><label for="mem">memory</label></li>
-								</s:else>
+<%-- 								<s:if test="%{#session.faultloadBean.hardwareFaultType == 'r'}"> --%>
+<!-- 									<li><input type="radio" id="reg" name="hardwareFaultType" value="r" checked><label for="reg">register</label></li> -->
+<!-- 									<li><input type="radio" id="mem" name="hardwareFaultType" value="m"><label for="mem">memory</label></li> -->
+<%-- 								</s:if> --%>
+<%-- 								<s:else> --%>
+<!-- 									<li><input type="radio" id="reg" name="hardwareFaultType" value="r"><label for="reg">register</label></li> -->
+<!-- 									<li><input type="radio" id="mem" name="hardwareFaultType" value="m" checked><label for="mem">memory</label></li> -->
+<%-- 								</s:else> --%>
+								<li><s:radio label="hardwarefaulttype" name="hardwareFaultTypeId" list="hardwareFaultTypes" listKey="hardwareFaultTypeId" listValue="name" value="defaultHardwareFaultTypeId" /></li>
 							</ul>
 						</div>
 
@@ -177,15 +178,8 @@ footer {
 					<fieldset>
 						<div class="control-group column-group gutters required">
 							<p class="label all-20 align-right push-middle">Fault class</p>
-							<ul class="control unstyled all-80 inline">
-								<s:if test="%{#session.faultloadBean.bitFlip}">
-									<li><input type="radio" id="bitflip" name="faultClass" value="true" checked><label for="bitflip">bit-flip</label></li>
-									<li><input type="radio" id="stuckat" name="faultClass" value="false"><label for="stuckat">stuck at</label></li>
-								</s:if>
-								<s:else>
-									<li><input type="radio" id="bitflip" name="faultClass" value="true"><label for="bitflip">bit-flip</label></li>
-									<li><input type="radio" id="stuckat" name="faultClass" value="false" checked><label for="stuckat">stuck at</label></li>
-								</s:else>
+							<ul class="control unstyled all-80 inline">															
+								<li><s:radio label="faultclasses" name="faultClassId" list="faultClasses" listKey="faultClassId" listValue="name" value="defaultFaultClassId"/></li>															
 							</ul>
 						</div>
 
@@ -222,7 +216,7 @@ footer {
 							<div class="all-50">
 								<div class="column-group">
 									<div class="all-50 align-left">
-										<a href="createfaultload1" class="ink-button all-95">&lt; Previous</a>
+										<a href="new_faultload_1.jsp" class="ink-button all-95">&lt; Previous</a>
 									</div>
 									<div class="all-50 align-right">
 										<button class="ink-button all-95" type="submit" id="next" disabled>Next &gt;</button>
@@ -254,7 +248,7 @@ footer {
 	<script type="text/javascript">
 		var check10, check11, value = $('input[name=hardwareFaultType]:checked').val();
 
-		if (value == "m")
+		if (value == "memory")
 		{
 			$('#memstart').attr("disabled", false);
 			$('#memend').attr("disabled", false);
@@ -292,7 +286,7 @@ footer {
 		{
 			value = $('input[name=hardwareFaultType]:checked').val();
 
-			if (value == "m")
+			if (value == "memory")
 			{
 				$('#memstart').attr("disabled", false);
 				$('#memend').attr("disabled", false);

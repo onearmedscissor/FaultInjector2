@@ -123,7 +123,7 @@ footer {
 						</tr>
 						<tr>
 							<td class="all-25 align-right fw-400">Creation date</td>
-							<td class="all-75 fw-300"><s:property value="faultload.creation_date" /></td>
+							<td class="all-75 fw-300"><s:property value="faultload.creationDate" /></td>
 						</tr>
 						<tr>
 							<td class="all-25 align-right fw-400">Experiment name</td>
@@ -135,46 +135,32 @@ footer {
 						</tr>
 						<tr>
 							<td class="all-25 align-right fw-400">Time interval (ms)</td>
-							<td class="all-75 fw-300"><s:property value="faultload.time_interval" /></td>
+							<td class="all-75 fw-300"><s:property value="faultload.timeInterval" /></td>
 						</tr>
 						<s:iterator value="faults">
-							<s:iterator value="hardwares">
-								<s:if test="hw_fault_type =='m'">
-									<tr>
-										<td class="all-25 align-right fw-400">Hardware fault type</td>
-										<td class="all-75 fw-300">memory</td>
-									</tr>
+							<s:iterator value="hardwareFaults">
+								<tr>
+									<td class="all-25 align-right fw-400">Hardware fault type</td>
+									<td class="all-75 fw-300"><s:property value="hardwareFaultType.name" /></td>
+								</tr>
+								<s:if test="hardwareFaultType.name =='memory'">
 									<tr>
 										<td class="all-25 align-right fw-400">Memory range start</td>
-										<td class="all-75 fw-300"><s:property value="faultload.mem_range_beg" /></td>
+										<td class="all-75 fw-300"><s:property value="faultload.memoryRangeBeginning" /></td>
 									</tr>
 									<tr>
 										<td class="all-25 align-right fw-400">Memory range end</td>
-										<td class="all-75 fw-300"><s:property value="faultload.mem_range_end" /></td>
+										<td class="all-75 fw-300"><s:property value="faultload.memoryRangeEnd" /></td>
 									</tr>
 								</s:if>
-								<s:else>
-									<tr>
-										<td class="all-25 align-right fw-400">Hardware fault type</td>
-										<td class="all-75 fw-300">register</td>
-									</tr>
-								</s:else>
 								<tr>
 									<td class="all-25 align-right fw-400">Number of faults</td>
-									<td class="all-75 fw-300"><s:property value="faultload.n_faults" /></td>
+									<td class="all-75 fw-300"><s:property value="faultload.numberFaults" /></td>
 								</tr>
-								<s:if test="%{bit_flip}">
-									<tr>
-										<td class="all-25 align-right fw-400">Fault class</td>
-										<td class="all-75 fw-300">bit-flip</td>
-									</tr>
-								</s:if>
-								<s:else>
-									<tr>
-										<td class="all-25 align-right fw-400">Fault class</td>
-										<td class="all-75 fw-300">stuck at</td>
-									</tr>
-								</s:else>
+								<tr>
+									<td class="all-25 align-right fw-400">Fault class</td>
+									<td class="all-75 fw-300"><s:property value="faultClass.name" /></td>
+								</tr>
 								<tr>
 									<td class="all-25 align-right fw-400">Bits to change start</td>
 									<td class="all-75 fw-300"><s:property value="bitStart" /></td>
@@ -192,48 +178,40 @@ footer {
 							</tr>
 						</s:iterator>
 						<s:iterator value="faults">
-							<s:if test="%{kernel_mode}">
-								<tr>
-									<td class="all-25 align-right fw-400">Mode</td>
-									<td class="all-75 fw-300">kernel</td>
-								</tr>
-							</s:if>
-							<s:else>
-								<tr>
-									<td class="all-25 align-right fw-400">Mode</td>
-									<td class="all-75 fw-300">user</td>
-								</tr>
-							</s:else>
+							<tr>
+								<td class="all-25 align-right fw-400">Mode</td>
+								<td class="all-75 fw-300"><s:property value="faultMode.name" /></td>
+							</tr>
 							<tr>
 								<td class="all-25 align-right fw-400">Process ID</td>
 								<td class="all-75 fw-300"><s:property value="pid" /></td>
 							</tr>
-							<s:if test="trigger_type=='tp'">
+							<s:if test="triggerType=='tp'">
 								<tr>
 									<td class="all-25 align-right fw-400">Fault trigger type</td>
 									<td class="all-75 fw-300">temporal</td>
 								</tr>
 								<tr>
 									<td class="all-25 align-right fw-400">Temporal trigger start (ms)</td>
-									<td class="all-75 fw-300"><s:property value="time_start" /></td>
+									<td class="all-75 fw-300"><s:property value="timeStart" /></td>
 								</tr>
 								<tr>
 									<td class="all-25 align-right fw-400">Temporal trigger end (ms)</td>
-									<td class="all-75 fw-300"><s:property value="time_end" /></td>
+									<td class="all-75 fw-300"><s:property value="timeEnd" /></td>
 								</tr>
 							</s:if>
-							<s:elseif test="trigger_type=='sc'">
+							<s:elseif test="triggerType=='sc'">
 								<tr>
 									<td class="all-25 align-right fw-400">Fault trigger type</td>
 									<td class="all-75 fw-300">spatial (code segment)</td>
 								</tr>
 								<tr>
 									<td class="all-25 align-right fw-400">Mode</td>
-									<td class="all-75 fw-300"><s:property value="read_address" /></td>
+									<td class="all-75 fw-300"><s:property value="readAddress" /></td>
 								</tr>
 								<tr>
 									<td class="all-25 align-right fw-400">Memory address</td>
-									<td class="all-75 fw-300"><s:property value="mem_address" /></td>
+									<td class="all-75 fw-300"><s:property value="memoryAddress" /></td>
 								</tr>
 							</s:elseif>
 							<s:else>
@@ -243,11 +221,11 @@ footer {
 								</tr>
 								<tr>
 									<td class="all-25 align-right fw-400">Mode</td>
-									<td class="all-75 fw-300"><s:property value="read_address" /></td>
+									<td class="all-75 fw-300"><s:property value="readAddress" /></td>
 								</tr>
 								<tr>
 									<td class="all-25 align-right fw-400">Memory address</td>
-									<td class="all-75 fw-300"><s:property value="mem_address" /></td>
+									<td class="all-75 fw-300"><s:property value="memoryAddress" /></td>
 								</tr>
 							</s:else>
 						</s:iterator>

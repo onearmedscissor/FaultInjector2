@@ -8,8 +8,10 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.entity.Fault;
+import faultinjector.entity.FaultClass;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.HardwareFault;
+import faultinjector.entity.HardwareFaultType;
 import faultinjector.service.ExperimentService;
 
 public class EditFaultload22Action extends ActionSupport implements SessionAware
@@ -19,29 +21,29 @@ public class EditFaultload22Action extends ActionSupport implements SessionAware
 	private Map<String, Object> session;
 	private Faultload faultload;
 	private List<Fault> faults;
-	private List<HardwareFault> hardwares;
+	private List<HardwareFault> hardwareFaults;
 
 	private String id;
+
+	private List<HardwareFaultType> hardwareFaultTypes;
+	private List<FaultClass> faultClasses;
 
 	@Override
 	public String execute()
 	{
-		if (!session.containsKey("editFaultload"))
-		{
-			this.faultload = this.getExperimentService().findFaultload(Integer.parseInt(id));
-			this.session.put("editFaultload", faultload);
-		}
-		else
-			faultload = (Faultload) session.get("editFaultload");
+		faultload = (Faultload) session.get("editFaultload");
+
+		hardwareFaultTypes = this.getExperimentService().findAllHardwareFaultTypes();
+		faultClasses = this.getExperimentService().findAllFaultClasses();
 
 		faults = faultload.getFaults();
-		hardwares = faults.get(0).getHardwares();
+		hardwareFaults = faults.get(0).getHardwareFaults();
 
 		System.out.println("ID -> " + id);
 		System.out.println("EDIT FAULTLOAD [2.2/4]-------------------------------");
-		System.out.println("Faultload ID = " + faultload.getFl_id());
+		System.out.println("Faultload ID = " + faultload.getFaultloadlId());
 		System.out.println("Faultload NAME = " + faultload.getName());
-		System.out.println("Faultload TIME INTERVAL = " + faultload.getTime_interval());
+		System.out.println("Faultload TIME INTERVAL = " + faultload.getTimeInterval());
 
 		return SUCCESS;
 	}
@@ -78,9 +80,29 @@ public class EditFaultload22Action extends ActionSupport implements SessionAware
 		return faults;
 	}
 
-	public List<HardwareFault> getHardwares()
+	public List<HardwareFault> getHardwareFaults()
 	{
-		return hardwares;
+		return hardwareFaults;
+	}
+
+	public List<FaultClass> getFaultClasses()
+	{
+		return faultClasses;
+	}
+
+	public int getFaultClassId()
+	{
+		return getHardwareFaults().get(0).getFaultClass().getFaultClassId();
+	}
+
+	public List<HardwareFaultType> getHardwareFaultTypes()
+	{
+		return hardwareFaultTypes;
+	}
+
+	public int getHardwareFaultTypeId()
+	{
+		return getHardwareFaults().get(0).getHardwareFaultType().getHardwareFaultTypeId();
 	}
 
 	@Override

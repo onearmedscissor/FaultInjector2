@@ -7,10 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import faultinjector.entity.Application;
 import faultinjector.entity.Experiment;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.HardwareFault;
-import faultinjector.entity.Injection_Run;
+import faultinjector.entity.InjectionRun;
 import faultinjector.entity.Register;
 import faultinjector.entity.Target;
 import faultinjector.entity.User;
@@ -26,27 +27,11 @@ public class PopulateDatabase
 
 		Experiment experiment = new Experiment();
 		/*
-		 * experiment.setEid(17); experiment.setName("Experiment_3");
-		 * experiment.setTarget_name("CentOS 6.5 32 bit");
-		 * experiment.setCreation_date("2014-12-08 00:00:00");
-		 * experiment.setCreator_name("jaff");
-		 * experiment.setWorkload_name("CentOS + YSCB");
-		 * experiment.setOutput_filename("experiment_3_2.csv");
-		 * experiment.setDescription(
-		 * "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla velit justo, tristique sit amet vestibulum id, molestie in nunc. Maecenas blandit turpis non lectus sollicitudin aliquet. Integer scelerisque at mauris vel porta."
-		 * ); experiment.setFaultload_name("Faultload #1");
+		 * experiment.setEid(17); experiment.setName("Experiment_3"); experiment.setTarget_name("CentOS 6.5 32 bit"); experiment.setCreation_date("2014-12-08 00:00:00"); experiment.setCreator_name("jaff"); experiment.setWorkload_name("CentOS + YSCB"); experiment.setOutput_filename("experiment_3_2.csv"); experiment.setDescription( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla velit justo, tristique sit amet vestibulum id, molestie in nunc. Maecenas blandit turpis non lectus sollicitudin aliquet. Integer scelerisque at mauris vel porta." ); experiment.setFaultload_name("Faultload #1");
 		 */
 
 		/*
-		 * experiment.setEid(2); experiment.setName("Experiência_3_repetição");
-		 * experiment.setTargetName("Intel i7 2.6 Ghz");
-		 * experiment.setCreationDate("2015-02-02 12:00:41");
-		 * experiment.setCreatorName("admin 1");
-		 * experiment.setWorkloadName("CentOS + YCSB + VirtualBox");
-		 * experiment.setOutputFilename("experiencia_3_2_repeticao.csv");
-		 * experiment.setDescription(
-		 * "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla velit justo, tristique sit amet vestibulum id, molestie in nunc. Maecenas blandit turpis non lectus sollicitudin aliquet. Integer scelerisque at mauris vel porta."
-		 * ); experiment.setFaultloadName("Spatial_read");
+		 * experiment.setEid(2); experiment.setName("Experiência_3_repetição"); experiment.setTargetName("Intel i7 2.6 Ghz"); experiment.setCreationDate("2015-02-02 12:00:41"); experiment.setCreatorName("admin 1"); experiment.setWorkloadName("CentOS + YCSB + VirtualBox"); experiment.setOutputFilename("experiencia_3_2_repeticao.csv"); experiment.setDescription( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla velit justo, tristique sit amet vestibulum id, molestie in nunc. Maecenas blandit turpis non lectus sollicitudin aliquet. Integer scelerisque at mauris vel porta." ); experiment.setFaultloadName("Spatial_read");
 		 */
 
 		PopulateDatabase.population.persistAll(entitymanager);
@@ -114,7 +99,7 @@ public class PopulateDatabase
 		Experiment experiment = new Experiment();
 
 		experiment.setName("Experiment_3");
-		experiment.setCreation_date(getCurrentTimestamp());
+		experiment.setCreationDate(getCurrentTimestamp());
 		experiment.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla velit justo, tristique sit amet vestibulum id, molestie in nunc. Maecenas blandit turpis non lectus sollicitudin aliquet. Integer scelerisque at mauris vel porta.");
 
 		User user = new User();
@@ -130,28 +115,37 @@ public class PopulateDatabase
 
 		Target target = new Target();
 		target.setName("Intel i7 2.6 Ghz + 8 GB");
-		target.setI386Arch(true);
+		// target.setI386Arch(true);
 		target.setIp("127.0.0.1");
-		target.setOperating_system("CentOS 6.5 32 bit");
+		target.setOperatingSystem("CentOS 6.5 32 bit");
 
 		target.addExperiment(experiment);
 		/* experiment.setTarget(target); */
 
 		Workload workload = new Workload();
 		workload.setName("CentOS + YSCB");
-		workload.setApp_1_name("CentOS 6.5 32 bit");
-		workload.setApp_2_name("Yahoo Cloud Service Benchmark");
+
+		Application app1 = new Application();
+		app1.setName("CentOS 6.5 32 bit");
+
+		Application app2 = new Application();
+		app2.setName("Yahoo Cloud Service Benchmark");
+
+		List<Application> apps = new ArrayList<Application>();
+		apps.add(app1);
+		apps.add(app2);
+		workload.setApplications(apps);
 
 		// workload.setTarget(target);
 		target.addWorkload(workload);
 
 		Faultload faultload = new Faultload();
 		faultload.setName("Faultload #1");
-		faultload.setCreation_date(getCurrentTimestamp());
-		faultload.setTime_interval(500);
-		faultload.setMem_range_beg(9600);
-		faultload.setMem_range_end(21833);
-		faultload.setN_faults(1000);
+		faultload.setCreationDate(getCurrentTimestamp());
+		faultload.setTimeInterval(500);
+		faultload.setMemoryRangeBeginning(9600);
+		faultload.setMemoryRangeEnd(21833);
+		faultload.setNumberFaults(1000);
 		faultload.setDescription("Veni, vidi, vici");
 		faultload.setRegisters(regs);
 
@@ -159,24 +153,24 @@ public class PopulateDatabase
 		experiment.addFaultload(faultload);
 
 		HardwareFault hardwareFault = new HardwareFault();
-		hardwareFault.setCreation_date(getCurrentTimestamp());
-		hardwareFault.setTrigger_type("sc");
-		hardwareFault.setKernel_mode(false);
+		hardwareFault.setCreationDate(getCurrentTimestamp());
+		hardwareFault.setTriggerType("sc");
+		// hardwareFault.setKernel_mode(false);
 		hardwareFault.setPid(6667);
 		hardwareFault.setInjected(false);
-		hardwareFault.setRead_address(true);
+		hardwareFault.setReadAddress(true);
 
-		hardwareFault.setBit_flip(false);
+		// hardwareFault.setBit_flip(false);
 		hardwareFault.setBitStart(7);
-		hardwareFault.setHw_fault_type('m');
+		// hardwareFault.setHw_fault_type('m');
 		hardwareFault.setBitEnd(15);
-		hardwareFault.setMem_address(6969);
+		hardwareFault.setMemAddress(6969);
 
 		// softwareFault.setFaultload(faultload);
 		faultload.addFault(hardwareFault);
 
-		Injection_Run injection_Run = new Injection_Run();
-		injection_Run.setOutput_filename("experiment_3_2.csv");
+		InjectionRun injection_Run = new InjectionRun();
+		injection_Run.setOutputFilename("experiment_3_2.csv");
 
 		// injection_Run.setWorkload(workload);
 		workload.addInjectionRun(injection_Run);
@@ -195,7 +189,7 @@ public class PopulateDatabase
 		Experiment experiment = new Experiment();
 
 		experiment.setName("Nova experiência");
-		experiment.setCreation_date(getCurrentTimestamp());
+		experiment.setCreationDate(getCurrentTimestamp());
 		experiment.setDescription("Descrição");
 
 		User user = new User();
@@ -211,27 +205,39 @@ public class PopulateDatabase
 
 		Target target = new Target();
 		target.setName("Vaio VGN-CS11Z 4GB Core 2 Duo 64 bits");
-		target.setI386Arch(true);
+		// target.setI386Arch(true);
 		target.setIp("127.1.1.1");
-		target.setOperating_system("Elementary OS 64 bit");
+		target.setOperatingSystem("Elementary OS 64 bit");
 
 		target.addExperiment(experiment);
 		/* experiment.setTarget(target); */
 
 		Workload workload = new Workload();
 		workload.setName("Elementary + VirtualBox + YSCB");
-		workload.setApp_1_name("Elementary OS 64 bit");
-		workload.setApp_2_name("VirtualBox");
-		workload.setApp_3_name("Yahoo Cloud Service Benchmark");
+
+		Application app1 = new Application();
+		app1.setName("Elementary OS 64 bit");
+
+		Application app2 = new Application();
+		app2.setName("VirtualBox");
+
+		Application app3 = new Application();
+		app3.setName("Yahoo Cloud Service Benchmark");
+
+		List<Application> apps = new ArrayList<Application>();
+		apps.add(app1);
+		apps.add(app2);
+		apps.add(app3);
+		workload.setApplications(apps);
 
 		// workload.setTarget(target);
 		target.addWorkload(workload);
 
 		Faultload faultload = new Faultload();
 		faultload.setName("Fault set 666 1234");
-		faultload.setCreation_date(getCurrentTimestamp());
-		faultload.setTime_interval(666);
-		faultload.setN_faults(1234);
+		faultload.setCreationDate(getCurrentTimestamp());
+		faultload.setTimeInterval(666);
+		faultload.setNumberFaults(1234);
 		faultload.setDescription("Blue screen");
 		faultload.setRegisters(regs);
 
@@ -239,24 +245,24 @@ public class PopulateDatabase
 		experiment.addFaultload(faultload);
 
 		HardwareFault hardwareFault = new HardwareFault();
-		hardwareFault.setCreation_date(getCurrentTimestamp());
-		hardwareFault.setTrigger_type("sd");
-		hardwareFault.setKernel_mode(true);
+		hardwareFault.setCreationDate(getCurrentTimestamp());
+		hardwareFault.setTriggerType("sd");
+		// hardwareFault.setKernel_mode(true);
 		hardwareFault.setPid(3140);
 		hardwareFault.setInjected(false);
-		hardwareFault.setRead_address(false);
-		hardwareFault.setBit_flip(true);
+		hardwareFault.setReadAddress(false);
+		// hardwareFault.setBit_flip(true);
 		hardwareFault.setBitStart(0);
-		hardwareFault.setHw_fault_type('r');
+		// hardwareFault.setHw_fault_type('r');
 		hardwareFault.setBitEnd(4);
 		// hardwareFault.setRegister("eax");
-		hardwareFault.setMem_address(1234);
+		hardwareFault.setMemAddress(1234);
 
 		// softwareFault.setFaultload(faultload);
 		faultload.addFault(hardwareFault);
 
-		Injection_Run injection_Run = new Injection_Run();
-		injection_Run.setOutput_filename("experiencia_nova_injeccao_67.txt");
+		InjectionRun injection_Run = new InjectionRun();
+		injection_Run.setOutputFilename("experiencia_nova_injeccao_67.txt");
 
 		// injection_Run.setWorkload(workload);
 		workload.addInjectionRun(injection_Run);

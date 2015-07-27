@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -28,10 +30,12 @@ public class Target implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Target_id")
-	private int target_id;
+	private int targetId;
 
-	@Column(name = "32_bit_arch")
-	private boolean i386Arch;
+	// bi-directional many-to-one association to Architecture
+	@ManyToOne
+	@JoinColumn(name = "Architecture_id")
+	private Architecture architecture;
 
 	@Column(name = "IP")
 	private String ip;
@@ -40,7 +44,7 @@ public class Target implements Serializable
 	private String name;
 
 	@Column(name = "Operating_system")
-	private String operating_system;
+	private String operatingSystem;
 
 	// bi-directional many-to-one association to Experiment
 	@OneToMany(mappedBy = "target", cascade = CascadeType.ALL)
@@ -54,24 +58,24 @@ public class Target implements Serializable
 	{
 	}
 
-	public int getTarget_id()
+	public int getTargetId()
 	{
-		return this.target_id;
+		return this.targetId;
 	}
 
-	public void setTarget_id(int target_id)
+	public void setTargetId(int target_id)
 	{
-		this.target_id = target_id;
+		this.targetId = target_id;
 	}
 
-	public boolean getI386Arch()
+	public Architecture getArchitecture()
 	{
-		return this.i386Arch;
+		return this.architecture;
 	}
 
-	public void setI386Arch(boolean i386Arch)
+	public void setArchitecture(Architecture architecture)
 	{
-		this.i386Arch = i386Arch;
+		this.architecture = architecture;
 	}
 
 	public String getIp()
@@ -94,14 +98,14 @@ public class Target implements Serializable
 		this.name = name;
 	}
 
-	public String getOperating_system()
+	public String getOperatingSystem()
 	{
-		return this.operating_system;
+		return this.operatingSystem;
 	}
 
-	public void setOperating_system(String operating_system)
+	public void setOperatingSystem(String operating_system)
 	{
-		this.operating_system = operating_system;
+		this.operatingSystem = operating_system;
 	}
 
 	public List<Experiment> getExperiments()

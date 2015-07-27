@@ -119,7 +119,7 @@ footer {
 
 		<div class="column-group">
 			<div class="all-100">
-				<form action="createfaultload1" id="page_1" class="ink-form all-100 small-100 tiny-100" method="post">
+				<form action="createfaultload11" id="page_1" class="ink-form all-100 small-100 tiny-100" method="post">
 					<fieldset>
 						<div class="control-group column-group gutters required">
 							<label for="name" class="all-20 align-right">Name</label>
@@ -184,7 +184,8 @@ footer {
 		{
 			if ($('#timeinterval').val().match(/^\d+$/))
 				$('#next').attr("disabled", false);
-		} else
+		}
+		else
 			$('#next').attr("disabled", true);
 
 		$("#page_1").on("input", function()

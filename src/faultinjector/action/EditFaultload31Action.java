@@ -6,7 +6,9 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import faultinjector.entity.FaultClass;
 import faultinjector.entity.Faultload;
+import faultinjector.entity.HardwareFaultType;
 import faultinjector.service.ExperimentService;
 
 public class EditFaultload31Action extends ActionSupport implements SessionAware
@@ -17,48 +19,37 @@ public class EditFaultload31Action extends ActionSupport implements SessionAware
 	private Faultload faultload;
 
 	private String id;
-	private char hardwareFaultType;
-	private boolean faultClass;
-	private int memStart, memEnd, numberFaults, bitStart, bitEnd;
+	private int hardwareFaultTypeId, memStart, memEnd, numberFaults, faultClassId, bitStart, bitEnd;
 
 	public String execute()
 	{
-		if (!session.containsKey("editFaultload"))
-		{
-			this.faultload = this.getExperimentService().findFaultload(Integer.parseInt(id));
-			this.session.put("editFaultload", faultload);
-		}
-		else
-			faultload = (Faultload) session.get("editFaultload");
+		faultload = (Faultload) session.get("editFaultload");
 
-		faultload.getFaults().get(0).getHardwares().get(0).setHw_fault_type(hardwareFaultType);
-		faultload.setMem_range_beg(memStart);
-		faultload.setMem_range_end(memEnd);
-		faultload.setN_faults(numberFaults);
-		faultload.getFaults().get(0).getHardwares().get(0).setBit_flip(faultClass);
-		faultload.getFaults().get(0).getHardwares().get(0).setBitStart(bitStart);
-		faultload.getFaults().get(0).getHardwares().get(0).setBitEnd(bitEnd);
+		HardwareFaultType hft = this.getExperimentService().findHardwareFaultType(hardwareFaultTypeId);
+		hft.addHardwareFault(faultload.getFaults().get(0).getHardwareFaults().get(0));
 
-		// faultload.setHardwareFaultType(hardwareFaultType);
-		// faultload.setMemoryFaultRangeStart(memStart);
-		// faultload.setMemoryFaultRangeEnd(memEnd);
-		// faultload.setNumberFaults(numberFaults);
-		// faultload.setBitFlip(faultClass);
-		// faultload.setBitsChangeStart(bitStart);
-		// faultload.setBitsChangeEnd(bitEnd);
+		faultload.setMemoryRangeBeginning(memStart);
+		faultload.setMemoryRangeEnd(memEnd);
+		faultload.setNumberFaults(numberFaults);
+
+		FaultClass fc = this.getExperimentService().findFaultClass(faultClassId);
+		fc.addFault(faultload.getFaults().get(0).getHardwareFaults().get(0));
+
+		faultload.getFaults().get(0).getHardwareFaults().get(0).setBitStart(bitStart);
+		faultload.getFaults().get(0).getHardwareFaults().get(0).setBitEnd(bitEnd);
 
 		System.out.println("ID -> " + id);
 		System.out.println("EDIT FAULTLOAD [3.1/4]-------------------------------");
-		System.out.println("Faultload ID = " + faultload.getFl_id());
+		System.out.println("Faultload ID = " + faultload.getFaultloadlId());
 		System.out.println("Faultload NAME = " + faultload.getName());
-		System.out.println("Faultload TIME INTERVAL = " + faultload.getTime_interval());
+		System.out.println("Faultload TIME INTERVAL = " + faultload.getTimeInterval());
 
-		System.out.println("Faultload HARDWARE FAULT TYPE = " + faultload.getFaults().get(0).getHardwares().get(0).getHw_fault_type());
-		System.out.println("Faultload MEMORY FAULT RANGE = " + faultload.getMem_range_beg() + " - " + faultload.getMem_range_end());
-		System.out.println("Faultload NUMBER OF FAULTS = " + faultload.getN_faults());
+		System.out.println("Faultload HARDWARE FAULT TYPE = " + faultload.getFaults().get(0).getHardwareFaults().get(0).getHardwareFaultType().getName());
+		System.out.println("Faultload MEMORY FAULT RANGE = " + faultload.getMemoryRangeBeginning() + " - " + faultload.getMemoryRangeEnd());
+		System.out.println("Faultload NUMBER OF FAULTS = " + faultload.getNumberFaults());
 		System.out.println("Faultload 1.1 FAULT MODEL____________________________________");
-		System.out.println("Faultload FAULT CLASS: IS BIT-FLIP? = " + faultload.getFaults().get(0).getHardwares().get(0).getBit_flip());
-		System.out.println("Faultload BITS TO CHANGE = " + faultload.getFaults().get(0).getHardwares().get(0).getBitStart() + " - " + faultload.getFaults().get(0).getHardwares().get(0).getBitEnd());
+		System.out.println("Faultload FAULT CLASS = " + faultload.getFaults().get(0).getHardwareFaults().get(0).getFaultClass().getName());
+		System.out.println("Faultload BITS TO CHANGE = " + faultload.getFaults().get(0).getHardwareFaults().get(0).getBitStart() + " - " + faultload.getFaults().get(0).getHardwareFaults().get(0).getBitEnd());
 
 		return SUCCESS;
 	}
@@ -98,14 +89,14 @@ public class EditFaultload31Action extends ActionSupport implements SessionAware
 		this.session.put("experimentService", experimentService);
 	}
 
-	public void setHardwareFaultType(char hardwareFaultType)
+	public void setHardwareFaultTypeId(int hardwareFaultTypeId)
 	{
-		this.hardwareFaultType = hardwareFaultType;
+		this.hardwareFaultTypeId = hardwareFaultTypeId;
 	}
 
-	public void setFaultClass(boolean faultClass)
+	public void setFaultClassId(int faultClassId)
 	{
-		this.faultClass = faultClass;
+		this.faultClassId = faultClassId;
 	}
 
 	public void setMemStart(int memStart)

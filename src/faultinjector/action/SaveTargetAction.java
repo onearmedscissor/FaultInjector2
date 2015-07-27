@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import faultinjector.entity.Architecture;
 import faultinjector.entity.Target;
 import faultinjector.service.ExperimentService;
 
@@ -23,8 +24,7 @@ public class SaveTargetAction extends ActionSupport implements SessionAware
 
 	private String id;
 	private String name;
-	private boolean i386Arch;
-	private int ip1, ip2, ip3, ip4;
+	private int architectureId, ip1, ip2, ip3, ip4;
 	private String ip;
 	private String operatingSystem;
 
@@ -35,29 +35,27 @@ public class SaveTargetAction extends ActionSupport implements SessionAware
 		et = em.getTransaction();
 		et.begin();
 
-		// target = (Target) session.get("target "+id);
-
 		target = this.getExperimentService().findTarget(Integer.parseInt(id));
 
 		target.setName(name);
 
-		System.out.println("ARCH I386 -> " + i386Arch);
-		target.setI386Arch(i386Arch);
+		Architecture a = this.getExperimentService().findArchitecture(architectureId);
+		a.addTarget(target);
 
 		ip = Integer.toString(ip1) + "." + Integer.toString(ip2) + "." + Integer.toString(ip3) + "." + Integer.toString(ip4);
 		target.setIp(ip);
 
-		target.setOperating_system(operatingSystem);
+		target.setOperatingSystem(operatingSystem);
 
 		et.commit();
 		em.close();
 
 		System.out.println("SAVE TARGET-------------------------------");
-		System.out.println("Target ID = " + target.getTarget_id());
+		System.out.println("Target ID = " + target.getTargetId());
 		System.out.println("Target NAME = " + target.getName());
-		System.out.println("Target 32 BIT ARCHITECTURE? = " + target.getI386Arch());
+		System.out.println("Target ARCHITECTURE = " + target.getArchitecture().getName());
 		System.out.println("Target IP = " + target.getIp());
-		System.out.println("Target OPERATING SYSTEM = " + target.getOperating_system());
+		System.out.println("Target OPERATING SYSTEM = " + target.getOperatingSystem());
 
 		return SUCCESS;
 	}
@@ -96,11 +94,6 @@ public class SaveTargetAction extends ActionSupport implements SessionAware
 	public String getId()
 	{
 		return id;
-	}
-
-	public boolean getI386Arch()
-	{
-		return i386Arch;
 	}
 
 	public Map<String, Object> getSession()
@@ -143,12 +136,9 @@ public class SaveTargetAction extends ActionSupport implements SessionAware
 		this.name = name;
 	}
 
-	public void setI386Arch(String arch)
+	public void setArchitectureId(int architectureId)
 	{
-		if (arch.equals("Intel 32 Bit"))
-			this.i386Arch = true;
-		else if (arch.equals("Intel 64 Bit"))
-			this.i386Arch = false;
+		this.architectureId = architectureId;
 	}
 
 	public void setIp1(int ip1)

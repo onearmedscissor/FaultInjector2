@@ -26,7 +26,7 @@ public class Register implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Reg_id")
-	private int reg_id;
+	private int registerId;
 
 	@Column(name = "Name")
 	private String name;
@@ -39,14 +39,14 @@ public class Register implements Serializable
 	{
 	}
 
-	public int getReg_id()
+	public int getRegisterId()
 	{
-		return this.reg_id;
+		return this.registerId;
 	}
 
-	public void setReg_id(int reg_id)
+	public void setRegisterId(int reg_id)
 	{
-		this.reg_id = reg_id;
+		this.registerId = reg_id;
 	}
 
 	public String getName()

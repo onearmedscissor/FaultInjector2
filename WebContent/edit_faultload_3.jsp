@@ -133,11 +133,11 @@ footer {
 										<div class="ink-form quarter-top-space">
 											<div class="control-group" style="margin: 0">
 												<ul class="control unstyled" style="margin: 0">
-													<s:if test="faultload.containsRegisterId(reg_id) == true">
-														<li style="margin: 0"><input type="checkbox" class="cb" name="select" id="<s:property value="reg_id"/>" value="" checked><label for=""></label></li>
+													<s:if test="faultload.containsRegisterId(registerId) == true">
+														<li style="margin: 0"><input type="checkbox" class="cb" name="select" id="<s:property value="registerId"/>" value="" checked><label for=""></label></li>
 													</s:if>
 													<s:else>
-														<li style="margin: 0"><input type="checkbox" class="cb" name="select" id="<s:property value="reg_id"/>" value=""><label for=""></label></li>
+														<li style="margin: 0"><input type="checkbox" class="cb" name="select" id="<s:property value="registerId"/>" value=""><label for=""></label></li>
 													</s:else>
 												</ul>
 											</div>

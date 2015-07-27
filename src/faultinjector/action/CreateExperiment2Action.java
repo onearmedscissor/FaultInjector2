@@ -2,9 +2,9 @@ package faultinjector.action;
 
 import java.util.Map;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.bean.ExperimentBean;
 import faultinjector.service.ExperimentService;
@@ -12,46 +12,42 @@ import faultinjector.service.ExperimentService;
 public class CreateExperiment2Action extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 4L;
-		
+
 	private Map<String, Object> session;
 	private ExperimentBean experimentBean;
-	
+
 	private String tid;
 
 	@Override
 	public String execute()
-    {	
-		if(!session.containsKey("experimentBean"))
+	{
+		if (!session.containsKey("experimentBean"))
 		{
 			this.experimentBean = new ExperimentBean();
 			session.put("experimentBean", experimentBean);
 		}
 		else
 			experimentBean = (ExperimentBean) session.get("experimentBean");
-		
-		//Target target = this.getExperimentService().findTarget(Integer.parseInt(tid));
-		
-		//target.addExperiment(experiment);
-		
+
 		experimentBean.setTargetId(Integer.parseInt(tid));
-		
+
 		System.out.println("NEW EXPERIMENT 2-------------------------------");
-		System.out.println("New experiment NAME = "+experimentBean.getName());
-		System.out.println("New experiment DESCRIPTION = "+experimentBean.getDescription());
-		System.out.println("New experiment SELECTED TARGET ID = "+experimentBean.getTargetId());
-		
-        return SUCCESS;
+		System.out.println("New experiment NAME = " + experimentBean.getName());
+		System.out.println("New experiment DESCRIPTION = " + experimentBean.getDescription());
+		System.out.println("New experiment SELECTED TARGET ID = " + experimentBean.getTargetId());
+
+		return SUCCESS;
 	}
-	
+
 	public ExperimentService getExperimentService()
 	{
-		if(!session.containsKey("experimentService"))
+		if (!session.containsKey("experimentService"))
 		{
 			ExperimentService experimentService = new ExperimentService();
-			
+
 			this.setExperimentService(experimentService);
 		}
-		
+
 		return (ExperimentService) session.get("experimentService");
 	}
 
@@ -59,7 +55,7 @@ public class CreateExperiment2Action extends ActionSupport implements SessionAwa
 	{
 		this.session.put("experimentService", experimentService);
 	}
-	
+
 	public void setTid(String tid)
 	{
 		this.tid = tid;
@@ -68,6 +64,6 @@ public class CreateExperiment2Action extends ActionSupport implements SessionAwa
 	@Override
 	public void setSession(Map<String, Object> session)
 	{
-		this.session=session;
+		this.session = session;
 	}
 }

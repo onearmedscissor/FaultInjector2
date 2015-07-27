@@ -131,26 +131,26 @@
 											<div class="control-group" style="margin:0">
 								                <ul class="control unstyled" style="margin:0">
 									                <s:if test="#session.experimentBean != null">
-									                	<s:if test="#session.experimentBean.containsFaultloadId(fl_id) == true">
-										                	<li style="margin:0"><input type="checkbox" class="cb" name="select" id="<s:property value="fl_id"/>" value="" checked><label for=""></label></li>									            		
+									                	<s:if test="#session.experimentBean.containsFaultloadId(faultloadId) == true">
+										                	<li style="margin:0"><input type="checkbox" class="cb" name="select" id="<s:property value="faultloadId"/>" value="" checked><label for=""></label></li>									            		
 									            		</s:if>
 									            		<s:else>
-								                			<li style="margin:0"><input type="checkbox" class="cb" name="select" id="<s:property value="fl_id"/>" value=""><label for=""></label></li>
+								                			<li style="margin:0"><input type="checkbox" class="cb" name="select" id="<s:property value="faultloadId"/>" value=""><label for=""></label></li>
 								                		</s:else>
 									            	</s:if>
 								            		<s:else>
-								                		<li style="margin:0"><input type="checkbox" class="cb" name="select" id="<s:property value="fl_id"/>" value=""><label for=""></label></li>
+								                		<li style="margin:0"><input type="checkbox" class="cb" name="select" id="<s:property value="faultloadId"/>" value=""><label for=""></label></li>
 								                	</s:else>
 								            	</ul>
 							            	</div>
 						                </div>
 			                      	</td>
-			                      <td><a href="<s:url action="showfaultload"><s:param name="id"><s:property value="fl_id"/></s:param></s:url>" class="large all-100"><s:property value="name"/></a></td>
+			                      <td><a href="<s:url action="showfaultload"><s:param name="id"><s:property value="faultloadId"/></s:param></s:url>" class="large all-100"><s:property value="name"/></a></td>
 <!-- 								  <td><a href="#" class="ink-button all-100">select</a></td>			                       -->
-			                      <td><a href="<s:url action="cleareditfaultload"><s:param name="id"><s:property value="fl_id"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
+			                      <td><a href="<s:url action="cleareditfaultload"><s:param name="id"><s:property value="faultloadId"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
 <!-- 			                      <td><a href="#" class="ink-button all-100">copy</a></td> -->
 <!-- 								  <td><a href="#" class="ink-button all-100">regenerate</a></td> -->
-			                      <td><a href="<s:url action="deletefaultload"><s:param name="id"><s:property value="fl_id"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
+			                      <td><a href="<s:url action="deletefaultload"><s:param name="id"><s:property value="faultloadId"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
 			                      <td class="align-center"><a class="help all-100">?</a></td>
 			                    </tr>
 			          		</s:iterator>

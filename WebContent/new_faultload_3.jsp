@@ -133,11 +133,11 @@ footer {
 										<div class="ink-form quarter-top-space">
 											<div class="control-group" style="margin: 0">
 												<ul class="control unstyled" style="margin: 0">
-													<s:if test="#session.faultloadBean.containsRegisterId(reg_id) == true">
-														<li style="margin: 0"><input type="checkbox" class="cb" name="select" id="<s:property value="reg_id"/>" value="" checked><label for=""></label></li>
+													<s:if test="#session.faultloadBean.containsRegisterId(registerId) == true">
+														<li style="margin: 0"><input type="checkbox" class="cb" name="select" id="<s:property value="registerId"/>" value="" checked><label for=""></label></li>
 													</s:if>
 													<s:else>
-														<li style="margin: 0"><input type="checkbox" class="cb" name="select" id="<s:property value="reg_id"/>" value=""><label for=""></label></li>
+														<li style="margin: 0"><input type="checkbox" class="cb" name="select" id="<s:property value="registerId"/>" value=""><label for=""></label></li>
 													</s:else>
 												</ul>
 											</div>
@@ -160,7 +160,7 @@ footer {
 			<div class="all-50">
 				<div class="column-group">
 					<div class="all-50 align-left">
-						<a href="new_faultload_2.jsp" class="ink-button all-95">&lt; Previous</a>
+						<a href="createfaultload12" class="ink-button all-95">&lt; Previous</a>
 					</div>
 					<div class="all-50 align-right">
 						<button class="ink-button all-95" type="submit" id="nextfl" disabled>Next &gt;</button>
@@ -194,6 +194,10 @@ footer {
 		{
 			$('#nextfl').attr("disabled", !checkboxes.is(":checked"));
 		});
+	</script>
+	
+	<script type="text/javascript">
+	
 	</script>
 
 	<script type="text/javascript">

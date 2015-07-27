@@ -6,8 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
+import faultinjector.entity.Architecture;
 import faultinjector.entity.Experiment;
+import faultinjector.entity.FaultClass;
+import faultinjector.entity.FaultMode;
 import faultinjector.entity.Faultload;
+import faultinjector.entity.HardwareFaultType;
 import faultinjector.entity.Register;
 import faultinjector.entity.Target;
 import faultinjector.entity.Workload;
@@ -32,6 +36,10 @@ public interface Persistable
 
 	public void createTarget(Target t);
 
+	public List<Architecture> findAllArchitectures();
+
+	public Architecture findArchitecture(int id);
+
 	public List<Workload> findAllWorkloads();
 
 	public Workload findWorkload(int id);
@@ -51,6 +59,18 @@ public interface Persistable
 	public List<Register> findAllRegisters();
 
 	public Register findRegister(int id);
+
+	public List<FaultMode> findAllFaultModes();
+
+	public FaultMode findFaultMode(int id);
+
+	public List<FaultClass> findAllFaultClasses();
+
+	public FaultClass findFaultClass(int id);
+
+	public List<HardwareFaultType> findAllHardwareFaultTypes();
+
+	public HardwareFaultType findHardwareFaultType(int id);
 
 	public EntityManager getEntityManager();
 

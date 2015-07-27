@@ -125,16 +125,16 @@ footer {
 					<tbody>
 						<s:if test="workloads.size > 0">
 							<s:iterator value="workloads">
-								<s:if test="#session.experimentBean.workloadId == wl_id">
-									<tr id="<s:property value="wl_id"/>" class="highlight">
+								<s:if test="#session.experimentBean.workloadId == workloadId">
+									<tr id="<s:property value="workloadId"/>" class="highlight">
 								</s:if>
 								<s:else>
-									<tr id="<s:property value="wl_id"/>">
+									<tr id="<s:property value="workloadId"/>">
 								</s:else>
-									<td><a href="<s:url action="showworkload"><s:param name="id"><s:property value="wl_id"/></s:param></s:url>" class="large all-100"><s:property value="name" /></a></td>
+									<td><a href="<s:url action="showworkload"><s:param name="id"><s:property value="workloadId"/></s:param></s:url>" class="large all-100"><s:property value="name" /></a></td>
 									<td><a class="select ink-button all-100">select</a></td>
-									<td><a href="<s:url action="editworkload"><s:param name="id"><s:property value="wl_id"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
-									<td><a href="<s:url action="deleteworkload"><s:param name="id"><s:property value="wl_id"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
+									<td><a href="<s:url action="editworkload"><s:param name="id"><s:property value="workloadId"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
+									<td><a href="<s:url action="deleteworkload"><s:param name="id"><s:property value="workloadId"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
 									<td class="align-center"><a class="help all-100">?</a></td>
 								</tr>
 							</s:iterator>

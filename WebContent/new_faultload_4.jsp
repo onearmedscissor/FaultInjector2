@@ -132,14 +132,15 @@ footer {
 						<div class="control-group column-group gutters required">
 							<p class="label all-20 align-right push-middle">Mode</p>
 							<ul class="control unstyled all-80 inline">
-								<s:if test="%{!#session.faultloadBean.kernelMode}">
-									<li><input type="radio" id="kernel" name="faultMode" value="true"><label for="kernel">kernel</label></li>
-									<li><input type="radio" id="user" name="faultMode" value="false" checked><label for="user">user</label></li>
-								</s:if>
-								<s:else>
-									<li><input type="radio" id="kernel" name="faultMode" value="true" checked><label for="kernel">kernel</label></li>
-									<li><input type="radio" id="user" name="faultMode" value="false"><label for="user">user</label></li>
-								</s:else>
+<%-- 								<s:if test="%{!#session.faultloadBean.kernelMode}"> --%>
+<!-- 									<li><input type="radio" id="kernel" name="faultMode" value="true"><label for="kernel">kernel</label></li> -->
+<!-- 									<li><input type="radio" id="user" name="faultMode" value="false" checked><label for="user">user</label></li> -->
+<%-- 								</s:if> --%>
+<%-- 								<s:else> --%>
+<!-- 									<li><input type="radio" id="kernel" name="faultMode" value="true" checked><label for="kernel">kernel</label></li> -->
+<!-- 									<li><input type="radio" id="user" name="faultMode" value="false"><label for="user">user</label></li> -->
+<%-- 								</s:else> --%>
+								<li><s:radio label="faultmode" name="faultModeId" list="faultModes" listKey="faultModeId" listValue="name" value="defaultFaultModeId" /></li>
 							</ul>
 						</div>
 

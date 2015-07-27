@@ -30,30 +30,6 @@ public class CreateExperiment41Action extends ActionSupport implements SessionAw
 
 		experimentBean.setFaultloadIds(fids);
 
-		//
-		// Experiment experiment = new Experiment();
-		//
-		// experiment.setName(experimentBean.getName());
-		// experiment.setDescription(experimentBean.getDescription());
-		//
-		// Target t =
-		// this.getExperimentService().findTarget(experimentBean.getTargetId());
-		// experiment.setTarget(t);
-		//
-		// Workload w =
-		// this.getExperimentService().findWorkload(experimentBean.getWorkloadId());
-		// experiment.getTarget().addWorkload(w);
-		//
-		// for (int n=0; n<fids.length; n++)
-		// {
-		// Faultload f =
-		// this.getExperimentService().findFaultload(Integer.parseInt(fids[n]));
-		//
-		// experiment.addFaultload(f);
-		// }
-		//
-		// this.getExperimentService().createExperiment(experiment);
-		//
 		System.out.println("NEW EXPERIMENT 4.1-------------------------------");
 		System.out.println("BEAN");
 		System.out.println("New experiment NAME = " + experimentBean.getName());

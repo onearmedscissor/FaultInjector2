@@ -8,8 +8,12 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import faultinjector.entity.Architecture;
 import faultinjector.entity.Experiment;
+import faultinjector.entity.FaultClass;
+import faultinjector.entity.FaultMode;
 import faultinjector.entity.Faultload;
+import faultinjector.entity.HardwareFaultType;
 import faultinjector.entity.Register;
 import faultinjector.entity.Target;
 import faultinjector.entity.Workload;
@@ -127,6 +131,21 @@ public class ExperimentService implements Persistable
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<Architecture> findAllArchitectures()
+	{
+		this.em = this.getEntityManagerFactory().createEntityManager();
+
+		Query query = this.em.createQuery("select a FROM Architecture a");
+
+		return query.getResultList();
+	}
+
+	public Architecture findArchitecture(int id)
+	{
+		return this.em.find(Architecture.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Workload> findAllWorkloads()
 	{
 		this.em = this.getEntityManagerFactory().createEntityManager();
@@ -221,7 +240,7 @@ public class ExperimentService implements Persistable
 
 		this.em.close();
 
-		id = fl.getFl_id();
+		id = fl.getFaultloadlId();
 
 		return id;
 	}
@@ -239,6 +258,51 @@ public class ExperimentService implements Persistable
 	public Register findRegister(int id)
 	{
 		return this.em.find(Register.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<FaultMode> findAllFaultModes()
+	{
+		this.em = this.getEntityManagerFactory().createEntityManager();
+
+		Query query = this.em.createQuery("select fm FROM FaultMode fm");
+
+		return query.getResultList();
+	}
+
+	public FaultMode findFaultMode(int id)
+	{
+		return this.em.find(FaultMode.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<FaultClass> findAllFaultClasses()
+	{
+		this.em = this.getEntityManagerFactory().createEntityManager();
+
+		Query query = this.em.createQuery("select fc FROM FaultClass fc");
+
+		return query.getResultList();
+	}
+
+	public FaultClass findFaultClass(int id)
+	{
+		return this.em.find(FaultClass.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<HardwareFaultType> findAllHardwareFaultTypes()
+	{
+		this.em = this.getEntityManagerFactory().createEntityManager();
+
+		Query query = this.em.createQuery("select hft FROM HardwareFaultType hft");
+
+		return query.getResultList();
+	}
+
+	public HardwareFaultType findHardwareFaultType(int id)
+	{
+		return this.em.find(HardwareFaultType.class, id);
 	}
 
 	public EntityManager getEntityManager()

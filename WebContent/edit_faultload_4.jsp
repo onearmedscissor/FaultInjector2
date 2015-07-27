@@ -129,21 +129,12 @@ footer {
 					</div>
 
 					<fieldset>
-<%-- 						<s:hidden name="id" value="%{faultload.fl_id}" /> --%>
+<%-- 						<s:hidden name="id" value="%{faultload.faultloadId}" /> --%>
 						
 						<div class="control-group column-group gutters required">
 							<p class="label all-20 align-right push-middle">Mode</p>
 							<ul class="control unstyled all-80 inline">
-								<s:iterator value="faults">
-									<s:if test="%{kernel_mode}">
-										<li><input type="radio" id="kernel" name="faultMode" value="true" checked><label for="kernel">kernel</label></li>
-										<li><input type="radio" id="user" name="faultMode" value="false"><label for="user">user</label></li>
-									</s:if>
-									<s:else>
-										<li><input type="radio" id="kernel" name="faultMode" value="true"><label for="kernel">kernel</label></li>
-										<li><input type="radio" id="user" name="faultMode" value="false" checked><label for="user">user</label></li>
-									</s:else>
-								</s:iterator>
+								<li><s:radio label="faultmode" name="faultModeId" list="faultModes" listKey="faultModeId" listValue="name" value="faultModeId" /></li>								
 							</ul>
 						</div>
 
@@ -166,19 +157,17 @@ footer {
 								<div class="control-group">
 									<ul id="triggertype" class="control unstyled">
 										<s:iterator value="faults">
-											<s:if test="%{trigger_type == 'tp'}">
+											<s:if test="%{triggerType == 'tp'}">
 												<li class="column-group quarter-gutters">
 													<div class="all-30 large push-bottom">
 														<input type="radio" id="temporal" name="triggerType" value="tp" checked><label for="temporal">temporal between</label>
 													</div>
 													<div class="all-15">
-														<!-- 			                                        <input type="text" id="timestart" name="timeStart" value="%{#session.faultloadBean.temporalTriggerStart}" class="all-66 quarter-right-space"><label for="timestart" class="all-33">and</label> -->
-														<s:textfield id="timestart" name="timeStart" value="%{time_start}" cssClass="all-66 quarter-right-space" />
+														<s:textfield id="timestart" name="timeStart" value="%{timeStart}" cssClass="all-66 quarter-right-space" />
 														<label for="timestart" class="all-33">and</label>
 													</div>
 													<div class="all-15">
-														<!-- 			                                        <input type="text" id="timeend" name="timeEnd" value="%{#session.faultloadBean.temporalTriggerEnd}" class="all-66 quarter-right-space"><label for="timeend" class="all-33">ms</label> -->
-														<s:textfield id="timeend" name="timeEnd" value="%{time_end}" cssClass="all-66 quarter-right-space" />
+														<s:textfield id="timeend" name="timeEnd" value="%{timeEnd}" cssClass="all-66 quarter-right-space" />
 														<label for="timeend" class="all-33">ms</label>
 													</div>
 												</li>
@@ -205,19 +194,17 @@ footer {
 													</div>
 												</li>
 											</s:if>
-											<s:elseif test="%{trigger_type == 'sc'}">
+											<s:elseif test="%{triggerType == 'sc'}">
 												<li class="column-group quarter-gutters">
 													<div class="all-30 large push-bottom">
 														<input type="radio" id="temporal" name="triggerType" value="tp"><label for="temporal">temporal between</label>
 													</div>
 													<div class="all-15">
-														<!-- 			                                        <input type="text" id="timestart" name="timeStart" value="%{#session.faultloadBean.temporalTriggerStart}" class="all-66 quarter-right-space"><label for="timestart" class="all-33">and</label> -->
-														<s:textfield id="timestart" name="timeStart" value="%{time_start}" cssClass="all-66 quarter-right-space" disabled="true"/>
+														<s:textfield id="timestart" name="timeStart" value="%{timeStart}" cssClass="all-66 quarter-right-space" disabled="true"/>
 														<label for="timestart" class="all-33">and</label>
 													</div>
 													<div class="all-15">
-														<!-- 			                                        <input type="text" id="timeend" name="timeEnd" value="%{#session.faultloadBean.temporalTriggerEnd}" class="all-66 quarter-right-space"><label for="timeend" class="all-33">ms</label> -->
-														<s:textfield id="timeend" name="timeEnd" value="%{time_end}" cssClass="all-66 quarter-right-space" disabled="true"/>
+														<s:textfield id="timeend" name="timeEnd" value="%{timeEnd}" cssClass="all-66 quarter-right-space" disabled="true"/>
 														<label for="timeend" class="all-33">ms</label>
 													</div>
 												</li>
@@ -226,10 +213,10 @@ footer {
 														<input type="radio" id="spatialcode" name="triggerType" value="sc" checked><label for="spatialcode">spatial (code segment)</label>
 													</div>
 													<div class="all-10">
-														<s:select label="spatial (code segment)" id="accesscode" list="accessTypes" name="accessCode" cssClass="all-100" value="%{read_address}"/>
+														<s:select label="spatial (code segment)" id="accesscode" list="accessTypes" name="accessCode" cssClass="all-100" value="%{readAddress}"/>
 													</div>
 													<div class="all-20">
-														<label for="codeaddress" class="all-50 quarter-right-space">address</label><s:textfield id="codeaddress" name="codeAddress" value="%{mem_address}" cssClass="all-50"/>
+														<label for="codeaddress" class="all-50 quarter-right-space">address</label><s:textfield id="codeaddress" name="codeAddress" value="%{memoryAddress}" cssClass="all-50"/>
 													</div>
 												</li>
 												<li class="column-group quarter-gutters">
@@ -250,13 +237,11 @@ footer {
 														<input type="radio" id="temporal" name="triggerType" value="tp"><label for="temporal">temporal between</label>
 													</div>
 													<div class="all-15">
-														<!-- 			                                        <input type="text" id="timestart" name="timeStart" value="%{#session.faultloadBean.temporalTriggerStart}" class="all-66 quarter-right-space"><label for="timestart" class="all-33">and</label> -->
-														<s:textfield id="timestart" name="timeStart" value="%{time_start}" cssClass="all-66 quarter-right-space" disabled="true"/>
+														<s:textfield id="timestart" name="timeStart" value="%{timeStart}" cssClass="all-66 quarter-right-space" disabled="true"/>
 														<label for="timestart" class="all-33">and</label>
 													</div>
 													<div class="all-15">
-														<!-- 			                                        <input type="text" id="timeend" name="timeEnd" value="%{#session.faultloadBean.temporalTriggerEnd}" class="all-66 quarter-right-space"><label for="timeend" class="all-33">ms</label> -->
-														<s:textfield id="timeend" name="timeEnd" value="%{time_end}" cssClass="all-66 quarter-right-space" disabled="true"/>
+														<s:textfield id="timeend" name="timeEnd" value="%{timeEnd}" cssClass="all-66 quarter-right-space" disabled="true"/>
 														<label for="timeend" class="all-33">ms</label>
 													</div>
 												</li>
@@ -276,10 +261,10 @@ footer {
 														<input type="radio" id="spatialdata" name="triggerType" value="sd" checked><label for="spatialdata">spatial (data segment)</label>
 													</div>
 													<div class="all-10">
-														<s:select label="spatial (data segment)" id="accessdata" list="accessTypes" name="accessData" cssClass="all-100" value="%{read_address}"/>
+														<s:select label="spatial (data segment)" id="accessdata" list="accessTypes" name="accessData" cssClass="all-100" value="%{readAddress}"/>
 													</div>
 													<div class="all-20">
-														<label for="dataaddress" class="all-50 quarter-right-space">address</label><s:textfield id="dataaddress" name="dataAddress" value="%{mem_address}" cssClass="all-50"/>
+														<label for="dataaddress" class="all-50 quarter-right-space">address</label><s:textfield id="dataaddress" name="dataAddress" value="%{memoryAddress}" cssClass="all-50"/>
 													</div>
 												</li>
 											</s:else>

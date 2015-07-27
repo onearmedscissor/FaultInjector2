@@ -2,6 +2,9 @@ package faultinjector.action;
 
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,12 +19,14 @@ public class EditFaultload1Action extends ActionSupport implements SessionAware
 
 	private Map<String, Object> session;
 	private Faultload faultload;
-
+	private EntityManager em;
+	private EntityTransaction et;
 	private int id;
 
 	@Override
 	public String execute()
 	{
+		// if it's the first time we're here
 		if (!session.containsKey("editFaultload"))
 		{
 			this.faultload = this.getExperimentService().findFaultload(id);
@@ -32,36 +37,36 @@ public class EditFaultload1Action extends ActionSupport implements SessionAware
 
 		System.out.println("ID -> " + id);
 		System.out.println("EDIT FAULTLOAD [1/5]-------------------------------");
-		System.out.println("Faultload ID = " + faultload.getFl_id());
+		System.out.println("Faultload ID = " + faultload.getFaultloadlId());
 		System.out.println("Faultload NAME = " + faultload.getName());
-		System.out.println("Faultload TIME INTERVAL = " + faultload.getTime_interval());
+		System.out.println("Faultload TIME INTERVAL = " + faultload.getTimeInterval());
 
-		System.out.println("Faultload HARDWARE FAULT TYPE = " + faultload.getFaults().get(0).getHardwares().get(0).getHw_fault_type());
-		System.out.println("Faultload MEMORY FAULT RANGE = " + faultload.getMem_range_beg() + " - " + faultload.getMem_range_end());
-		System.out.println("Faultload NUMBER OF FAULTS = " + faultload.getN_faults());
+		System.out.println("Faultload HARDWARE FAULT TYPE = " + faultload.getFaults().get(0).getHardwareFaults().get(0).getHardwareFaultType().getName());
+		System.out.println("Faultload MEMORY FAULT RANGE = " + faultload.getMemoryRangeBeginning() + " - " + faultload.getMemoryRangeEnd());
+		System.out.println("Faultload NUMBER OF FAULTS = " + faultload.getNumberFaults());
 		System.out.println("Faultload 1.1 FAULT MODEL____________________________________");
-		System.out.println("Faultload FAULT CLASS: IS BIT-FLIP? = " + faultload.getFaults().get(0).getHardwares().get(0).getBit_flip());
-		System.out.println("Faultload BITS TO CHANGE = " + faultload.getFaults().get(0).getHardwares().get(0).getBitStart() + " - " + faultload.getFaults().get(0).getHardwares().get(0).getBitEnd());
+		System.out.println("Faultload FAULT CLASS = " + faultload.getFaults().get(0).getHardwareFaults().get(0).getFaultClass().getName());
+		System.out.println("Faultload BITS TO CHANGE = " + faultload.getFaults().get(0).getHardwareFaults().get(0).getBitStart() + " - " + faultload.getFaults().get(0).getHardwareFaults().get(0).getBitEnd());
 
 		for (Register r : faultload.getRegisters())
-			System.out.println("Faultload REGISTER: ID = " + r.getReg_id() + " | NAME = " + r.getName());
+			System.out.println("Faultload REGISTER: ID = " + r.getRegisterId() + " | NAME = " + r.getName());
 
 		System.out.println("Faultload 2.1 FAULT TRIGGER____________________________________");
-		System.out.println("Faultload MODE: KERNEL? = " + faultload.getFaults().get(0).getKernel_mode());
+		System.out.println("Faultload MODE = " + faultload.getFaults().get(0).getFaultMode().getName());
 		System.out.println("Faultload PROCESS ID = " + faultload.getFaults().get(0).getPid());
 		System.out.println("Faultload 2.2 FAULT TRIGGER TYPE____________________________________");
-		System.out.println("Faultload TRIGGER TYPE = " + faultload.getFaults().get(0).getTrigger_type());
+		System.out.println("Faultload TRIGGER TYPE = " + faultload.getFaults().get(0).getTriggerType());
 
-		switch (faultload.getFaults().get(0).getTrigger_type())
+		switch (faultload.getFaults().get(0).getTriggerType())
 		{
 			case "tp":
-				System.out.println("Faultload TEMPORAL BETWEEN = " + faultload.getFaults().get(0).getTime_start() + " AND " + faultload.getFaults().get(0).getTime_end());
+				System.out.println("Faultload TEMPORAL BETWEEN = " + faultload.getFaults().get(0).getTimeStart() + " AND " + faultload.getFaults().get(0).getTimeEnd());
 				break;
 			case "sc":
-				System.out.println("Faultload SPATIAL (CODE SEGMENT) = " + faultload.getFaults().get(0).getRead_address() + " ON ADDRESS " + faultload.getFaults().get(0).getMem_address());
+				System.out.println("Faultload SPATIAL (CODE SEGMENT) = " + faultload.getFaults().get(0).getReadAddress() + " ON ADDRESS " + faultload.getFaults().get(0).getMemAddress());
 				break;
 			case "sd":
-				System.out.println("Faultload SPATIAL (DATA SEGMENT) = " + faultload.getFaults().get(0).getRead_address() + " ON ADDRESS " + faultload.getFaults().get(0).getMem_address());
+				System.out.println("Faultload SPATIAL (DATA SEGMENT) = " + faultload.getFaults().get(0).getReadAddress() + " ON ADDRESS " + faultload.getFaults().get(0).getMemAddress());
 				break;
 		}
 

@@ -18,41 +18,36 @@ public class EditFaultload21Action extends ActionSupport implements SessionAware
 
 	private Map<String, Object> session;
 	private Faultload faultload;
-	 private EntityManager em;
-	 private EntityTransaction et;
-
-	private String id, name, description;
-	private int timeInterval;
+	private EntityManager em;
+	private EntityTransaction et;
+	private String name, description;
+	private int id, timeInterval;
 
 	@Override
 	public String execute()
 	{
-		if (!session.containsKey("editFaultload"))
+		// if it's the first time we're here
+		if (!session.containsKey("et") || !session.containsKey("em"))
 		{
-			this.faultload = this.getExperimentService().findFaultload(Integer.parseInt(id));
-			this.session.put("editFaultload", faultload);
-		}
-		else
-		{
-			 em = this.getExperimentService().getEntityManager();
-			 et = em.getTransaction();
-			 et.begin();
-			
-			 this.session.put("em", em);
-			 this.session.put("et", et);
-			faultload = (Faultload) session.get("editFaultload");
+			em = this.getExperimentService().getEntityManager();
+			et = em.getTransaction();
+			et.begin();
+
+			this.session.put("em", em);
+			this.session.put("et", et);
 		}
 
-		// faultload.setId(id);
+		faultload = (Faultload) session.get("editFaultload");
+
 		faultload.setName(name);
 		faultload.setDescription(description);
-		faultload.setTime_interval(timeInterval);
+		faultload.setTimeInterval(timeInterval);
 
 		System.out.println("ID -> " + id);
 		System.out.println("EDIT FAULTLOAD [2.1/4]-------------------------------");
-		System.out.println("Faultload ID = " + faultload.getFl_id());
+		System.out.println("Faultload ID = " + faultload.getFaultloadlId());
 		System.out.println("Faultload NAME = " + faultload.getName());
-		System.out.println("Faultload TIME INTERVAL = " + faultload.getTime_interval());
+		System.out.println("Faultload TIME INTERVAL = " + faultload.getTimeInterval());
 
 		return SUCCESS;
 	}
@@ -86,12 +81,12 @@ public class EditFaultload21Action extends ActionSupport implements SessionAware
 		this.session.put("experimentService", experimentService);
 	}
 
-	public void setId(String id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}
 
-	public String getId()
+	public int getId()
 	{
 		return id;
 	}

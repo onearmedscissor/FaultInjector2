@@ -121,23 +121,12 @@ footer {
 			<div class="all-100">
 				<form action="editfaultload31" id="page_2" class="ink-form all-100 small-100 tiny-100" method="post">
 					<fieldset>
-						<s:hidden name="id" value="%{faultload.fl_id}" />
+						<s:hidden name="id" value="%{faultload.faultloadId}" />
 
 						<div class="control-group column-group gutters required">
 							<p class="label all-20 align-right push-middle">Hardware fault type</p>
 							<ul id="hwfaulttype" class="control unstyled all-80 inline">
-								<s:iterator value="faults">
-									<s:iterator value="hardwares">
-										<s:if test="%{hw_fault_type == 'r'}">
-											<li><input type="radio" id="reg" name="hardwareFaultType" value="r" checked><label for="reg">register</label></li>
-											<li><input type="radio" id="mem" name="hardwareFaultType" value="m"><label for="mem">memory</label></li>
-										</s:if>
-										<s:else>
-											<li><input type="radio" id="reg" name="hardwareFaultType" value="r"><label for="reg">register</label></li>
-											<li><input type="radio" id="mem" name="hardwareFaultType" value="m" checked><label for="mem">memory</label></li>
-										</s:else>
-									</s:iterator>
-								</s:iterator>
+								<li><s:radio label="hardwarefaulttype" name="hardwareFaultTypeId" list="hardwareFaultTypes" listKey="hardwareFaultTypeId" listValue="name" value="hardwareFaultTypeId" /></li>
 							</ul>
 						</div>
 
@@ -146,7 +135,7 @@ footer {
 								<div class="column-group gutters">
 									<label for="memstart" class="all-66 align-right">Memory fault range</label>
 									<div class="control all-33">
-										<s:textfield id="memstart" name="memStart" value="%{faultload.mem_range_beg}" />
+										<s:textfield id="memstart" name="memStart" value="%{faultload.memoryRangeBeginning}" />
 									</div>
 								</div>
 							</div>
@@ -155,7 +144,7 @@ footer {
 									<div class="all-5"></div>
 									<label for="memend" class="all-35 align-left">-</label>
 									<div class="control all-60">
-										<s:textfield id="memend" name="memEnd" value="%{faultload.mem_range_end}" />
+										<s:textfield id="memend" name="memEnd" value="%{faultload.memoryRangeEnd}" />
 									</div>
 								</div>
 							</div>
@@ -165,7 +154,7 @@ footer {
 						<div class="control-group column-group gutters required">
 							<label for="name" class="all-20 align-right">Number of faults</label>
 							<div class="control all-10">
-								<s:textfield id="numberfaults" name="numberFaults" value="%{faultload.n_faults}" />
+								<s:textfield id="numberfaults" name="numberFaults" value="%{faultload.numberFaults}" />
 							</div>
 							<div class="all-70"></div>
 						</div>
@@ -183,20 +172,9 @@ footer {
 					<fieldset>
 						<div class="control-group column-group gutters required">
 							<p class="label all-20 align-right push-middle">Fault class</p>
-							<s:iterator value="faults">
-								<s:iterator value="hardwares">
-									<ul class="control unstyled all-80 inline">
-										<s:if test="%{bit_flip}">
-											<li><input type="radio" id="bitflip" name="faultClass" value="true" checked><label for="bitflip">bit-flip</label></li>
-											<li><input type="radio" id="stuckat" name="faultClass" value="false"><label for="stuckat">stuck at</label></li>
-										</s:if>
-										<s:else>
-											<li><input type="radio" id="bitflip" name="faultClass" value="true"><label for="bitflip">bit-flip</label></li>
-											<li><input type="radio" id="stuckat" name="faultClass" value="false" checked><label for="stuckat">stuck at</label></li>
-										</s:else>
-									</ul>
-								</s:iterator>
-							</s:iterator>
+							<ul class="control unstyled all-80 inline">
+								<li><s:radio label="faultclass" name="faultClassId" list="faultClasses" listKey="faultClassId" listValue="name" value="faultClassId" /></li>
+							</ul>
 						</div>
 
 						<!-- 							<div class="control-group column-group gutters"> -->
@@ -210,7 +188,7 @@ footer {
 							<div class="control-group all-30 required">
 								<div class="column-group gutters">
 									<s:iterator value="faults" end="1">
-										<s:iterator value="hardwares" end="1">
+										<s:iterator value="hardwareFaults" end="1">
 											<label for="bitstart" class="all-66 align-right">Bit(s) to change</label>
 											<div class="control all-33">
 												<s:textfield id="bitstart" name="bitStart" value="%{bitStart}" />
@@ -222,7 +200,7 @@ footer {
 							<div class="control-group all-15">
 								<div class="column-group">
 									<s:iterator value="faults" end="1">
-										<s:iterator value="hardwares" end="1">
+										<s:iterator value="hardwareFaults" end="1">
 											<div class="all-5"></div>
 											<label for="bitend" class="all-35 align-left">-</label>
 											<div class="control all-60">
@@ -270,13 +248,14 @@ footer {
 	<script src="js/my-jquery.js"></script>
 
 	<script type="text/javascript">
-		var check10, check11, value = $('input[name=hardwareFaultType]:checked').val();
-
-		if (value == "m")
+		var check10, check11, value = $('input[name=hardwareFaultTypeId]:checked + label').text();
+		
+		if (value == "memory")
 		{
 			$('#memstart').attr("disabled", false);
 			$('#memend').attr("disabled", false);
-		} else
+		}
+		else
 		{
 			$('#memstart').attr("disabled", true);
 			$('#memend').attr("disabled", true);
@@ -293,7 +272,8 @@ footer {
 				else
 					check10 = "false";
 			}
-		} else
+		}
+		else
 			check10 = "false";
 
 		if ($('#bitstart').val().match(/^\d+$/) && $('#bitend').val().match(/^\d+$/) && $('#bitstart').val() >= 0 && parseInt($('#bitstart').val()) <= parseInt($('#bitend').val()))
@@ -308,13 +288,14 @@ footer {
 
 		$("#page_2").on("input change", function()
 		{
-			value = $('input[name=hardwareFaultType]:checked').val();
+			value = $('input[name=hardwareFaultTypeId]:checked + label').text();
 
-			if (value == "m")
+			if (value == "memory")
 			{
 				$('#memstart').attr("disabled", false);
 				$('#memend').attr("disabled", false);
-			} else
+			}
+			else
 			{
 				$('#memstart').attr("disabled", true);
 				$('#memend').attr("disabled", true);
@@ -331,7 +312,8 @@ footer {
 					else
 						check10 = "false";
 				}
-			} else
+			}
+			else
 				check10 = "false";
 
 			if ($('#bitstart').val().match(/^\d+$/) && $('#bitend').val().match(/^\d+$/) && $('#bitstart').val() >= 0 && parseInt($('#bitstart').val()) <= parseInt($('#bitend').val()))

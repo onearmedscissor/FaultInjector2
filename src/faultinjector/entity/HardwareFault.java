@@ -23,8 +23,10 @@ public class HardwareFault extends Fault implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "Bit_flip")
-	private boolean bit_flip;
+	// bi-directional many-to-one association to Fault
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "Fault_id")
+	private Fault fault;
 
 	@Column(name = "Bit_start")
 	private int bitStart;
@@ -32,26 +34,23 @@ public class HardwareFault extends Fault implements Serializable
 	@Column(name = "Bit_end")
 	private int bitEnd;
 
-	@Column(name = "Hw_fault_type")
-	private char hw_fault_type;
-
-	// bi-directional many-to-one association to Fault
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "Fault_id")
-	private Fault fault;
+	// bi-directional many-to-one association to Hardware_fault_type
+	@ManyToOne
+	@JoinColumn(name = "Hardware_fault_type_id")
+	private HardwareFaultType hardwareFaultType;
 
 	public HardwareFault()
 	{
 	}
 
-	public boolean getBit_flip()
+	public Fault getFault()
 	{
-		return this.bit_flip;
+		return this.fault;
 	}
 
-	public void setBit_flip(boolean bit_flip)
+	public void setFault(Fault fault)
 	{
-		this.bit_flip = bit_flip;
+		this.fault = fault;
 	}
 
 	public int getBitStart()
@@ -74,24 +73,13 @@ public class HardwareFault extends Fault implements Serializable
 		this.bitEnd = bitEnd;
 	}
 
-	public char getHw_fault_type()
+	public HardwareFaultType getHardwareFaultType()
 	{
-		return hw_fault_type;
+		return hardwareFaultType;
 	}
 
-	public void setHw_fault_type(char hw_fault_type)
+	public void setHardwareFaultType(HardwareFaultType hardwareFaultType)
 	{
-		this.hw_fault_type = hw_fault_type;
+		this.hardwareFaultType = hardwareFaultType;
 	}
-
-	public Fault getFault()
-	{
-		return this.fault;
-	}
-
-	public void setFault(Fault fault)
-	{
-		this.fault = fault;
-	}
-
 }

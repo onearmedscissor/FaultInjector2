@@ -124,10 +124,10 @@ footer {
 						<s:if test="experiments.size > 0">
 							<s:iterator value="experiments">
 								<tr>
-									<td><a href="<s:url action="showexperiment"><s:param name="id"><s:property value="exp_id"/></s:param></s:url>" class="large all-100"><s:property value="name" /></a></td>
+									<td><a href="<s:url action="showexperiment"><s:param name="id"><s:property value="experimentId"/></s:param></s:url>" class="large all-100"><s:property value="name" /></a></td>
 									<td><a class="select ink-button all-100">select</a></td>
-									<td><a href="<s:url action="editexperiment"><s:param name="id"><s:property value="exp_id"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
-									<td><a href="<s:url action="deleteexperiment"><s:param name="id"><s:property value="exp_id"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
+									<td><a href="<s:url action="editexperiment"><s:param name="id"><s:property value="experimentId"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
+									<td><a href="<s:url action="deleteexperiment"><s:param name="id"><s:property value="experimentId"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
 									<td class="align-center"><a class="help all-100">?</a></td>
 								</tr>
 							</s:iterator>

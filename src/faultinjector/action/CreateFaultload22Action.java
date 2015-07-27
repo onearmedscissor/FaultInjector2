@@ -26,7 +26,7 @@ public class CreateFaultload22Action extends ActionSupport implements SessionAwa
 
 		for (Register r : this.registers)
 		{
-			System.out.println("Register ID = " + r.getReg_id());
+			System.out.println("Register ID = " + r.getRegisterId());
 			System.out.println("Register NAME = " + r.getName());
 			System.out.println();
 		}

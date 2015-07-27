@@ -7,14 +7,18 @@
 		<class>faultinjector.entity.Experiment</class>
 		<class>faultinjector.entity.Fault</class>
 		<class>faultinjector.entity.HardwareFault</class>
-		<class>faultinjector.entity.Injection_Run</class>
+		<class>faultinjector.entity.InjectionRun</class>
 		<class>faultinjector.entity.SoftwareFault</class>
 		<class>faultinjector.entity.Target</class>
 		<class>faultinjector.entity.User</class>
 		<class>faultinjector.entity.Workload</class>
 		<class>faultinjector.entity.Faultload</class>
 		<class>faultinjector.entity.Register</class>
-		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<class>faultinjector.entity.Application</class>
+		<class>faultinjector.entity.Architecture</class>
+		<class>faultinjector.entity.FaultClass</class>
+		<class>faultinjector.entity.FaultMode</class>
+		<class>faultinjector.entity.HardwareFaultType</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/fault_injector" />
 			<property name="javax.persistence.jdbc.user" value="root" />

@@ -7,7 +7,8 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import faultinjector.entity.Injection_Run;
+import faultinjector.entity.Application;
+import faultinjector.entity.InjectionRun;
 import faultinjector.entity.Workload;
 import faultinjector.service.ExperimentService;
 
@@ -19,39 +20,31 @@ public class EditWorkloadAction extends ActionSupport implements SessionAware
 	private Workload workload;
 
 	private int id;
-	private List<Injection_Run> injectionRuns;
+	private List<InjectionRun> injectionRuns;
+	private List<Application> applications;
 
 	@Override
 	public String execute()
 	{
-		// et = this.getExperimentService().getEntityManager().getTransaction();
-		//
-		// if(!et.isActive())
-		// et.begin();
-
 		workload = this.getExperimentService().findWorkload(id);
 
-		// if(!session.containsKey("workload "+id))
-		// {
-		// this.workload = this.getExperimentService().findWorkload(id);
-		// session.put("workload "+id, workload);
-		// }
-		// else
-		// workload = (Workload) session.get("workload "+id);
+		applications = workload.getApplications();
 
 		System.out.println("EDIT WORKLOAD-------------------------------");
-		System.out.println("Workload ID = " + workload.getWl_id());
+		System.out.println("Workload ID = " + workload.getWorkloadId());
 		System.out.println("Workload NAME = " + workload.getName());
-		System.out.println("Workload APP 1 NAME = " + workload.getApp_1_name());
-		System.out.println("Workload APP 2 NAME = " + workload.getApp_2_name());
-		System.out.println("Workload APP 3 NAME = " + workload.getApp_3_name());
+
+		for (int n = 0; n < applications.size(); n++)
+		{
+			System.out.println("Workload APP " + (n + 1) + " NAME = " + applications.get(n).getName());
+		}
 
 		injectionRuns = workload.getInjectionRuns();
 
-		for (Injection_Run i : injectionRuns)
+		for (InjectionRun i : injectionRuns)
 		{
 			System.out.println("Workload FAULTLOAD NAME = " + i.getFaultload().getName());
-			System.out.println("Workload OUTPUT FILENAME = " + i.getOutput_filename());
+			System.out.println("Workload OUTPUT FILENAME = " + i.getOutputFilename());
 		}
 
 		System.out.println("Workload TARGET NAME = " + workload.getTarget().getName());
@@ -89,6 +82,11 @@ public class EditWorkloadAction extends ActionSupport implements SessionAware
 	public Workload getWorkload()
 	{
 		return workload;
+	}
+
+	public List<Application> getApplications()
+	{
+		return applications;
 	}
 
 	@Override

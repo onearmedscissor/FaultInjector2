@@ -9,7 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.entity.Experiment;
 import faultinjector.entity.Faultload;
-import faultinjector.entity.Injection_Run;
+import faultinjector.entity.InjectionRun;
 import faultinjector.service.ExperimentService;
 
 public class EditExperimentAction extends ActionSupport implements SessionAware
@@ -21,7 +21,7 @@ public class EditExperimentAction extends ActionSupport implements SessionAware
 
 	private int id;
 	private List<Faultload> faultloads;
-	private List<Injection_Run> injectionRuns;
+	private List<InjectionRun> injectionRuns;
 
 	@Override
 	public String execute()
@@ -30,13 +30,13 @@ public class EditExperimentAction extends ActionSupport implements SessionAware
 
 		System.out.println("ID -> " + id);
 		System.out.println("EDIT EXPERIMENT-------------------------------");
-		System.out.println("Experiment ID = " + experiment.getExp_id());
+		System.out.println("Experiment ID = " + experiment.getExpId());
 		System.out.println("Experiment NAME = " + experiment.getName());
 
 		if (experiment.getTarget() != null)
 			System.out.println("Experiment TARGET NAME = " + experiment.getTarget().getName());
 
-		System.out.println("Experiment CREATION DATE = " + experiment.getCreation_date());
+		System.out.println("Experiment CREATION DATE = " + experiment.getCreationDate());
 
 		if (experiment.getUser() != null)
 			System.out.println("Experiment CREATOR NAME = " + experiment.getUser().getName());
@@ -50,10 +50,10 @@ public class EditExperimentAction extends ActionSupport implements SessionAware
 
 			System.out.println("Experiment FAULTLOAD NAME = " + f.getName());
 
-			for (Injection_Run i : injectionRuns)
+			for (InjectionRun i : injectionRuns)
 			{
 				System.out.println("Faultload WORKLOAD NAME = " + i.getWorkload().getName());
-				System.out.println("Faultload OUTPUT FILENAME = " + i.getOutput_filename());
+				System.out.println("Faultload OUTPUT FILENAME = " + i.getOutputFilename());
 			}
 		}
 
@@ -104,7 +104,7 @@ public class EditExperimentAction extends ActionSupport implements SessionAware
 		return faultloads;
 	}
 
-	public List<Injection_Run> getInjectionRuns()
+	public List<InjectionRun> getInjectionRuns()
 	{
 		return injectionRuns;
 	}

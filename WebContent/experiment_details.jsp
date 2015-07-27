@@ -124,16 +124,21 @@ footer {
 						</tr>
 						<tr>
 							<td class="all-25 align-right fw-400">Creation date</td>
-							<td class="all-75 fw-300"><s:property value="experiment.creation_date" /></td>
+							<td class="all-75 fw-300"><s:property value="experiment.creationDate" /></td>
 						</tr>
 						<tr>
 							<td class="all-25 align-right fw-400">Target name</td>
 							<td class="all-75 fw-300"><s:property value="experiment.target.name" /></td>
 						</tr>
 						<s:if test="faultloads.size > 0">
-							<s:iterator value="faultloads">
+							<s:iterator value="faultloads" status="flCounter">
 								<tr>
-									<td class="all-25 align-right fw-400">Faultload name(s)</td>
+									<td class="all-25 align-right fw-400">Faultload #<s:property value="%{#flCounter.count}" />:</td>
+									<td class="all-75"></td>
+								</tr>
+							
+								<tr>
+									<td class="all-25 align-right fw-400">Faultload name</td>
 									<td class="all-75 fw-300"><s:property value="name" /></td>
 								</tr>
 
@@ -145,7 +150,7 @@ footer {
 										</tr>
 										<tr>
 											<td class="all-25 align-right fw-400">Output filename</td>
-											<td class="all-75 fw-300"><s:property value="output_filename" /></td>
+											<td class="all-75 fw-300"><s:property value="outputFilename" /></td>
 										</tr>
 									</s:iterator>
 								</s:if>

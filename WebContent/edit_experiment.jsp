@@ -117,7 +117,7 @@ footer {
 			<div class="all-100">
 				<form action="saveexperiment" class="ink-form all-100 small-100 tiny-100" method="post">
 					<fieldset>
-						<s:hidden name="id" value="%{experiment.exp_id}" />
+						<s:hidden name="id" value="%{experiment.experimentId}" />
 
 						<div class="control-group column-group gutters required">
 							<label for="name" class="all-20 align-right">Name</label>
@@ -141,7 +141,7 @@ footer {
 							<label for="creationdate" class="all-20 align-right">Creation date</label>
 							<div class="control all-50">
 								<!-- <input type="text" id="creationdate" name="creationDate"> -->
-								<s:textfield id="creationdate" disabled="true" value="%{experiment.creation_date}" />
+								<s:textfield id="creationdate" disabled="true" value="%{experiment.creationDate}" />
 							</div>
 							<div class="all-30"></div>
 						</div>
@@ -149,7 +149,7 @@ footer {
 						<div class="control-group column-group gutters">
 							<label for="injectiondate" class="all-20 align-right">Injection date</label>
 							<div class="control all-50">
-								<s:textfield id="injectiondate" disabled="true" value="%{experiment.injection_date}" />
+								<s:textfield id="injectiondate" disabled="true" value="%{experiment.injectionDate}" />
 							</div>
 							<div class="all-30"></div>
 						</div>
@@ -157,7 +157,6 @@ footer {
 						<div class="control-group column-group gutters required">
 							<label for="targetname" class="all-20 align-right">Target name</label>
 							<div class="control all-50">
-								<!-- <input type="text" id="targetname" name="targetName"> -->
 								<s:textfield id="targetname" name="targetName" value="%{experiment.target.name}" />
 							</div>
 							<%-- 	                            <a href="<s:url action="edittarget"><s:param name="id"><s:property value="experiment.target.target_id"/></s:param></s:url>" class="ink-button all-10">Edit...</a> --%>
@@ -180,7 +179,6 @@ footer {
 										<div class="control-group column-group gutters required">
 											<label for="workloadname" class="all-20 align-right">Workload name</label>
 											<div class="control all-50">
-												<!-- <input type="text" id="workloadname" name="workloadName"> -->
 												<s:textfield id="workloadname" name="workloadName" value="%{workload.name}" />
 											</div>
 											<div class="control all-30"></div>
@@ -189,8 +187,7 @@ footer {
 										<div class="control-group column-group gutters required">
 											<label for="outputfilename" class="all-20 align-right">Output filename</label>
 											<div class="control all-50">
-												<!-- <input type="text" id="outputfilename" name="outputFilename"> -->
-												<s:textfield id="outputfilename" name="outputFilename" value="%{output_filename}" disabled="true" />
+												<s:textfield id="outputfilename" name="outputFilename" value="%{outputFilename}" disabled="true" />
 											</div>
 											<div class="all-30"></div>
 										</div>

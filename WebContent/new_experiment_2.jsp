@@ -125,16 +125,16 @@ footer {
 					<tbody>
 						<s:if test="targets.size > 0">
 							<s:iterator value="targets">
-								<s:if test="#session.experimentBean.targetId == target_id">
-									<tr id="<s:property value="target_id"/>" class="highlight">
+								<s:if test="#session.experimentBean.targetId == targetId">
+									<tr id="<s:property value="targetId"/>" class="highlight">
 								</s:if>
 								<s:else>
-									<tr id="<s:property value="target_id"/>">
+									<tr id="<s:property value="targetId"/>">
 								</s:else>
-									<td><a href="<s:url action="showtarget"><s:param name="id"><s:property value="target_id"/></s:param></s:url>" class="large all-100"><s:property value="name" /></a></td>
+									<td><a href="<s:url action="showtarget"><s:param name="id"><s:property value="targetId"/></s:param></s:url>" class="large all-100"><s:property value="name" /></a></td>
 									<td><a class="select ink-button all-100">select</a></td>
-									<td><a href="<s:url action="edittarget"><s:param name="id"><s:property value="target_id"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
-									<td><a href="<s:url action="deletetarget"><s:param name="id"><s:property value="target_id"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
+									<td><a href="<s:url action="edittarget"><s:param name="id"><s:property value="targetId"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
+									<td><a href="<s:url action="deletetarget"><s:param name="id"><s:property value="targetId"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
 									<td class="align-center"><a class="help all-100">?</a></td>
 								</tr>
 							</s:iterator>
@@ -154,7 +154,7 @@ footer {
 					<p>Here you can view, edit or delete previously created targets or alternatively create a new one. To select a target, click on the corresponding row on the table above.</p>
 				</div>
 
-				<a href="new_target.jsp" class="ink-button all-20" id="newtarget">Create new target...</a>
+				<a href="loadarchitectures" class="ink-button all-20" id="newtarget">Create new target...</a>
 				<div class="column-group push-center">
 					<a href="new_experiment_1.jsp" class="ink-button double-top-space all-25" id="previous">&lt; Previous</a>
 					<button class="ink-button double-top-space all-25 dynamicButton" id="next" disabled>Next &gt;</button>

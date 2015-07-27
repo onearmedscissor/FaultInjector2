@@ -119,7 +119,7 @@ footer {
 			<div class="all-100">
 				<form action="savetarget" class="ink-form all-100 small-100 tiny-100" method="post">
 					<fieldset>
-						<s:hidden name="id" value="%{target.target_id}" />
+						<s:hidden name="id" value="%{target.targetId}" />
 
 						<div class="control-group column-group gutters required">
 							<label for="name" class="all-20 align-right">Name</label>
@@ -130,10 +130,12 @@ footer {
 						</div>
 
 						<div class="control-group column-group gutters">
-							<p class="label all-20 align-right">Architecture</p>
-							<div class="all-70">
-								<s:radio label="i386arch" name="i386Arch" list="architectures" value="defaultArchitectureValue" />
-							</div>
+							<p class="label all-20 align-right push-middle">Architecture</p>
+							<ul class="control unstyled all-80 inline">
+								<s:action name="loadarchitectures">
+								<li><s:radio label="architectures" name="architectureId" list="architectures" listKey="architectureId" listValue="name" value="architectureId"/></li>
+								</s:action>
+							</ul>
 						</div>
 
 						<div class="column-group all-50">
@@ -175,7 +177,7 @@ footer {
 						<div class="control-group column-group gutters required">
 							<label for="operatingsystem" class="all-20 align-right">Operating system</label>
 							<div class="control all-50">
-								<s:textfield id="operatingsystem" name="operatingSystem" value="%{target.operating_system}" />
+								<s:textfield id="operatingsystem" name="operatingSystem" value="%{target.operatingSystem}" />
 							</div>
 							<div class="all-30"></div>
 						</div>

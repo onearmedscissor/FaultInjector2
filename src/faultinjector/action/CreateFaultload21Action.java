@@ -15,9 +15,7 @@ public class CreateFaultload21Action extends ActionSupport implements SessionAwa
 	private Map<String, Object> session;
 	private FaultloadBean faultloadBean;
 
-	private char hardwareFaultType;
-	private boolean faultClass;
-	private int memStart, memEnd, numberFaults, bitStart, bitEnd;
+	private int hardwareFaultTypeId, memStart, memEnd, numberFaults, faultClassId, bitStart, bitEnd;
 
 	public String execute()
 	{
@@ -25,14 +23,15 @@ public class CreateFaultload21Action extends ActionSupport implements SessionAwa
 		{
 			this.faultloadBean = new FaultloadBean();
 			session.put("faultloadBean", faultloadBean);
-		} else
+		}
+		else
 			faultloadBean = (FaultloadBean) session.get("faultloadBean");
 
-		faultloadBean.setHardwareFaultType(hardwareFaultType);
+		faultloadBean.setHardwareFaultTypeId(hardwareFaultTypeId);
 		faultloadBean.setMemoryFaultRangeStart(memStart);
 		faultloadBean.setMemoryFaultRangeEnd(memEnd);
 		faultloadBean.setNumberFaults(numberFaults);
-		faultloadBean.setBitFlip(faultClass);
+		faultloadBean.setFaultClassId(faultClassId);
 		faultloadBean.setBitsChangeStart(bitStart);
 		faultloadBean.setBitsChangeEnd(bitEnd);
 
@@ -41,11 +40,11 @@ public class CreateFaultload21Action extends ActionSupport implements SessionAwa
 		System.out.println("New faultload DESCRIPTION = " + faultloadBean.getDescription());
 		System.out.println("New faultload TIME INTERVAL = " + faultloadBean.getTimeInterval());
 
-		System.out.println("New faultload HARDWARE FAULT TYPE = " + faultloadBean.getHardwareFaultType());
+		System.out.println("New faultload HARDWARE FAULT TYPE ID = " + faultloadBean.getHardwareFaultTypeId());
 		System.out.println("New faultload MEMORY FAULT RANGE = " + faultloadBean.getMemoryFaultRangeStart() + " - " + faultloadBean.getMemoryFaultRangeEnd());
 		System.out.println("New faultload NUMBER OF FAULTS = " + faultloadBean.getNumberFaults());
 		System.out.println("New faultload 1.1 FAULT MODEL____________________________________");
-		System.out.println("New faultload FAULT CLASS: IS BIT-FLIP? = " + faultloadBean.getBitFlip());
+		System.out.println("New faultload FAULT CLASS ID = " + faultloadBean.getFaultClassId());
 		System.out.println("New faultload BITS TO CHANGE = " + faultloadBean.getBitsChangeStart() + " - " + faultloadBean.getBitsChangeEnd());
 
 		return SUCCESS;
@@ -69,14 +68,14 @@ public class CreateFaultload21Action extends ActionSupport implements SessionAwa
 			addFieldError("faultloadBean.bitsChangeEnd", "Faultload bit(s) to change range is required and must be set between 0 and 31!");
 	}
 
-	public void setHardwareFaultType(char hardwareFaultType)
+	public void setHardwareFaultTypeId(int hardwareFaultTypeId)
 	{
-		this.hardwareFaultType = hardwareFaultType;
+		this.hardwareFaultTypeId = hardwareFaultTypeId;
 	}
 
-	public void setFaultClass(boolean faultClass)
+	public void setFaultClassId(int faultClassId)
 	{
-		this.faultClass = faultClass;
+		this.faultClassId = faultClassId;
 	}
 
 	public void setMemStart(int memStart)
@@ -102,6 +101,11 @@ public class CreateFaultload21Action extends ActionSupport implements SessionAwa
 	public void setBitEnd(int bitEnd)
 	{
 		this.bitEnd = bitEnd;
+	}
+
+	public FaultloadBean getFaultloadBean()
+	{
+		return faultloadBean;
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.entity.Experiment;
 import faultinjector.entity.Faultload;
-import faultinjector.entity.Injection_Run;
+import faultinjector.entity.InjectionRun;
 import faultinjector.service.ExperimentService;
 
 public class SaveExperimentAction extends ActionSupport implements SessionAware
@@ -25,8 +25,8 @@ public class SaveExperimentAction extends ActionSupport implements SessionAware
 	private EntityTransaction et;
 	private List<Faultload> faultloads;
 	private Faultload faultload;
-	private List<Injection_Run> injectionRuns;
-	private Injection_Run injectionRun;
+	private List<InjectionRun> injectionRuns;
+	private InjectionRun injectionRun;
 
 	private String id;
 	private String name;
@@ -41,30 +41,18 @@ public class SaveExperimentAction extends ActionSupport implements SessionAware
 	@Override
 	public String execute()
 	{
-		// experiment.setCreatorName(creatorName);
-
 		System.out.println("SAVE EXPERIMENT ID HIDDEN FORM VALUE FIELD -> " + id);
 
 		em = this.getExperimentService().getEntityManager();
 		et = em.getTransaction();
 		et.begin();
 
-		// experiment = (Experiment) session.get("experiment "+id);
-
 		experiment = this.getExperimentService().findExperiment(Integer.parseInt(id));
 
-		// if(name.length()!=0)
 		experiment.setName(name);
 
-		// if(!creatorName.isEmpty())
-		// experiment.getUser().setName(creatorName); // descomentar só quando existirem contas de utilizador
-
-		// experiment.setCreationDate(creationDate);
-
-		// if(targetName.length()!=0)
 		experiment.getTarget().setName(targetName);
 
-		// if(workloadName.length()!=0)
 		faultloads = experiment.getFaultloads();
 		if (!faultloads.isEmpty())
 		{
@@ -74,28 +62,21 @@ public class SaveExperimentAction extends ActionSupport implements SessionAware
 			{
 				injectionRun = injectionRuns.get(0);
 				injectionRun.getWorkload().setName(workloadName);
-
-				//injectionRun.setOutput_filename(outputFilename);
 			}
 
 			faultload.setName(faultloadName);
 		}
 
-		// if(faultloadName.length()!=0)
-
-		// if(outputFilename.length()!=0)
-
-		// if(description.length()!=0)
 		experiment.setDescription(description);
 
 		et.commit();
 		em.close();
 
 		System.out.println("SAVE EXPERIMENT-------------------------------");
-		System.out.println("Experiment ID = " + experiment.getExp_id());
+		System.out.println("Experiment ID = " + experiment.getExpId());
 		System.out.println("Experiment NAME = " + experiment.getName());
 		System.out.println("Experiment TARGET NAME = " + experiment.getTarget().getName());
-		System.out.println("Experiment CREATION DATE = " + experiment.getCreation_date());
+		System.out.println("Experiment CREATION DATE = " + experiment.getCreationDate());
 
 		if (experiment.getUser() != null)
 			System.out.println("Experiment CREATOR NAME = " + experiment.getUser().getName());
@@ -106,17 +87,14 @@ public class SaveExperimentAction extends ActionSupport implements SessionAware
 
 			System.out.println("Experiment FAULTLOAD NAME = " + f.getName());
 
-			for (Injection_Run i : injectionRuns)
+			for (InjectionRun i : injectionRuns)
 			{
 				System.out.println("Faultload WORKLOAD NAME = " + i.getWorkload().getName());
-				System.out.println("Faultload OUTPUT FILENAME = " + i.getOutput_filename());
+				System.out.println("Faultload OUTPUT FILENAME = " + i.getOutputFilename());
 			}
 		}
 
 		System.out.println("Experiment DESCRIPTION = " + experiment.getDescription());
-
-		// this.getExperimentService().closeTransaction();
-		// session.clear();
 
 		return SUCCESS;
 	}
@@ -128,24 +106,11 @@ public class SaveExperimentAction extends ActionSupport implements SessionAware
 		if (name == null || name.length() == 0 || name.length() > 50)
 			addFieldError("experiment.name", "Experience name is required and can't have more than 50 characters!");
 
-		// if (creatorName == null || creatorName.length() == 0 ||
-		// creatorName.length() > 30)
-		// addFieldError("experiment.creatorName",
-		// "Creator name is required and can't have more than 30 characters!");
-
 		if (targetName == null || targetName.length() == 0 || targetName.length() > 50)
 			addFieldError("experiment.targetName", "Target name is required and can't have more than 50 characters!");
-		//
-		// if(experiment.getFaultloads()!=null)
-		// {
+
 		if (workloadName == null || workloadName.length() == 0 || workloadName.length() > 30)
 			addFieldError("experiment.workloadName", "Workload name is required and can't have more than 30 characters!");
-
-		// if (outputFilename == null || outputFilename.length() == 0 ||
-		// outputFilename.length() > 50)
-		// addFieldError("experiment.outputFilename",
-		// "Output filename is required and can't have more than 50 characters!");
-		// }
 
 		if (faultloadName == null || faultloadName.length() == 0 || faultloadName.length() > 30)
 			addFieldError("experiment.faultloadName", "Faultload name is required and can't have more than 30 characters!");

@@ -23,28 +23,22 @@ public class EditFaultload32Action extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		if (!session.containsKey("editFaultload"))
-		{
-			this.faultload = this.getExperimentService().findFaultload(Integer.parseInt(id));
-			this.session.put("editFaultload", faultload);
-		}
-		else
-			faultload = (Faultload) session.get("editFaultload");
+		faultload = (Faultload) session.get("editFaultload");
 
 		this.registers = this.getExperimentService().findAllRegisters();
 
 		System.out.println("ID -> " + id);
 		System.out.println("EDIT FAULTLOAD [3.2/4]-------------------------------");
-		System.out.println("Faultload ID = " + faultload.getFl_id());
+		System.out.println("Faultload ID = " + faultload.getFaultloadlId());
 		System.out.println("Faultload NAME = " + faultload.getName());
-		System.out.println("Faultload TIME INTERVAL = " + faultload.getTime_interval());
+		System.out.println("Faultload TIME INTERVAL = " + faultload.getTimeInterval());
 
-		System.out.println("Faultload HARDWARE FAULT TYPE = " + faultload.getFaults().get(0).getHardwares().get(0).getHw_fault_type());
-		System.out.println("Faultload MEMORY FAULT RANGE = " + faultload.getMem_range_beg() + " - " + faultload.getMem_range_end());
-		System.out.println("Faultload NUMBER OF FAULTS = " + faultload.getN_faults());
+		System.out.println("Faultload HARDWARE FAULT TYPE = " + faultload.getFaults().get(0).getHardwareFaults().get(0).getHardwareFaultType().getName());
+		System.out.println("Faultload MEMORY FAULT RANGE = " + faultload.getMemoryRangeBeginning() + " - " + faultload.getMemoryRangeEnd());
+		System.out.println("Faultload NUMBER OF FAULTS = " + faultload.getNumberFaults());
 		System.out.println("Faultload 1.1 FAULT MODEL____________________________________");
-		System.out.println("Faultload FAULT CLASS: IS BIT-FLIP? = " + faultload.getFaults().get(0).getHardwares().get(0).getBit_flip());
-		System.out.println("Faultload BITS TO CHANGE = " + faultload.getFaults().get(0).getHardwares().get(0).getBitStart() + " - " + faultload.getFaults().get(0).getHardwares().get(0).getBitEnd());
+		System.out.println("Faultload FAULT CLASS = " + faultload.getFaults().get(0).getHardwareFaults().get(0).getFaultClass().getName());
+		System.out.println("Faultload BITS TO CHANGE = " + faultload.getFaults().get(0).getHardwareFaults().get(0).getBitStart() + " - " + faultload.getFaults().get(0).getHardwareFaults().get(0).getBitEnd());
 
 		return SUCCESS;
 	}

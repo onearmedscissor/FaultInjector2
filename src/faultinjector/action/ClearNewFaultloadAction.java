@@ -24,14 +24,7 @@ public class ClearNewFaultloadAction extends ActionSupport implements SessionAwa
 
 			System.out.println("FAULTLOAD BEAN RESET-------------------------------");
 			System.out.println("New faultload NAME = " + faultloadBean.getName());
-			// System.out.println("New experiment DESCRIPTION = " +
-			// faultloadBean.getDescription());
-			// System.out.println("New experiment SELECTED TARGET ID = " +
-			// experimentBean.getTargetId());
-			// System.out.println("New experiment SELECTED WORKLOAD ID = " +
-			// experimentBean.getWorkloadId());
-			// System.out.println("New experiment SELECTED FAULTLOADS = " +
-			// Arrays.toString(experimentBean.getFaultloadIds()));
+			System.out.println("New experiment DESCRIPTION = " + faultloadBean.getDescription());
 
 			faultloadBean = new FaultloadBean();
 			session.put("faultloadBean", faultloadBean);

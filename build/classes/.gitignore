@@ -1,9 +1,5 @@
 /DeleteExperiment.class
-/META-INF/
 /PopulateDatabase.class
 /ShowDatabase.class
 /UpdateExperiment.class
 /faultinjector/
-/log4j.dtd
-/log4j.xml
-/struts.xml

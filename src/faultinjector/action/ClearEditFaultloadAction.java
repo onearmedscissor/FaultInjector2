@@ -26,9 +26,9 @@ public class ClearEditFaultloadAction extends ActionSupport implements SessionAw
 
 		System.out.println("CLEAR EDIT FAULTLOAD-------------------------------");
 		System.out.println("ID -> " + id);
-		System.out.println("Faultload ID = " + faultload.getFl_id());
+		System.out.println("Faultload ID = " + faultload.getFaultloadlId());
 		System.out.println("Faultload NAME = " + faultload.getName());
-		System.out.println("Faultload TIME INTERVAL = " + faultload.getTime_interval());
+		System.out.println("Faultload TIME INTERVAL = " + faultload.getTimeInterval());
 
 		return SUCCESS;
 	}
@@ -54,11 +54,6 @@ public class ClearEditFaultloadAction extends ActionSupport implements SessionAw
 	{
 		this.id = id;
 	}
-
-	// public Faultload getFaultload()
-	// {
-	// return faultload;
-	// }
 
 	@Override
 	public void setSession(Map<String, Object> session)

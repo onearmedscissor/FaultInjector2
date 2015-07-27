@@ -139,7 +139,7 @@ footer {
 						</tr>
 						<tr>
 							<td class="all-25 align-right fw-400">Operating system</td>
-							<td class="all-75 fw-300"><s:property value="target.operating_system" /></td>
+							<td class="all-75 fw-300"><s:property value="target.operatingSystem" /></td>
 						</tr>
 					</tbody>
 				</table>

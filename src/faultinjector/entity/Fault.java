@@ -36,40 +36,47 @@ public class Fault implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Fault_id")
-	private int fault_id;
+	private int faultId;
+
+	// bi-directional many-to-one association to Fault_mode
+	@ManyToOne
+	@JoinColumn(name = "Fault_mode_id")
+	private FaultMode faultMode;
+
+	// bi-directional many-to-one association to Fault_class
+	@ManyToOne
+	@JoinColumn(name = "Fault_class_id")
+	private FaultClass faultClass;
 
 	@Column(name = "Creation_date")
-	private Timestamp creation_date;
+	private Timestamp creationDate;
 
 	@Column(name = "Fault_type")
-	private String fault_type;
+	private String faultType;
 
 	@Column(name = "Injected")
 	private boolean injected;
 
 	@Column(name = "Injection_date")
-	private Timestamp injection_date;
-
-	@Column(name = "Kernel_mode")
-	private boolean kernel_mode;
+	private Timestamp injectionDate;
 
 	@Column(name = "Pid")
 	private int pid;
 
 	@Column(name = "Read_address")
-	private boolean read_address;
+	private boolean readAddress;
 
 	@Column(name = "Trigger_type")
-	private String trigger_type;
+	private String triggerType;
 
 	@Column(name = "Time_start")
-	private int time_start;
+	private int timeStart;
 
 	@Column(name = "Time_end")
-	private int time_end;
+	private int timeEnd;
 
 	@Column(name = "Mem_address")
-	private int mem_address;
+	private int memAddress;
 
 	// bi-directional many-to-one association to Faultload
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -78,50 +85,68 @@ public class Fault implements Serializable
 
 	// bi-directional many-to-one association to HardwareFault
 	@OneToMany(mappedBy = "fault", cascade = CascadeType.PERSIST)
-	private List<HardwareFault> hardwares;
+	private List<HardwareFault> hardwareFaults;
 
 	// bi-directional many-to-one association to Injection_Run
 	@OneToMany(mappedBy = "fault", cascade = CascadeType.PERSIST)
-	private List<Injection_Run> injectionRuns;
+	private List<InjectionRun> injectionRuns;
 
 	// bi-directional many-to-one association to SoftwareFault
 	@OneToMany(mappedBy = "fault", cascade = CascadeType.PERSIST)
-	private List<SoftwareFault> softwares;
-
-	private static final String READ = "read", WRITE = "write";
+	private List<SoftwareFault> softwareFaults;
 
 	public Fault()
 	{
 	}
 
-	public int getFault_id()
+	public int getFaultId()
 	{
-		return this.fault_id;
+		return this.faultId;
 	}
 
-	public void setFault_id(int fault_id)
+	public void setFaultId(int fault_id)
 	{
-		this.fault_id = fault_id;
+		this.faultId = fault_id;
 	}
 
-	public Timestamp getCreation_date()
+	public FaultMode getFaultMode()
 	{
-		return this.creation_date;
+		return faultMode;
 	}
 
-	public void setCreation_date(Timestamp creation_date)
+	public void setFaultMode(FaultMode faultMode)
 	{
-		this.creation_date = creation_date;
+		this.faultMode = faultMode;
 	}
 
-	public String getFault_type()
+	public FaultClass getFaultClass()
 	{
-		return fault_type;
+		return faultClass;
 	}
 
-	public void setFault_type(String fault_type)
+	public void setFaultClass(FaultClass faultClass)
 	{
-		this.fault_type = fault_type;
+		this.faultClass = faultClass;
+	}
+
+	public Timestamp getCreationDate()
+	{
+		return this.creationDate;
+	}
+
+	public void setCreationDate(Timestamp creation_date)
+	{
+		this.creationDate = creation_date;
+	}
+
+	public String getFaultType()
+	{
+		return faultType;
+	}
+
+	public void setFaultType(String fault_type)
+	{
+		this.faultType = fault_type;
 	}
 
 	public boolean getInjected()
@@ -134,24 +159,14 @@ public class Fault implements Serializable
 		this.injected = injected;
 	}
 
-	public Timestamp getInjection_date()
+	public Timestamp getInjectionDate()
 	{
-		return this.injection_date;
+		return this.injectionDate;
 	}
 
-	public void setInjection_date(Timestamp injection_date)
+	public void setInjectionDate(Timestamp injection_date)
 	{
-		this.injection_date = injection_date;
-	}
-
-	public boolean getKernel_mode()
-	{
-		return this.kernel_mode;
-	}
-
-	public void setKernel_mode(boolean kernel_mode)
-	{
-		this.kernel_mode = kernel_mode;
+		this.injectionDate = injection_date;
 	}
 
 	public int getPid()
@@ -164,62 +179,54 @@ public class Fault implements Serializable
 		this.pid = pid;
 	}
 
-	// public boolean getRead_address()
-	// {
-	// return this.read_address;
-	// }
-
-	public String getRead_address()
+	public boolean getReadAddress()
 	{
-		if (this.read_address)
-			return READ;
-		else
-			return WRITE;
+		return this.readAddress;
 	}
 
-	public void setRead_address(boolean read_address)
+	public void setReadAddress(boolean read_address)
 	{
-		this.read_address = read_address;
+		this.readAddress = read_address;
 	}
 
-	public String getTrigger_type()
+	public String getTriggerType()
 	{
-		return this.trigger_type;
+		return this.triggerType;
 	}
 
-	public void setTrigger_type(String trigger_type)
+	public void setTriggerType(String trigger_type)
 	{
-		this.trigger_type = trigger_type;
+		this.triggerType = trigger_type;
 	}
 
-	public int getTime_start()
+	public int getTimeStart()
 	{
-		return time_start;
+		return timeStart;
 	}
 
-	public void setTime_start(int time_start)
+	public void setTimeStart(int time_start)
 	{
-		this.time_start = time_start;
+		this.timeStart = time_start;
 	}
 
-	public int getTime_end()
+	public int getTimeEnd()
 	{
-		return time_end;
+		return timeEnd;
 	}
 
-	public void setTime_end(int time_end)
+	public void setTimeEnd(int time_end)
 	{
-		this.time_end = time_end;
+		this.timeEnd = time_end;
 	}
 
-	public int getMem_address()
+	public int getMemAddress()
 	{
-		return this.mem_address;
+		return this.memAddress;
 	}
 
-	public void setMem_address(int mem_address)
+	public void setMemAddress(int mem_address)
 	{
-		this.mem_address = mem_address;
+		this.memAddress = mem_address;
 	}
 
 	public Faultload getFaultload()
@@ -232,19 +239,19 @@ public class Fault implements Serializable
 		this.faultload = faultload;
 	}
 
-	public List<HardwareFault> getHardwares()
+	public List<HardwareFault> getHardwareFaults()
 	{
-		return this.hardwares;
+		return this.hardwareFaults;
 	}
 
-	public void setHardwares(List<HardwareFault> hardwares)
+	public void setHardwareFaults(List<HardwareFault> hardwareFaults)
 	{
-		this.hardwares = hardwares;
+		this.hardwareFaults = hardwareFaults;
 	}
 
 	public HardwareFault addHardware(HardwareFault hardware)
 	{
-		getHardwares().add(hardware);
+		getHardwareFaults().add(hardware);
 		hardware.setFault(this);
 
 		return hardware;
@@ -252,26 +259,26 @@ public class Fault implements Serializable
 
 	public HardwareFault removeHardware(HardwareFault hardware)
 	{
-		getHardwares().remove(hardware);
+		getHardwareFaults().remove(hardware);
 		hardware.setFault(null);
 
 		return hardware;
 	}
 
-	public List<Injection_Run> getInjectionRuns()
+	public List<InjectionRun> getInjectionRuns()
 	{
 		if (this.injectionRuns == null)
-			this.injectionRuns = new ArrayList<Injection_Run>();
+			this.injectionRuns = new ArrayList<InjectionRun>();
 
 		return this.injectionRuns;
 	}
 
-	public void setInjectionRuns(List<Injection_Run> injectionRuns)
+	public void setInjectionRuns(List<InjectionRun> injectionRuns)
 	{
 		this.injectionRuns = injectionRuns;
 	}
 
-	public Injection_Run addInjectionRun(Injection_Run injectionRun)
+	public InjectionRun addInjectionRun(InjectionRun injectionRun)
 	{
 		getInjectionRuns().add(injectionRun);
 		injectionRun.setFault(this);
@@ -279,7 +286,7 @@ public class Fault implements Serializable
 		return injectionRun;
 	}
 
-	public Injection_Run removeInjectionRun(Injection_Run injectionRun)
+	public InjectionRun removeInjectionRun(InjectionRun injectionRun)
 	{
 		getInjectionRuns().remove(injectionRun);
 		injectionRun.setFault(null);
@@ -287,19 +294,19 @@ public class Fault implements Serializable
 		return injectionRun;
 	}
 
-	public List<SoftwareFault> getSoftwares()
+	public List<SoftwareFault> getSoftwareFaults()
 	{
-		return this.softwares;
+		return this.softwareFaults;
 	}
 
-	public void setSoftwares(List<SoftwareFault> softwares)
+	public void setSoftwareFaults(List<SoftwareFault> softwares)
 	{
-		this.softwares = softwares;
+		this.softwareFaults = softwares;
 	}
 
 	public SoftwareFault addSoftware(SoftwareFault software)
 	{
-		getSoftwares().add(software);
+		getSoftwareFaults().add(software);
 		software.setFault(this);
 
 		return software;
@@ -307,7 +314,7 @@ public class Fault implements Serializable
 
 	public SoftwareFault removeSoftware(SoftwareFault software)
 	{
-		getSoftwares().remove(software);
+		getSoftwareFaults().remove(software);
 		software.setFault(null);
 
 		return software;
