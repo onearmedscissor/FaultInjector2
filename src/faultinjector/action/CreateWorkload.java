@@ -2,25 +2,17 @@ package faultinjector.action;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.bean.ExperimentBean;
 import faultinjector.entity.Application;
 import faultinjector.entity.Target;
 import faultinjector.entity.Workload;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class CreateWorkload extends ActionSupport implements SessionAware
+public class CreateWorkload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Workload workload;
-
 	private String name, app1Name, app2Name, app3Name, app4Name, app5Name, app6Name, app7Name, app8Name, app9Name, app10Name;
 	private Application app1, app2, app3, app4, app5, app6, app7, app8, app9, app10;
 	private List<Application> apps;
@@ -102,7 +94,7 @@ public class CreateWorkload extends ActionSupport implements SessionAware
 
 		workload.setApplications(apps);
 
-		ExperimentBean eb = (ExperimentBean) session.get("experimentBean");
+		ExperimentBean eb = (ExperimentBean) getSession().get("experimentBean");
 		System.out.println(eb);
 		System.out.println("CREATE WORKLOAD SESSION EXPERIMENT TARGET ID -> " + eb.getTargetId());
 
@@ -160,23 +152,6 @@ public class CreateWorkload extends ActionSupport implements SessionAware
 
 		if (app10Name != null && app10Name.length() > 30)
 			addFieldError("app10Name", "Workload Application #10 can't have more than 30 characters!");
-	}
-
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
 	}
 
 	public void setName(String name)
@@ -242,11 +217,5 @@ public class CreateWorkload extends ActionSupport implements SessionAware
 	public String getApp1Name()
 	{
 		return app1Name;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

@@ -32,7 +32,7 @@ public class Experiment implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Exp_id")
-	private int expId;
+	private int experimentId;
 
 	@Column(name = "Description")
 	private String description;
@@ -64,14 +64,14 @@ public class Experiment implements Serializable
 	{
 	}
 
-	public int getExpId()
+	public int getExperimentId()
 	{
-		return this.expId;
+		return this.experimentId;
 	}
 
-	public void setExpId(int exp_id)
+	public void setExperimentId(int experimentId)
 	{
-		this.expId = exp_id;
+		this.experimentId = experimentId;
 	}
 
 	public String getDescription()

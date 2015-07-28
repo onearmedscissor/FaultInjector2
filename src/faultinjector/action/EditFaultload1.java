@@ -1,23 +1,15 @@
 package faultinjector.action;
 
-import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.entity.Faultload;
 import faultinjector.entity.Register;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class EditFaultload1 extends ActionSupport implements SessionAware
+public class EditFaultload1 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Faultload faultload;
 	private EntityManager em;
 	private EntityTransaction et;
@@ -27,13 +19,13 @@ public class EditFaultload1 extends ActionSupport implements SessionAware
 	public String execute()
 	{
 		// if it's the first time we're here
-		if (!session.containsKey("editFaultload"))
+		if (!getSession().containsKey("editFaultload"))
 		{
 			this.faultload = this.getExperimentService().findFaultload(id);
-			this.session.put("editFaultload", faultload);
+			this.getSession().put("editFaultload", faultload);
 		}
 		else
-			faultload = (Faultload) session.get("editFaultload");
+			faultload = (Faultload) getSession().get("editFaultload");
 
 		System.out.println("ID -> " + id);
 		System.out.println("EDIT FAULTLOAD [1/5]-------------------------------");
@@ -73,23 +65,6 @@ public class EditFaultload1 extends ActionSupport implements SessionAware
 		return SUCCESS;
 	}
 
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
-	}
-
 	public void setId(int id)
 	{
 		this.id = id;
@@ -98,11 +73,5 @@ public class EditFaultload1 extends ActionSupport implements SessionAware
 	public Faultload getFaultload()
 	{
 		return faultload;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

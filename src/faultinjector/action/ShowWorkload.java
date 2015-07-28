@@ -2,14 +2,12 @@ package faultinjector.action;
 
 import java.util.List;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.entity.Application;
 import faultinjector.entity.InjectionRun;
 import faultinjector.entity.Workload;
 import faultinjector.service.EclipseLinkPersistence;
 
-public class ShowWorkload extends ActionSupport
+public class ShowWorkload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
@@ -31,12 +29,12 @@ public class ShowWorkload extends ActionSupport
 		applications = workload.getApplications();
 
 		System.out.println("SHOW WORKLOAD-------------------------------");
-		System.out.println("Workload ID = "+workload.getWorkloadId());
-		System.out.println("Workload NAME = "+workload.getName());
+		System.out.println("Workload ID = " + workload.getWorkloadId());
+		System.out.println("Workload NAME = " + workload.getName());
 
 		for (Application a : applications)
 		{
-			System.out.println("Workload APP "+n+" NAME = "+a.getName());
+			System.out.println("Workload APP " + n + " NAME = " + a.getName());
 
 			n++;
 		}
@@ -45,11 +43,11 @@ public class ShowWorkload extends ActionSupport
 
 		for (InjectionRun i : injectionRuns)
 		{
-			System.out.println("Workload FAULTLOAD NAME = "+i.getFaultload().getName());
-			System.out.println("Workload OUTPUT FILENAME = "+i.getOutputFilename());
+			System.out.println("Workload FAULTLOAD NAME = " + i.getFaultload().getName());
+			System.out.println("Workload OUTPUT FILENAME = " + i.getOutputFilename());
 		}
 
-		System.out.println("Workload TARGET NAME = "+workload.getTarget().getName());
+		System.out.println("Workload TARGET NAME = " + workload.getTarget().getName());
 
 		return SUCCESS;
 	}

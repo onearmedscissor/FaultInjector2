@@ -1,24 +1,17 @@
 package faultinjector.action;
 
 import java.util.List;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.entity.Fault;
 import faultinjector.entity.FaultClass;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.HardwareFault;
 import faultinjector.entity.HardwareFaultType;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class EditFaultload22 extends ActionSupport implements SessionAware
+public class EditFaultload22 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Faultload faultload;
 	private List<Fault> faults;
 	private List<HardwareFault> hardwareFaults;
@@ -31,7 +24,7 @@ public class EditFaultload22 extends ActionSupport implements SessionAware
 	@Override
 	public String execute()
 	{
-		faultload = (Faultload) session.get("editFaultload");
+		faultload = (Faultload) getSession().get("editFaultload");
 
 		hardwareFaultTypes = this.getExperimentService().findAllHardwareFaultTypes();
 		faultClasses = this.getExperimentService().findAllFaultClasses();
@@ -46,23 +39,6 @@ public class EditFaultload22 extends ActionSupport implements SessionAware
 		System.out.println("Faultload TIME INTERVAL = " + faultload.getTimeInterval());
 
 		return SUCCESS;
-	}
-
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
 	}
 
 	public void setId(String id)
@@ -103,11 +79,5 @@ public class EditFaultload22 extends ActionSupport implements SessionAware
 	public int getHardwareFaultTypeId()
 	{
 		return getHardwareFaults().get(0).getHardwareFaultType().getHardwareFaultTypeId();
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

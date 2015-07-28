@@ -1,31 +1,24 @@
 package faultinjector.action;
 
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.bean.FaultloadBean;
 
-public class CreateFaultload21 extends ActionSupport implements SessionAware
+public class CreateFaultload21 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private FaultloadBean faultloadBean;
 
 	private int hardwareFaultTypeId, memStart, memEnd, numberFaults, faultClassId, bitStart, bitEnd;
 
 	public String execute()
 	{
-		if (!session.containsKey("faultloadBean"))
+		if (!getSession().containsKey("faultloadBean"))
 		{
 			this.faultloadBean = new FaultloadBean();
-			session.put("faultloadBean", faultloadBean);
+			getSession().put("faultloadBean", faultloadBean);
 		}
 		else
-			faultloadBean = (FaultloadBean) session.get("faultloadBean");
+			faultloadBean = (FaultloadBean) getSession().get("faultloadBean");
 
 		faultloadBean.setHardwareFaultTypeId(hardwareFaultTypeId);
 		faultloadBean.setMemoryFaultRangeStart(memStart);
@@ -106,11 +99,5 @@ public class CreateFaultload21 extends ActionSupport implements SessionAware
 	public FaultloadBean getFaultloadBean()
 	{
 		return faultloadBean;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

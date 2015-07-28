@@ -1,19 +1,11 @@
 package faultinjector.action;
 
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.bean.ExperimentBean;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class CreateExperiment1 extends ActionSupport implements SessionAware
+public class CreateExperiment1 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private ExperimentBean experimentBean;
 
 	private String name, description;
@@ -21,13 +13,13 @@ public class CreateExperiment1 extends ActionSupport implements SessionAware
 	@Override
 	public String execute()
 	{
-		if (!session.containsKey("experimentBean"))
+		if (!getSession().containsKey("experimentBean"))
 		{
 			this.experimentBean = new ExperimentBean();
-			session.put("experimentBean", experimentBean);
+			getSession().put("experimentBean", experimentBean);
 		}
 		else
-			experimentBean = (ExperimentBean) session.get("experimentBean");
+			experimentBean = (ExperimentBean) getSession().get("experimentBean");
 
 		experimentBean.setName(name);
 		experimentBean.setDescription(description);
@@ -48,23 +40,6 @@ public class CreateExperiment1 extends ActionSupport implements SessionAware
 			addFieldError("experimentBean.description", "Experiment description is required  and can't have more than 300 characters!");
 	}
 
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
-	}
-
 	public void setName(String name)
 	{
 		this.name = name;
@@ -73,11 +48,5 @@ public class CreateExperiment1 extends ActionSupport implements SessionAware
 	public void setDescription(String description)
 	{
 		this.description = description;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

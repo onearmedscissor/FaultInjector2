@@ -1,22 +1,13 @@
 package faultinjector.action;
 
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.entity.Architecture;
 import faultinjector.entity.Target;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class CreateTarget extends ActionSupport implements SessionAware
+public class CreateTarget extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Target target;
-
 	private String name, ip, operatingSystem;
 	private int ip1, ip2, ip3, ip4, architectureId;
 
@@ -58,23 +49,6 @@ public class CreateTarget extends ActionSupport implements SessionAware
 
 		if (operatingSystem == null || operatingSystem.length() == 0 || operatingSystem.length() > 30)
 			addFieldError("target.operating_system", "Target operating system is required and can't have more than 30 characters!");
-	}
-
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
 	}
 
 	public void setName(String name)
@@ -150,11 +124,5 @@ public class CreateTarget extends ActionSupport implements SessionAware
 	public String getOperatingSystem()
 	{
 		return operatingSystem;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

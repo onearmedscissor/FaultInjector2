@@ -1,21 +1,13 @@
 package faultinjector.action;
 
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.entity.FaultClass;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.HardwareFaultType;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class EditFaultload31 extends ActionSupport implements SessionAware
+public class EditFaultload31 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Faultload faultload;
 
 	private String id;
@@ -23,7 +15,7 @@ public class EditFaultload31 extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		faultload = (Faultload) session.get("editFaultload");
+		faultload = (Faultload) getSession().get("editFaultload");
 
 		HardwareFaultType hft = this.getExperimentService().findHardwareFaultType(hardwareFaultTypeId);
 		hft.addHardwareFault(faultload.getFaults().get(0).getHardwareFaults().get(0));
@@ -72,23 +64,6 @@ public class EditFaultload31 extends ActionSupport implements SessionAware
 			addFieldError("hardwareFault.bitEnd", "Faultload bit(s) to change range is required and must be set between 0 and 31!");
 	}
 
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
-	}
-
 	public void setHardwareFaultTypeId(int hardwareFaultTypeId)
 	{
 		this.hardwareFaultTypeId = hardwareFaultTypeId;
@@ -127,11 +102,5 @@ public class EditFaultload31 extends ActionSupport implements SessionAware
 	public void setId(String id)
 	{
 		this.id = id;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

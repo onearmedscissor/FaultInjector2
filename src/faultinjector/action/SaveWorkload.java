@@ -2,24 +2,17 @@ package faultinjector.action;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.entity.Application;
 import faultinjector.entity.Workload;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class SaveWorkload extends ActionSupport implements SessionAware
+public class SaveWorkload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Workload workload;
 	private EntityManager em;
 	private EntityTransaction et;
@@ -163,23 +156,6 @@ public class SaveWorkload extends ActionSupport implements SessionAware
 			addFieldError("app10Name", "Workload Application #10 can't have more than 30 characters!");
 	}
 
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
-	}
-
 	public void setId(int id)
 	{
 		this.id = id;
@@ -243,11 +219,5 @@ public class SaveWorkload extends ActionSupport implements SessionAware
 	public void setApp10Name(String app10Name)
 	{
 		this.app10Name = app10Name;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

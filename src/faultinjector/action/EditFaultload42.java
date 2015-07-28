@@ -2,24 +2,17 @@ package faultinjector.action;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.entity.Fault;
 import faultinjector.entity.FaultMode;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.HardwareFault;
 import faultinjector.entity.Register;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class EditFaultload42 extends ActionSupport implements SessionAware
+public class EditFaultload42 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Faultload faultload;
 	private List<Fault> faults;
 	private List<HardwareFault> hardwareFaults;
@@ -36,7 +29,7 @@ public class EditFaultload42 extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		faultload = (Faultload) session.get("editFaultload");
+		faultload = (Faultload) getSession().get("editFaultload");
 
 		faultModes = this.getExperimentService().findAllFaultModes();
 
@@ -59,23 +52,6 @@ public class EditFaultload42 extends ActionSupport implements SessionAware
 			System.out.println("Faultload REGISTER: ID = " + r.getRegisterId() + " | NAME = " + r.getName());
 
 		return SUCCESS;
-	}
-
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
 	}
 
 	public Faultload getFaultload()
@@ -106,11 +82,5 @@ public class EditFaultload42 extends ActionSupport implements SessionAware
 	public int getFaultModeId()
 	{
 		return getHardwareFaults().get(0).getFaultMode().getFaultModeId();
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

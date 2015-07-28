@@ -5,11 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.bean.ExperimentBean;
 import faultinjector.bean.FaultloadBean;
@@ -21,13 +16,11 @@ import faultinjector.entity.HardwareFaultType;
 import faultinjector.entity.InjectionRun;
 import faultinjector.entity.Register;
 import faultinjector.entity.Workload;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class CreateFaultload4 extends ActionSupport implements SessionAware
+public class CreateFaultload4 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private ExperimentBean experimentBean;
 	private FaultloadBean faultloadBean;
 	private int faultModeId, processId, timeStart, timeEnd, codeAddress, dataAddress;
@@ -37,21 +30,21 @@ public class CreateFaultload4 extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		if (!session.containsKey("experimentBean"))
+		if (!getSession().containsKey("experimentBean"))
 		{
 			this.experimentBean = new ExperimentBean();
-			session.put("experimentBean", experimentBean);
+			getSession().put("experimentBean", experimentBean);
 		}
 		else
-			experimentBean = (ExperimentBean) session.get("experimentBean");
+			experimentBean = (ExperimentBean) getSession().get("experimentBean");
 
-		if (!session.containsKey("faultloadBean"))
+		if (!getSession().containsKey("faultloadBean"))
 		{
 			this.faultloadBean = new FaultloadBean();
-			session.put("faultloadBean", faultloadBean);
+			getSession().put("faultloadBean", faultloadBean);
 		}
 		else
-			faultloadBean = (FaultloadBean) session.get("faultloadBean");
+			faultloadBean = (FaultloadBean) getSession().get("faultloadBean");
 
 		faultloadBean.setFaultModeId(faultModeId);
 		faultloadBean.setProcessId(processId);
@@ -260,23 +253,6 @@ public class CreateFaultload4 extends ActionSupport implements SessionAware
 		}
 	}
 
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
-	}
-
 	private Timestamp getCurrentTimestamp()
 	{
 		Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
@@ -332,11 +308,5 @@ public class CreateFaultload4 extends ActionSupport implements SessionAware
 	public void setAccessData(String accessData)
 	{
 		this.accessData = accessData;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

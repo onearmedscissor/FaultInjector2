@@ -1,26 +1,19 @@
 package faultinjector.action;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.entity.Fault;
 import faultinjector.entity.FaultMode;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.Register;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class EditFaultload5 extends ActionSupport implements SessionAware
+public class EditFaultload5 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Faultload faultload;
 	private EntityManager em;
 	private EntityTransaction et;
@@ -31,10 +24,10 @@ public class EditFaultload5 extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		em = (EntityManager) session.get("em");
-		et = (EntityTransaction) session.get("et");
+		em = (EntityManager) getSession().get("em");
+		et = (EntityTransaction) getSession().get("et");
 
-		faultload = (Faultload) session.get("editFaultload");
+		faultload = (Faultload) getSession().get("editFaultload");
 
 		faults = faultload.getFaults();
 
@@ -148,23 +141,6 @@ public class EditFaultload5 extends ActionSupport implements SessionAware
 		}
 	}
 
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
-	}
-
 	public void setFaultModeId(int faultModeId)
 	{
 		this.faultModeId = faultModeId;
@@ -213,11 +189,5 @@ public class EditFaultload5 extends ActionSupport implements SessionAware
 	public void setAccessTypes(List<String> accessTypes)
 	{
 		this.accessTypes = accessTypes;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

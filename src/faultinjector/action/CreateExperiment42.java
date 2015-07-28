@@ -1,26 +1,18 @@
 package faultinjector.action;
 
-import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.bean.ExperimentBean;
 import faultinjector.entity.Experiment;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.Target;
 import faultinjector.entity.Workload;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class CreateExperiment42 extends ActionSupport implements SessionAware
+public class CreateExperiment42 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private ExperimentBean experimentBean;
 	private Experiment experiment;
 	private String[] fids;
@@ -31,13 +23,13 @@ public class CreateExperiment42 extends ActionSupport implements SessionAware
 	@Override
 	public String execute()
 	{
-		if (!session.containsKey("experimentBean"))
+		if (!getSession().containsKey("experimentBean"))
 		{
 			this.experimentBean = new ExperimentBean();
-			session.put("experimentBean", experimentBean);
+			getSession().put("experimentBean", experimentBean);
 		}
 		else
-			experimentBean = (ExperimentBean) session.get("experimentBean");
+			experimentBean = (ExperimentBean) getSession().get("experimentBean");
 
 		fids = experimentBean.getFaultloadIds();
 
@@ -69,28 +61,5 @@ public class CreateExperiment42 extends ActionSupport implements SessionAware
 		System.out.println("NEW EXPERIMENT 4.2");
 
 		return SUCCESS;
-	}
-
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

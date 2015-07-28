@@ -2,14 +2,12 @@ package faultinjector.action;
 
 import java.util.List;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.entity.Experiment;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.InjectionRun;
 import faultinjector.service.EclipseLinkPersistence;
 
-public class ShowExperiment extends ActionSupport
+public class ShowExperiment extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
@@ -29,7 +27,7 @@ public class ShowExperiment extends ActionSupport
 
 		System.out.println("ID -> " + id);
 		System.out.println("SHOW EXPERIMENT-------------------------------");
-		System.out.println("Experiment ID = " + experiment.getExpId());
+		System.out.println("Experiment ID = " + experiment.getExperimentId());
 		System.out.println("Experiment NAME = " + experiment.getName());
 		System.out.println("Experiment TARGET NAME = " + experiment.getTarget().getName());
 		System.out.println("Experiment CREATION DATE = " + experiment.getCreationDate());

@@ -1,22 +1,14 @@
 package faultinjector.action;
 
-import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.entity.Faultload;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class EditFaultload21 extends ActionSupport implements SessionAware
+public class EditFaultload21 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Faultload faultload;
 	private EntityManager em;
 	private EntityTransaction et;
@@ -27,17 +19,17 @@ public class EditFaultload21 extends ActionSupport implements SessionAware
 	public String execute()
 	{
 		// if it's the first time we're here
-		if (!session.containsKey("et") || !session.containsKey("em"))
+		if (!getSession().containsKey("et") || !getSession().containsKey("em"))
 		{
 			em = this.getExperimentService().getEntityManager();
 			et = em.getTransaction();
 			et.begin();
 
-			this.session.put("em", em);
-			this.session.put("et", et);
+			this.getSession().put("em", em);
+			this.getSession().put("et", et);
 		}
 
-		faultload = (Faultload) session.get("editFaultload");
+		faultload = (Faultload) getSession().get("editFaultload");
 
 		faultload.setName(name);
 		faultload.setDescription(description);
@@ -62,23 +54,6 @@ public class EditFaultload21 extends ActionSupport implements SessionAware
 
 		if (timeInterval < 0 || timeInterval > 60000)
 			addFieldError("faultload.time_interval", "Faultload time interval is required. It can't be negative nor greater than 60.000 milliseconds!");
-	}
-
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
 	}
 
 	public void setId(int id)
@@ -109,11 +84,5 @@ public class EditFaultload21 extends ActionSupport implements SessionAware
 	public Faultload getFaultload()
 	{
 		return faultload;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

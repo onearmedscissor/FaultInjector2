@@ -1,11 +1,9 @@
 package faultinjector.action;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.entity.Target;
 import faultinjector.service.EclipseLinkPersistence;
 
-public class ShowTarget extends ActionSupport
+public class ShowTarget extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 

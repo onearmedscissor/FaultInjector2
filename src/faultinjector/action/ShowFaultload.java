@@ -2,15 +2,13 @@ package faultinjector.action;
 
 import java.util.List;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.entity.Fault;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.HardwareFault;
 import faultinjector.entity.InjectionRun;
 import faultinjector.service.EclipseLinkPersistence;
 
-public class ShowFaultload extends ActionSupport
+public class ShowFaultload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 

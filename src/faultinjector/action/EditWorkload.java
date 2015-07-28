@@ -1,24 +1,16 @@
 package faultinjector.action;
 
 import java.util.List;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.entity.Application;
 import faultinjector.entity.InjectionRun;
 import faultinjector.entity.Workload;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class EditWorkload extends ActionSupport implements SessionAware
+public class EditWorkload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Workload workload;
-
 	private int id;
 	private List<InjectionRun> injectionRuns;
 	private List<Application> applications;
@@ -52,23 +44,6 @@ public class EditWorkload extends ActionSupport implements SessionAware
 		return SUCCESS;
 	}
 
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
-	}
-
 	public int getId()
 	{
 		return id;
@@ -87,11 +62,5 @@ public class EditWorkload extends ActionSupport implements SessionAware
 	public List<Application> getApplications()
 	{
 		return applications;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

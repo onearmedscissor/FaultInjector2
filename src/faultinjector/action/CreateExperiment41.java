@@ -1,32 +1,26 @@
 package faultinjector.action;
 
 import java.util.Arrays;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 import faultinjector.bean.ExperimentBean;
 
-public class CreateExperiment41 extends ActionSupport implements SessionAware
+public class CreateExperiment41 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private ExperimentBean experimentBean;
 	private String[] fids;
 
 	@Override
 	public String execute()
 	{
-		if (!session.containsKey("experimentBean"))
+		if (!getSession().containsKey("experimentBean"))
 		{
 			this.experimentBean = new ExperimentBean();
-			session.put("experimentBean", experimentBean);
+			getSession().put("experimentBean", experimentBean);
 		}
 		else
-			experimentBean = (ExperimentBean) session.get("experimentBean");
+			experimentBean = (ExperimentBean) getSession().get("experimentBean");
 
 		experimentBean.setFaultloadIds(fids);
 
@@ -44,11 +38,5 @@ public class CreateExperiment41 extends ActionSupport implements SessionAware
 	public void setFids(String[] fids)
 	{
 		this.fids = fids;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }

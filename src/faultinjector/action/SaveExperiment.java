@@ -1,25 +1,18 @@
 package faultinjector.action;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import faultinjector.entity.Experiment;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.InjectionRun;
-import faultinjector.service.EclipseLinkPersistence;
 
-public class SaveExperiment extends ActionSupport implements SessionAware
+public class SaveExperiment extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
-	private Map<String, Object> session;
 	private Experiment experiment;
 	private EntityManager em;
 	private EntityTransaction et;
@@ -73,7 +66,7 @@ public class SaveExperiment extends ActionSupport implements SessionAware
 		em.close();
 
 		System.out.println("SAVE EXPERIMENT-------------------------------");
-		System.out.println("Experiment ID = " + experiment.getExpId());
+		System.out.println("Experiment ID = " + experiment.getExperimentId());
 		System.out.println("Experiment NAME = " + experiment.getName());
 		System.out.println("Experiment TARGET NAME = " + experiment.getTarget().getName());
 		System.out.println("Experiment CREATION DATE = " + experiment.getCreationDate());
@@ -117,23 +110,6 @@ public class SaveExperiment extends ActionSupport implements SessionAware
 
 		if (description == null || description.length() == 0 || description.length() > 300)
 			addFieldError("experiment.description", "Description is required and can't have more than 300 characters!");
-	}
-
-	public EclipseLinkPersistence getExperimentService()
-	{
-		if (!session.containsKey("experimentService"))
-		{
-			EclipseLinkPersistence experimentService = new EclipseLinkPersistence();
-
-			this.setExperimentService(experimentService);
-		}
-
-		return (EclipseLinkPersistence) session.get("experimentService");
-	}
-
-	public void setExperimentService(EclipseLinkPersistence experimentService)
-	{
-		this.session.put("experimentService", experimentService);
 	}
 
 	public Experiment getExperiment()
@@ -234,11 +210,5 @@ public class SaveExperiment extends ActionSupport implements SessionAware
 	public String getDescription()
 	{
 		return description;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
 	}
 }
