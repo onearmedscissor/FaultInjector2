@@ -4,13 +4,13 @@ import faultinjector.entity.Experiment;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.InjectionRun;
 
-import faultinjector.service.ExperimentService;
+import faultinjector.service.EclipseLinkPersistence;
 
 public class ShowDatabase
 {
 	public static void main(String[] args)
 	{
-	    ExperimentService service = new ExperimentService();
+	    EclipseLinkPersistence service = new EclipseLinkPersistence();
 		
 	    List <Experiment> experiments = service.findAllExperiments();
 	    List <Faultload> faultloads;

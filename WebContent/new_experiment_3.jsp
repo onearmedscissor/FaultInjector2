@@ -114,7 +114,6 @@ footer {
 				<table class="ink-table dynamicTable">
 					<thead>
 						<tr>
-<!-- 							<th colspan="4" class="align-left large">Select the workload to use:</th> -->
 							<th class="align-left all-50 large">Select the workload to use:</th>
 							<th class="all-15"></th>
 							<th class="all-15"></th>
@@ -180,15 +179,7 @@ footer {
 
 	<script type="text/javascript">
 		$(document).ready(function()
-		{
-			// 	            $('.help').on('mouseover', function() {
-			// 	              $('#help-workloads').show();
-			// 	            });
-
-			// 	            $('.help').on('mouseout', function() {
-			// 	                $('#help-workloads').hide();
-			// 	              });
-			
+		{	
 			$('.delete').click(function(e)
 			{
 				e.preventDefault();
@@ -230,7 +221,6 @@ footer {
 				},
 				success : function()
 				{
-					//alert("WID -> "+wid);
 					window.location = "loadtargets.action";
 				}
 			});
@@ -250,7 +240,6 @@ footer {
 				},
 				success : function()
 				{
-					//alert("WID -> "+wid);
 					window.location = "loadfaultloads.action";
 				}
 			});

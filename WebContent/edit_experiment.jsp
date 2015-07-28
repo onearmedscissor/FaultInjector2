@@ -122,7 +122,6 @@ footer {
 						<div class="control-group column-group gutters required">
 							<label for="name" class="all-20 align-right">Name</label>
 							<div class="control all-50">
-								<!-- <input type="text" id="name" name="name"> -->
 								<s:textfield id="name" name="name" value="%{experiment.name}" />
 							</div>
 							<div class="all-30"></div>
@@ -131,7 +130,6 @@ footer {
 						<div class="control-group column-group gutters required">
 							<label for="creatorname" class="all-20 align-right">Creator name</label>
 							<div class="control all-50">
-								<!-- <input type="text" id="creatorname" name="creatorName"> -->
 								<s:textfield id="creatorname" name="creatorName" value="%{experiment.user.name}" disabled="true"/>
 							</div>
 							<div class="all-30"></div>
@@ -140,7 +138,6 @@ footer {
 						<div class="control-group column-group gutters">
 							<label for="creationdate" class="all-20 align-right">Creation date</label>
 							<div class="control all-50">
-								<!-- <input type="text" id="creationdate" name="creationDate"> -->
 								<s:textfield id="creationdate" disabled="true" value="%{experiment.creationDate}" />
 							</div>
 							<div class="all-30"></div>
@@ -159,7 +156,7 @@ footer {
 							<div class="control all-50">
 								<s:textfield id="targetname" name="targetName" value="%{experiment.target.name}" />
 							</div>
-							<%-- 	                            <a href="<s:url action="edittarget"><s:param name="id"><s:property value="experiment.target.target_id"/></s:param></s:url>" class="ink-button all-10">Edit...</a> --%>
+							<%--<a href="<s:url action="edittarget"><s:param name="id"><s:property value="experiment.target.target_id"/></s:param></s:url>" class="ink-button all-10">Edit...</a> --%>
 							<div class="all-20"></div>
 						</div>
 
@@ -168,7 +165,6 @@ footer {
 								<div class="control-group column-group gutters required">
 									<label for="faultloadname" class="all-20 align-right">Faultload name</label>
 									<div class="control all-50">
-										<!-- <input type="text" id="faultloadname" name="faultloadName"> -->
 										<s:textfield id="faultloadname" name="faultloadName" value="%{name}" />
 									</div>
 									<div class="all-30"></div>
@@ -199,7 +195,6 @@ footer {
 						<div class="control-group column-group gutters required">
 							<label for="description" class="all-20 align-right">Description</label>
 							<div class="control all-50">
-								<!-- <textarea id="description" name="description"></textarea> -->
 								<s:textarea id="description" name="description" rows="5" maxlength="300" value="%{experiment.description}" />
 							</div>
 							<div class="all-30"></div>

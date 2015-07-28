@@ -33,7 +33,7 @@ public class Faultload implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Fl_id")
-	private int faultloadlId;
+	private int faultloadId;
 
 	@Column(name = "Creation_date")
 	private Timestamp creationDate;
@@ -70,7 +70,7 @@ public class Faultload implements Serializable
 	@JoinColumn(name = "Exp_id")
 	private Experiment experiment;
 
-	// bi-directional many-to-one association to Injection_Run
+	// bi-directional many-to-one association to InjectionRun
 	@OneToMany(mappedBy = "faultload", cascade = CascadeType.PERSIST)
 	private List<InjectionRun> injectionRuns;
 
@@ -78,14 +78,14 @@ public class Faultload implements Serializable
 	{
 	}
 
-	public int getFaultloadlId()
+	public int getFaultloadId()
 	{
-		return this.faultloadlId;
+		return this.faultloadId;
 	}
 
-	public void setFaultloadlId(int fl_id)
+	public void setFaultloadId(int faultloadId)
 	{
-		this.faultloadlId = fl_id;
+		this.faultloadId = faultloadId;
 	}
 
 	public Timestamp getCreationDate()
@@ -93,9 +93,9 @@ public class Faultload implements Serializable
 		return this.creationDate;
 	}
 
-	public void setCreationDate(Timestamp creation_date)
+	public void setCreationDate(Timestamp creationDate)
 	{
-		this.creationDate = creation_date;
+		this.creationDate = creationDate;
 	}
 
 	public String getDescription()
@@ -113,9 +113,9 @@ public class Faultload implements Serializable
 		return this.memoryRangeBeginning;
 	}
 
-	public void setMemoryRangeBeginning(int mem_range_beg)
+	public void setMemoryRangeBeginning(int memoryRangeBeginning)
 	{
-		this.memoryRangeBeginning = mem_range_beg;
+		this.memoryRangeBeginning = memoryRangeBeginning;
 	}
 
 	public int getMemoryRangeEnd()
@@ -123,9 +123,9 @@ public class Faultload implements Serializable
 		return this.memoryRangeEnd;
 	}
 
-	public void setMemoryRangeEnd(int mem_range_end)
+	public void setMemoryRangeEnd(int memoryRangeEnd)
 	{
-		this.memoryRangeEnd = mem_range_end;
+		this.memoryRangeEnd = memoryRangeEnd;
 	}
 
 	public int getNumberFaults()
@@ -133,9 +133,9 @@ public class Faultload implements Serializable
 		return this.numberFaults;
 	}
 
-	public void setNumberFaults(int n_faults)
+	public void setNumberFaults(int numberFaults)
 	{
-		this.numberFaults = n_faults;
+		this.numberFaults = numberFaults;
 	}
 
 	public String getName()
@@ -153,9 +153,9 @@ public class Faultload implements Serializable
 		return this.timeInterval;
 	}
 
-	public void setTimeInterval(int time_interval)
+	public void setTimeInterval(int timeInterval)
 	{
-		this.timeInterval = time_interval;
+		this.timeInterval = timeInterval;
 	}
 
 	public List<Register> getRegisters()

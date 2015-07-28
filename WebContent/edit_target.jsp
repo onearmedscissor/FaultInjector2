@@ -132,9 +132,7 @@ footer {
 						<div class="control-group column-group gutters">
 							<p class="label all-20 align-right push-middle">Architecture</p>
 							<ul class="control unstyled all-80 inline">
-								<s:action name="loadarchitectures">
 								<li><s:radio label="architectures" name="architectureId" list="architectures" listKey="architectureId" listValue="name" value="architectureId"/></li>
-								</s:action>
 							</ul>
 						</div>
 

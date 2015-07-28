@@ -176,14 +176,6 @@ footer {
 								<li><s:radio label="faultclass" name="faultClassId" list="faultClasses" listKey="faultClassId" listValue="name" value="faultClassId" /></li>
 							</ul>
 						</div>
-
-						<!-- 							<div class="control-group column-group gutters"> -->
-						<!-- 					            <p class="label all-20 align-right push-top">Fault class</p> -->
-						<!--   					            <div class="all-80"> -->
-						<%-- 									<s:radio label="faultclass" name="faultClass" list="faultClasses" value="defaultFaultClass" cssClass="push-middle"/> --%>
-						<!--   					            </div> -->
-						<!-- 					        </div> -->
-
 						<div class="column-group gutters">
 							<div class="control-group all-30 required">
 								<div class="column-group gutters">

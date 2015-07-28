@@ -176,7 +176,7 @@ footer {
 		else
 			$('#next').attr("disabled", true);
 
-		$("#page_1").on("load ready input", function()
+		$("#page_1").on("input", function()
 		{
 			if ($('#name').val() && $('#description').val())
 				$('#next').attr("disabled", false);

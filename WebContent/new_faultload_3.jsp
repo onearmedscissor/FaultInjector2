@@ -219,8 +219,6 @@ footer {
 				traditional : true,
 				success : function()
 				{
-					//  					    	alert("RIDS -> "+rids);
-					//  					    	alert("RIDS [0] -> "+rids[0]);
 					window.location = "createfaultload32.action";
 				}
 			});

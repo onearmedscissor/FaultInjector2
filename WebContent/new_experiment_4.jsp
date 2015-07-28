@@ -205,14 +205,6 @@
         	
         	$(document).ready(function()
 	        {
-// 	            $('.help').on('mouseover', function() {
-// 	              $('#help-faultloads').show();
-// 	            });
-	            
-// 	            $('.help').on('mouseout', function() {
-// 	                $('#help-faultloads').hide();
-// 	              });
-
 	        	$('.help').click(function(event) {
 					$('#help-faultloads').show();
 				});
@@ -248,11 +240,11 @@
        	<script type="text/javascript">
        		$('#previous').click(function(event)
      			{
-    			    var fids = $('input:checkbox').filter(':checked').map(function ()
+       				var fids = $('input:checkbox').filter(':checked').map(function ()
     			    {
     			        return this.id;
     			    }).get();
-    			    
+       				
      				$.ajax({
      					method: "POST",
      					url: "createexperiment40.action",
@@ -261,8 +253,8 @@
      					success:
      						function()
      						{
-//      					    	alert("FIDS -> "+fids);
-//      					    	alert("FIDS [0] -> "+fids[0]);
+    	 						alert("FIDS -> "+fids);
+						    	alert("FIDS [0] -> "+fids[0]);
      							window.location = "createexperiment40.action";
      						}
      				});
@@ -283,8 +275,6 @@
  					success:
  						function()
  						{
-//  					    	alert("FIDS -> "+fids);
-//  					    	alert("FIDS [0] -> "+fids[0]);
  							window.location = "loadexperiments.action";
  						}
  				});

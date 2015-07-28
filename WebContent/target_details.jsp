@@ -126,12 +126,7 @@ footer {
 						</tr>
 						<tr>
 							<td class="all-25 align-right fw-400">Architecture</td>
-							<s:if test="target.i386Arch">
-								<td class="all-75 fw-300">Intel 32 bits</td>
-							</s:if>
-							<s:else>
-								<td class="all-75 fw-300">Intel 64 bits</td>
-							</s:else>
+							<td class="all-75 fw-300"><s:property value="target.architecture.name" /></td>
 						</tr>
 						<tr>
 							<td class="all-25 align-right fw-400">IP address</td>

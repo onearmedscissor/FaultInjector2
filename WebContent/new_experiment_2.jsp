@@ -114,7 +114,6 @@ footer {
 				<table class="ink-table dynamicTable">
 					<thead>
 						<tr>
-<!-- 							<th colspan="4" class="align-left large">Select your target:</th> -->
 							<th class="align-left all-50 large">Select your target:</th>
 							<th class="all-15"></th>
 							<th class="all-15"></th>
@@ -180,14 +179,6 @@ footer {
 	<script type="text/javascript">
 		$(document).ready(function()
 		{
-			// 	            $('.help').on('mouseover', function() {
-			// 	              $('#help-targets').show();
-			// 	            });
-
-			// 	            $('.help').on('mouseout', function() {
-			// 	                $('#help-targets').hide();
-			// 	              });
-
 			$('.help').click(function(event)
 			{
 				$('#help-targets').show();
@@ -226,7 +217,6 @@ footer {
 				success:
 					function()
 					{
-				    	//alert("TID -> "+tid);
 						window.location = "createexperiment2.action";
 					}
 			});
@@ -246,7 +236,6 @@ footer {
 				},
 				success : function()
 				{
-					//alert("TID -> "+tid);
 					window.location = "loadworkloads.action";
 				}
 			});

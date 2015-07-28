@@ -10,6 +10,8 @@ public class ExperimentBean
 
 	public ExperimentBean()
 	{
+		this.targetId = 0;
+		this.workloadId = 0;
 	}
 
 	public String getName()
@@ -67,8 +69,11 @@ public class ExperimentBean
 		for (String s : faultloadIds)
 		{
 			if (s.equals(id))
+			{
 				return true;
+			}
 		}
+
 		return false;
 	}
 }
