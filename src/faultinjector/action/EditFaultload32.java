@@ -5,6 +5,18 @@ import java.util.List;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.Register;
 
+/**
+ * This Action class accesses the database and provides the necessary data to display a list of the available registers
+ * in edit_faultload_3.jsp. It also accesses the session HTTP object (Session) and gets the faultload entity instance
+ * being edited in edit_faultload_3.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Faultload
+ * @see Register
+ */
+
 public class EditFaultload32 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
@@ -16,9 +28,9 @@ public class EditFaultload32 extends ApplicationSupport
 
 	public String execute()
 	{
-		faultload = (Faultload) getSession().get("editFaultload");
-
 		this.registers = this.getExperimentService().findAllRegisters();
+
+		faultload = (Faultload) getSession().get("editFaultload");
 
 		System.out.println("ID -> " + id);
 		System.out.println("EDIT FAULTLOAD [3.2/4]-------------------------------");

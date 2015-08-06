@@ -100,7 +100,7 @@ footer {
 				<div class="all-15">
 					<nav class="ink-navigation">
 						<ul class="breadcrumbs green align-center">
-							<li><a href="#">Logout jaff</a></li>
+							<li><a href="#"><!-- Logout jaff --></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -112,7 +112,6 @@ footer {
 				<table id="experiments" class="ink-table dynamicTable">
 					<thead>
 						<tr>
-<!-- 							<th colspan="4" class="align-left large"></th> -->
 							<th class="align-left all-50 large">Select the experiment to run:</th>
 							<th class="all-15"></th>
 							<th class="all-15"></th>

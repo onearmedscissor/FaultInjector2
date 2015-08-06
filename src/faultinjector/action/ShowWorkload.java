@@ -7,6 +7,17 @@ import faultinjector.entity.InjectionRun;
 import faultinjector.entity.Workload;
 import faultinjector.service.EclipseLinkPersistence;
 
+/**
+ * This Action class accesses the database and gets the workload with the specified ID, making it available to
+ * workload_details.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Workload
+ * @see Application
+ */
+
 public class ShowWorkload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

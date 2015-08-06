@@ -9,6 +9,20 @@ import faultinjector.entity.Faultload;
 import faultinjector.entity.Target;
 import faultinjector.entity.Workload;
 
+/**
+ * This Action class creates and persists a new Experiment entity instance into the database with the data available in
+ * a temporary experiment JavaBean (name, description, target ID, workload ID, faultload(s) ID(s)).
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see ExperimentBean
+ * @see Experiment
+ * @see Target
+ * @see Workload
+ * @see Faultload
+ */
+
 public class CreateExperiment42 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

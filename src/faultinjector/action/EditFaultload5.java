@@ -10,6 +10,21 @@ import faultinjector.entity.FaultMode;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.Register;
 
+/**
+ * This Action class validates and assigns the form data input submitted in edit_faultload_4.jsp (fault mode ID, process
+ * ID, fault trigger type, time range, access type and memory address) to the faultload entity instance being edited,
+ * accessible via the session HTTP object (Session). Finally, it also retrieves the entity manager and entity
+ * transaction stored in the session HTTP object (Session) at the beginning of the editing process, in order to persist
+ * the changes made to the faultload entity into the database.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Faultload
+ * @see Fault
+ * @see FaultMode
+ */
+
 public class EditFaultload5 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
@@ -20,7 +35,6 @@ public class EditFaultload5 extends ApplicationSupport
 	private List<Fault> faults;
 	private int faultModeId, processId, timeStart, timeEnd, codeAddress, dataAddress;
 	private String triggerType, accessCode, accessData;
-	private List<String> accessTypes;
 
 	public String execute()
 	{
@@ -34,7 +48,7 @@ public class EditFaultload5 extends ApplicationSupport
 		FaultMode fm = this.getExperimentService().findFaultMode(faultModeId);
 		fm.addFault(faults.get(0));
 
-		faults.get(0).setPid(processId);
+		faults.get(0).setProcessId(processId);
 		faults.get(0).setTriggerType(triggerType);
 
 		switch (triggerType)
@@ -52,7 +66,7 @@ public class EditFaultload5 extends ApplicationSupport
 				else
 					faults.get(0).setReadAddress(true);
 
-				faults.get(0).setMemAddress(codeAddress);
+				faults.get(0).setMemoryAddress(codeAddress);
 			}
 				break;
 			case "sd":
@@ -62,7 +76,7 @@ public class EditFaultload5 extends ApplicationSupport
 				else
 					faults.get(0).setReadAddress(true);
 
-				faults.get(0).setMemAddress(dataAddress);
+				faults.get(0).setMemoryAddress(dataAddress);
 			}
 				break;
 		}
@@ -87,7 +101,7 @@ public class EditFaultload5 extends ApplicationSupport
 
 		System.out.println("Faultload 2.1 FAULT TRIGGER____________________________________");
 		System.out.println("Faultload MODE = " + faults.get(0).getFaultMode().getName());
-		System.out.println("Faultload PROCESS ID = " + faults.get(0).getPid());
+		System.out.println("Faultload PROCESS ID = " + faults.get(0).getProcessId());
 		System.out.println("Faultload 2.2 FAULT TRIGGER TYPE____________________________________");
 		System.out.println("Faultload TRIGGER TYPE = " + faults.get(0).getTriggerType());
 
@@ -97,10 +111,10 @@ public class EditFaultload5 extends ApplicationSupport
 				System.out.println("Faultload TEMPORAL BETWEEN = " + faults.get(0).getTimeStart() + " AND " + faults.get(0).getTimeEnd());
 				break;
 			case "sc":
-				System.out.println("Faultload SPATIAL (CODE SEGMENT) = " + faults.get(0).getReadAddress() + " ON ADDRESS " + faults.get(0).getMemAddress());
+				System.out.println("Faultload SPATIAL (CODE SEGMENT) = " + faults.get(0).getReadAddress() + " ON ADDRESS " + faults.get(0).getMemoryAddress());
 				break;
 			case "sd":
-				System.out.println("Faultload SPATIAL (DATA SEGMENT) = " + faults.get(0).getReadAddress() + " ON ADDRESS " + faults.get(0).getMemAddress());
+				System.out.println("Faultload SPATIAL (DATA SEGMENT) = " + faults.get(0).getReadAddress() + " ON ADDRESS " + faults.get(0).getMemoryAddress());
 				break;
 		}
 
@@ -110,31 +124,31 @@ public class EditFaultload5 extends ApplicationSupport
 	public void validate()
 	{
 		if (processId <= 0)
-			addFieldError("fault.pid", "Faultload process ID is required and must be positive!");
+			addFieldError("fault.processId", "Faultload process ID is required and must be positive!");
 
 		switch (triggerType)
 		{
 			case "tp":
 			{
 				if (timeStart < 0 || timeEnd <= timeStart)
-					addFieldError("faultload.mem_range_beg", "Faultload temporal trigger time start is required and must be positive! Also, time end must be greater than time start!");
+					addFieldError("faultload.memoryRangeBeginning", "Faultload temporal trigger time start is required and must be positive! Also, time end must be greater than time start!");
 
 				if (timeEnd < 0 || timeEnd <= timeStart)
-					addFieldError("faultload.mem_range_end", "Faultload temporal trigger time end is required and must be positive! Also, time end must be greater than time start!");
+					addFieldError("faultload.memoryRangeEnd", "Faultload temporal trigger time end is required and must be positive! Also, time end must be greater than time start!");
 
 				break;
 			}
 			case "sc":
 			{
 				if (codeAddress <= 0)
-					addFieldError("fault.mem_address", "Faultload memory address is required and must be positive!");
+					addFieldError("fault.memoryAddress", "Faultload memory address is required and must be positive!");
 
 				break;
 			}
 			case "sd":
 			{
 				if (dataAddress <= 0)
-					addFieldError("fault.mem_address", "Faultload memory address is required and must be positive!");
+					addFieldError("fault.memoryAddress", "Faultload memory address is required and must be positive!");
 
 				break;
 			}
@@ -184,10 +198,5 @@ public class EditFaultload5 extends ApplicationSupport
 	public void setAccessData(String accessData)
 	{
 		this.accessData = accessData;
-	}
-
-	public void setAccessTypes(List<String> accessTypes)
-	{
-		this.accessTypes = accessTypes;
 	}
 }

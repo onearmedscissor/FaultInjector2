@@ -9,6 +9,19 @@ import faultinjector.entity.Experiment;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.InjectionRun;
 
+/**
+ * This Action class validates and applies the form data input submitted in edit_experiment.jsp to the experiment entity
+ * instance being edited, accessible via the session HTTP object (Session), after starting a new database entity
+ * transaction. Finally, it persists the changes made to the experiment entity into the database.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Experiment
+ * @see Faultload
+ * @see InjectionRun
+ */
+
 public class SaveExperiment extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
@@ -21,15 +34,8 @@ public class SaveExperiment extends ApplicationSupport
 	private List<InjectionRun> injectionRuns;
 	private InjectionRun injectionRun;
 
-	private String id;
-	private String name;
-	private String creatorName;
-	private String creationDate;
-	private String targetName;
-	private String workloadName;
-	private String faultloadName;
-	private String outputFilename;
-	private String description;
+	private int id;
+	private String name, creatorName, targetName, workloadName, faultloadName, outputFilename, description;
 
 	@Override
 	public String execute()
@@ -40,7 +46,7 @@ public class SaveExperiment extends ApplicationSupport
 		et = em.getTransaction();
 		et.begin();
 
-		experiment = this.getExperimentService().findExperiment(Integer.parseInt(id));
+		experiment = this.getExperimentService().findExperiment(id);
 
 		experiment.setName(name);
 
@@ -122,12 +128,12 @@ public class SaveExperiment extends ApplicationSupport
 		this.experiment = experiment;
 	}
 
-	public void setId(String id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}
 
-	public String getId()
+	public int getId()
 	{
 		return id;
 	}
@@ -140,11 +146,6 @@ public class SaveExperiment extends ApplicationSupport
 	public void setCreatorName(String creatorName)
 	{
 		this.creatorName = creatorName;
-	}
-
-	public void setCreationDate(String creationDate)
-	{
-		this.creationDate = creationDate;
 	}
 
 	public void setTargetName(String targetName)
@@ -180,11 +181,6 @@ public class SaveExperiment extends ApplicationSupport
 	public String getCreatorName()
 	{
 		return creatorName;
-	}
-
-	public String getCreationDate()
-	{
-		return creationDate;
 	}
 
 	public String getTargetName()

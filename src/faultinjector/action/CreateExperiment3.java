@@ -2,6 +2,15 @@ package faultinjector.action;
 
 import faultinjector.bean.ExperimentBean;
 
+/**
+ * This Action class assigns the ID of the selected workload in new_experiment_3.jsp to a temporary experiment JavaBean.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see ExperimentBean
+ */
+
 public class CreateExperiment3 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

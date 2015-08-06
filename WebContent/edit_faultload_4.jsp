@@ -102,7 +102,7 @@ footer {
 				<div class="all-15">
 					<nav class="ink-navigation">
 						<ul class="breadcrumbs green align-center">
-							<li><a href="#">Logout jaff</a></li>
+							<li><a href="#"><!-- Logout jaff --></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -129,8 +129,6 @@ footer {
 					</div>
 
 					<fieldset>
-<%-- 						<s:hidden name="id" value="%{faultload.faultloadId}" /> --%>
-						
 						<div class="control-group column-group gutters required">
 							<p class="label all-20 align-right push-middle">Mode</p>
 							<ul class="control unstyled all-80 inline">
@@ -142,7 +140,7 @@ footer {
 							<label for="processid" class="all-20 align-right">Process ID</label>
 							<div class="control all-15">
 								<s:iterator value="faults">
-									<s:textfield id="processid" name="processId" value="%{pid}" />
+									<s:textfield id="processid" name="processId" value="%{processId}" />
 								</s:iterator>
 							</div>
 							<div class="all-70"></div>

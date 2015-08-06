@@ -41,7 +41,8 @@
 		</action>
 
 		<action name="clearnewexperimentforward" class="faultinjector.action.ClearNewExperiment" method="execute">
-			<result name="success" type="redirectAction">createexperiment1</result>
+<!-- 			<result name="success" type="redirectAction">createexperiment1</result> -->
+			<result name="success">/new_experiment_1.jsp</result>
 		</action>
 
 		<action name="createexperiment1" class="faultinjector.action.CreateExperiment1" method="execute">
@@ -90,6 +91,10 @@
 			<result name="success" type="redirectAction">loadworkloads</result>
 		</action>
 
+		<action name="createexperiment30" class="faultinjector.action.CreateExperiment3" method="execute">
+			<result name="success" type="redirectAction">loadtargets</result>
+		</action>
+
 		<action name="loadworkloads" class="faultinjector.action.LoadWorkloads" method="execute">
 			<result name="success">/new_experiment_3.jsp</result>
 		</action>
@@ -119,7 +124,7 @@
 			<result name="input">/new_workload.jsp</result>
 		</action>
 
-		<action name="createexperiment3" class="faultinjector.action.CreateExperiment3" method="execute">
+		<action name="createexperiment31" class="faultinjector.action.CreateExperiment3" method="execute">
 			<result name="success" type="redirectAction">loadfaultloads</result>
 		</action>
 		
@@ -135,7 +140,7 @@
 			<result name="success">/faultload_details.jsp</result>
 		</action>
 
-		<action name="cleareditfaultload" class="faultinjector.action.ClearEditFaultload" method="execute">
+		<action name="replaceeditfaultload" class="faultinjector.action.ReplaceEditFaultload" method="execute">
 			<result name="success" type="redirectAction">editfaultload1</result>
 		</action>
 		

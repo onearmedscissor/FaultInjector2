@@ -102,7 +102,7 @@ footer {
 				<div class="all-15">
 					<nav class="ink-navigation">
 						<ul class="breadcrumbs green align-center">
-							<li><a href="#">Logout jaff</a></li>
+							<li><a href="#"><!-- Logout jaff --></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -157,7 +157,7 @@ footer {
 
 				<a href="new_workload.jsp" class="ink-button all-20" id="newworkload">Create new workload...</a>
 				<div class="column-group push-center">
-					<a href="loadtargets.action" class="ink-button double-vertical-space all-25" id="previous">&lt; Previous</a>
+					<a href="#" class="ink-button double-vertical-space all-25" id="previous">&lt; Previous</a>
 					<button class="ink-button double-vertical-space all-25 dynamicButton" id="next" disabled>Next &gt;</button>
 				</div>
 			</div>
@@ -214,7 +214,7 @@ footer {
 			$.ajax(
 			{
 				method : "POST",
-				url : "createexperiment3.action",
+				url : "createexperiment30.action",
 				data :
 				{
 					wid : wid
@@ -233,7 +233,7 @@ footer {
 			$.ajax(
 			{
 				method : "POST",
-				url : "createexperiment3.action",
+				url : "createexperiment31.action",
 				data :
 				{
 					wid : wid

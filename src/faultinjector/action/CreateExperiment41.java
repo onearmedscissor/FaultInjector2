@@ -4,6 +4,16 @@ import java.util.Arrays;
 
 import faultinjector.bean.ExperimentBean;
 
+/**
+ * This Action class assigns the ID(s) of the faultload(s) selected in new_experiment_4.jsp to a temporary experiment
+ * JavaBean.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see ExperimentBean
+ */
+
 public class CreateExperiment41 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

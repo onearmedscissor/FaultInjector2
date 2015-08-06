@@ -103,7 +103,7 @@ footer {
 				<div class="all-15">
 					<nav class="ink-navigation">
 						<ul class="breadcrumbs green align-center">
-							<li><a href="#">Logout jaff</a></li>
+							<li><a href="#"><!-- Logout jaff --></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -135,7 +135,7 @@ footer {
 								<div class="column-group gutters">
 									<label for="memstart" class="all-66 align-right">Memory fault range</label>
 									<div class="control all-33">
-										<s:textfield id="memstart" name="memStart" value="%{faultload.memoryRangeBeginning}" />
+										<s:textfield id="memorystart" name="memoryStart" value="%{faultload.memoryRangeBeginning}" />
 									</div>
 								</div>
 							</div>
@@ -144,7 +144,7 @@ footer {
 									<div class="all-5"></div>
 									<label for="memend" class="all-35 align-left">-</label>
 									<div class="control all-60">
-										<s:textfield id="memend" name="memEnd" value="%{faultload.memoryRangeEnd}" />
+										<s:textfield id="memoryend" name="memoryEnd" value="%{faultload.memoryRangeEnd}" />
 									</div>
 								</div>
 							</div>

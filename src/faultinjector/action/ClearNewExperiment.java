@@ -4,6 +4,15 @@ import java.util.Arrays;
 
 import faultinjector.bean.ExperimentBean;
 
+/**
+ * This Action class resets a temporary experiment JavaBean (experimentBean).
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see ExperimentBean
+ */
+
 public class ClearNewExperiment extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

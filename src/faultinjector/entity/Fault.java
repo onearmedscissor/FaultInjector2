@@ -61,7 +61,7 @@ public class Fault implements Serializable
 	private Timestamp injectionDate;
 
 	@Column(name = "Pid")
-	private int pid;
+	private int processId;
 
 	@Column(name = "Read_address")
 	private boolean readAddress;
@@ -76,7 +76,7 @@ public class Fault implements Serializable
 	private int timeEnd;
 
 	@Column(name = "Mem_address")
-	private int memAddress;
+	private int memoryAddress;
 
 	// bi-directional many-to-one association to Faultload
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -104,9 +104,9 @@ public class Fault implements Serializable
 		return this.faultId;
 	}
 
-	public void setFaultId(int fault_id)
+	public void setFaultId(int faultId)
 	{
-		this.faultId = fault_id;
+		this.faultId = faultId;
 	}
 
 	public FaultMode getFaultMode()
@@ -134,9 +134,9 @@ public class Fault implements Serializable
 		return this.creationDate;
 	}
 
-	public void setCreationDate(Timestamp creation_date)
+	public void setCreationDate(Timestamp creationDate)
 	{
-		this.creationDate = creation_date;
+		this.creationDate = creationDate;
 	}
 
 	public String getFaultType()
@@ -144,9 +144,9 @@ public class Fault implements Serializable
 		return faultType;
 	}
 
-	public void setFaultType(String fault_type)
+	public void setFaultType(String faultType)
 	{
-		this.faultType = fault_type;
+		this.faultType = faultType;
 	}
 
 	public boolean getInjected()
@@ -164,19 +164,19 @@ public class Fault implements Serializable
 		return this.injectionDate;
 	}
 
-	public void setInjectionDate(Timestamp injection_date)
+	public void setInjectionDate(Timestamp injectionDate)
 	{
-		this.injectionDate = injection_date;
+		this.injectionDate = injectionDate;
 	}
 
-	public int getPid()
+	public int getProcessId()
 	{
-		return this.pid;
+		return this.processId;
 	}
 
-	public void setPid(int pid)
+	public void setProcessId(int processId)
 	{
-		this.pid = pid;
+		this.processId = processId;
 	}
 
 	public boolean getReadAddress()
@@ -184,9 +184,9 @@ public class Fault implements Serializable
 		return this.readAddress;
 	}
 
-	public void setReadAddress(boolean read_address)
+	public void setReadAddress(boolean readAddress)
 	{
-		this.readAddress = read_address;
+		this.readAddress = readAddress;
 	}
 
 	public String getTriggerType()
@@ -194,9 +194,9 @@ public class Fault implements Serializable
 		return this.triggerType;
 	}
 
-	public void setTriggerType(String trigger_type)
+	public void setTriggerType(String triggerType)
 	{
-		this.triggerType = trigger_type;
+		this.triggerType = triggerType;
 	}
 
 	public int getTimeStart()
@@ -204,9 +204,9 @@ public class Fault implements Serializable
 		return timeStart;
 	}
 
-	public void setTimeStart(int time_start)
+	public void setTimeStart(int timeStart)
 	{
-		this.timeStart = time_start;
+		this.timeStart = timeStart;
 	}
 
 	public int getTimeEnd()
@@ -214,19 +214,19 @@ public class Fault implements Serializable
 		return timeEnd;
 	}
 
-	public void setTimeEnd(int time_end)
+	public void setTimeEnd(int timeEnd)
 	{
-		this.timeEnd = time_end;
+		this.timeEnd = timeEnd;
 	}
 
-	public int getMemAddress()
+	public int getMemoryAddress()
 	{
-		return this.memAddress;
+		return this.memoryAddress;
 	}
 
-	public void setMemAddress(int mem_address)
+	public void setMemoryAddress(int memoryAddress)
 	{
-		this.memAddress = mem_address;
+		this.memoryAddress = memoryAddress;
 	}
 
 	public Faultload getFaultload()

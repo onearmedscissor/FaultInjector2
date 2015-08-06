@@ -104,7 +104,7 @@
 				<div class="all-15">
 					<nav class="ink-navigation">
 						<ul class="breadcrumbs green align-center">
-							<li><a href="#">Logout jaff</a></li>
+							<li><a href="#"><!-- Logout jaff --></a></li>
 						</ul>
 					</nav>
 				</div>

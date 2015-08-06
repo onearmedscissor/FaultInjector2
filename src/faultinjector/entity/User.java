@@ -62,9 +62,9 @@ public class User implements Serializable
 		return this.userId;
 	}
 
-	public void setUserId(int user_id)
+	public void setUserId(int userId)
 	{
-		this.userId = user_id;
+		this.userId = userId;
 	}
 
 	public boolean getAdministrator()

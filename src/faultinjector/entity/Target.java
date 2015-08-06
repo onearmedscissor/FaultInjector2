@@ -63,9 +63,9 @@ public class Target implements Serializable
 		return this.targetId;
 	}
 
-	public void setTargetId(int target_id)
+	public void setTargetId(int targetId)
 	{
-		this.targetId = target_id;
+		this.targetId = targetId;
 	}
 
 	public Architecture getArchitecture()
@@ -103,9 +103,9 @@ public class Target implements Serializable
 		return this.operatingSystem;
 	}
 
-	public void setOperatingSystem(String operating_system)
+	public void setOperatingSystem(String operatingSystem)
 	{
-		this.operatingSystem = operating_system;
+		this.operatingSystem = operatingSystem;
 	}
 
 	public List<Experiment> getExperiments()

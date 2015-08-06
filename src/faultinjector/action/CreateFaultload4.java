@@ -17,16 +17,36 @@ import faultinjector.entity.InjectionRun;
 import faultinjector.entity.Register;
 import faultinjector.entity.Workload;
 
+/**
+ * This Action class validates and assigns the form data input submitted in new_faultload_4.jsp (fault mode ID, process
+ * ID, fault trigger type, time range, access type and memory address) to a temporary faultload JavaBean. It then
+ * creates an instance of the Faultload persistent class, fills it with the data stored in the temporary faultload
+ * JavaBean and persists it into the database. Finally it assigns the new persisted Faultload ID to the temporary
+ * experiment JavaBean.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see ExperimentBean
+ * @see FaultloadBean
+ * @see FaultClass
+ * @see FaultMode
+ * @see Faultload
+ * @see HardwareFault
+ * @see HardwareFaultType
+ * @see InjectionRun
+ * @see Register
+ * @see Workload
+ */
+
 public class CreateFaultload4 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
 	private ExperimentBean experimentBean;
 	private FaultloadBean faultloadBean;
-	private int faultModeId, processId, timeStart, timeEnd, codeAddress, dataAddress;
+	private int faultModeId, processId, timeStart, timeEnd, codeAddress, dataAddress, id;
 	private String triggerType, accessCode, accessData;
-	private List<String> accessTypes;
-	private int id;
 
 	public String execute()
 	{
@@ -120,7 +140,7 @@ public class CreateFaultload4 extends ApplicationSupport
 		FaultMode fm = this.getExperimentService().findFaultMode(faultloadBean.getFaultModeId());
 		fm.addFault(hardwareFault);
 
-		hardwareFault.setPid(processId);
+		hardwareFault.setProcessId(processId);
 		hardwareFault.setTriggerType(triggerType);
 
 		switch (hardwareFault.getTriggerType())
@@ -138,7 +158,7 @@ public class CreateFaultload4 extends ApplicationSupport
 				else
 					hardwareFault.setReadAddress(true);
 
-				hardwareFault.setMemAddress(codeAddress);
+				hardwareFault.setMemoryAddress(codeAddress);
 			}
 				break;
 			case "sd":
@@ -148,7 +168,7 @@ public class CreateFaultload4 extends ApplicationSupport
 				else
 					hardwareFault.setReadAddress(true);
 
-				hardwareFault.setMemAddress(dataAddress);
+				hardwareFault.setMemoryAddress(dataAddress);
 			}
 				break;
 		}
@@ -156,23 +176,18 @@ public class CreateFaultload4 extends ApplicationSupport
 		hardwareFault.setCreationDate(getCurrentTimestamp());
 		faultload.addFault(hardwareFault);
 
-		/* */
-
-		InjectionRun injection_Run = new InjectionRun();
-		// injection_Run.setOutput_filename("experiment_3_2.csv");
+		InjectionRun injectionRun = new InjectionRun();
+		// injectionRun.setOutputFilename("experiment_3_2.csv");
 
 		Workload workload = this.getExperimentService().findWorkload(experimentBean.getWorkloadId());
-		workload.addInjectionRun(injection_Run);
+		workload.addInjectionRun(injectionRun);
 
-		faultload.addInjectionRun(injection_Run);
+		faultload.addInjectionRun(injectionRun);
 
-		hardwareFault.addInjectionRun(injection_Run);
+		hardwareFault.addInjectionRun(injectionRun);
 
-		/* */
-
+		/* Stores the ID of the new faultload being created, and then assigns it to the experimentBean */
 		id = this.getExperimentService().createFaultload(faultload);
-
-		System.out.println("ID NOVA FAULTLOAD 3 -> " + id);
 
 		String[] fids = { Integer.toString(id) };
 		experimentBean.setFaultloadIds(fids);
@@ -199,7 +214,7 @@ public class CreateFaultload4 extends ApplicationSupport
 
 		System.out.println("New faultload 2.1 FAULT TRIGGER____________________________________");
 		System.out.println("New faultload FAULT MODE = " + hardwareFault.getFaultMode());
-		System.out.println("New faultload PROCESS ID = " + hardwareFault.getPid());
+		System.out.println("New faultload PROCESS ID = " + hardwareFault.getProcessId());
 		System.out.println("New faultload 2.2 FAULT TRIGGER TYPE____________________________________");
 		System.out.println("New faultload TRIGGER TYPE = " + hardwareFault.getTriggerType());
 
@@ -209,10 +224,10 @@ public class CreateFaultload4 extends ApplicationSupport
 				System.out.println("New faultload TEMPORAL BETWEEN = " + hardwareFault.getTimeStart() + " AND " + hardwareFault.getTimeEnd());
 				break;
 			case "sc":
-				System.out.println("New faultload SPATIAL (CODE SEGMENT) = " + hardwareFault.getReadAddress() + " ON ADDRESS " + hardwareFault.getMemAddress());
+				System.out.println("New faultload SPATIAL (CODE SEGMENT) = " + hardwareFault.getReadAddress() + " ON ADDRESS " + hardwareFault.getMemoryAddress());
 				break;
 			case "sd":
-				System.out.println("New faultload SPATIAL (DATA SEGMENT) = " + hardwareFault.getReadAddress() + " ON ADDRESS " + hardwareFault.getMemAddress());
+				System.out.println("New faultload SPATIAL (DATA SEGMENT) = " + hardwareFault.getReadAddress() + " ON ADDRESS " + hardwareFault.getMemoryAddress());
 				break;
 		}
 
@@ -293,11 +308,6 @@ public class CreateFaultload4 extends ApplicationSupport
 	public void setTriggerType(String triggerType)
 	{
 		this.triggerType = triggerType;
-	}
-
-	public void setAccessTypes(List<String> accessTypes)
-	{
-		this.accessTypes = accessTypes;
 	}
 
 	public void setAccessCode(String accessCode)

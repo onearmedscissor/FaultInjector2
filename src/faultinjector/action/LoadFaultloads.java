@@ -6,6 +6,18 @@ import faultinjector.entity.Fault;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.InjectionRun;
 
+/**
+ * This Action class accesses the database and provides the necessary data to display a list of the available faultloads
+ * in new_experiment_4.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Faultload
+ * @see InjectionRun
+ * @see Fault
+ */
+
 public class LoadFaultloads extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

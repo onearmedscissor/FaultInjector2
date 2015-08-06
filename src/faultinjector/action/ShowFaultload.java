@@ -8,6 +8,18 @@ import faultinjector.entity.HardwareFault;
 import faultinjector.entity.InjectionRun;
 import faultinjector.service.EclipseLinkPersistence;
 
+/**
+ * This Action class accesses the database and gets the faultload with the specified ID, making it available to
+ * faultload_details.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Faultload
+ * @see Fault
+ * @see HardwareFault
+ */
+
 public class ShowFaultload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

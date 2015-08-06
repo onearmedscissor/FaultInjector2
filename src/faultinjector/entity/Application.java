@@ -27,7 +27,7 @@ public class Application implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "App_id")
-	private int appId;
+	private int applicationId;
 
 	@Column(name = "Name")
 	private String name;
@@ -40,14 +40,14 @@ public class Application implements Serializable
 	{
 	}
 
-	public int getAppId()
+	public int getApplicationId()
 	{
-		return this.appId;
+		return this.applicationId;
 	}
 
-	public void setAppId(int app_id)
+	public void setApplicationId(int applicationId)
 	{
-		this.appId = app_id;
+		this.applicationId = applicationId;
 	}
 
 	public String getName()

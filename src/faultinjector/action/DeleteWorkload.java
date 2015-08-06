@@ -1,6 +1,17 @@
 package faultinjector.action;
 
+import faultinjector.entity.Workload;
 import faultinjector.service.EclipseLinkPersistence;
+
+/**
+ * This Action class removes a Workload entity instance from the database.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see EclipseLinkPersistence
+ * @see Workload
+ */
 
 public class DeleteWorkload extends ApplicationSupport
 {

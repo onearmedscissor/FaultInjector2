@@ -6,6 +6,18 @@ import javax.persistence.EntityTransaction;
 import faultinjector.entity.Architecture;
 import faultinjector.entity.Target;
 
+/**
+ * This Action class validates and applies the form data input submitted in edit_target.jsp (target name, architecture,
+ * IP address and operating system) to the target entity instance being edited, accessible via the session HTTP object
+ * (Session), after starting a new database entity transaction. Finally, it persists the changes made to the target
+ * entity into the database.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Target
+ */
+
 public class SaveTarget extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
@@ -13,11 +25,8 @@ public class SaveTarget extends ApplicationSupport
 	private Target target;
 	private EntityManager em;
 	private EntityTransaction et;
-	private String id;
-	private String name;
-	private int architectureId, ip1, ip2, ip3, ip4;
-	private String ip;
-	private String operatingSystem;
+	private String name, ip, operatingSystem;
+	private int id, architectureId, ip1, ip2, ip3, ip4;
 
 	@Override
 	public String execute()
@@ -26,7 +35,7 @@ public class SaveTarget extends ApplicationSupport
 		et = em.getTransaction();
 		et.begin();
 
-		target = this.getExperimentService().findTarget(Integer.parseInt(id));
+		target = this.getExperimentService().findTarget(id);
 
 		target.setName(name);
 
@@ -62,10 +71,10 @@ public class SaveTarget extends ApplicationSupport
 			addFieldError("target.ip", "Target IP address is required and blocks must contain a vlaue between 0 and 255!");
 
 		if (operatingSystem == null || operatingSystem.length() == 0 || operatingSystem.length() > 30)
-			addFieldError("target.operating_system", "Target operating system is required and can't have more than 30 characters!");
+			addFieldError("target.operatingSystem", "Target operating system is required and can't have more than 30 characters!");
 	}
 
-	public String getId()
+	public int getId()
 	{
 		return id;
 	}
@@ -90,7 +99,7 @@ public class SaveTarget extends ApplicationSupport
 		return target;
 	}
 
-	public void setId(String id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}

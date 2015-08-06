@@ -4,6 +4,16 @@ import java.util.List;
 
 import faultinjector.entity.Target;
 
+/**
+ * This Action class accesses the database and provides the necessary data to display a list of the available targets in
+ * new_experiment_2.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Target
+ */
+
 public class LoadTargets extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

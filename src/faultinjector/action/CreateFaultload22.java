@@ -4,6 +4,16 @@ import java.util.List;
 
 import faultinjector.entity.Register;
 
+/**
+ * This Action class accesses the database and provides the necessary data to display a list of the available registers
+ * in new_faultload_3.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Register
+ */
+
 public class CreateFaultload22 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

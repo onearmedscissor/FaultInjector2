@@ -9,6 +9,19 @@ import javax.persistence.EntityTransaction;
 import faultinjector.entity.Application;
 import faultinjector.entity.Workload;
 
+/**
+ * This Action class validates and applies the form data input submitted in edit_workload.jsp (workload and
+ * application(s) name(s)) to the workload entity instance being edited, accessible via the session HTTP object
+ * (Session), after starting a new database entity transaction. Finally, it persists the changes made to the workload
+ * entity into the database.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Workload
+ * @see Application
+ */
+
 public class SaveWorkload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

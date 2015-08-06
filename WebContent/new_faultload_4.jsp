@@ -102,7 +102,7 @@ footer {
 				<div class="all-15">
 					<nav class="ink-navigation">
 						<ul class="breadcrumbs green align-center">
-							<li><a href="#">Logout jaff</a></li>
+							<li><a href="#"><!-- Logout jaff --></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -132,14 +132,6 @@ footer {
 						<div class="control-group column-group gutters required">
 							<p class="label all-20 align-right push-middle">Mode</p>
 							<ul class="control unstyled all-80 inline">
-<%-- 								<s:if test="%{!#session.faultloadBean.kernelMode}"> --%>
-<!-- 									<li><input type="radio" id="kernel" name="faultMode" value="true"><label for="kernel">kernel</label></li> -->
-<!-- 									<li><input type="radio" id="user" name="faultMode" value="false" checked><label for="user">user</label></li> -->
-<%-- 								</s:if> --%>
-<%-- 								<s:else> --%>
-<!-- 									<li><input type="radio" id="kernel" name="faultMode" value="true" checked><label for="kernel">kernel</label></li> -->
-<!-- 									<li><input type="radio" id="user" name="faultMode" value="false"><label for="user">user</label></li> -->
-<%-- 								</s:else> --%>
 								<li><s:radio label="faultmode" name="faultModeId" list="faultModes" listKey="faultModeId" listValue="name" value="defaultFaultModeId" /></li>
 							</ul>
 						</div>
@@ -165,12 +157,10 @@ footer {
 												<input type="radio" id="temporal" name="triggerType" value="tp" checked><label for="temporal">temporal between</label>
 											</div>
 											<div class="all-15">
-												<!-- 			                                        <input type="text" id="timestart" name="timeStart" value="%{#session.faultloadBean.temporalTriggerStart}" class="all-66 quarter-right-space"><label for="timestart" class="all-33">and</label> -->
 												<s:textfield id="timestart" name="timeStart" value="%{#session.faultloadBean.temporalTriggerStart}" cssClass="all-66 quarter-right-space" />
 												<label for="timestart" class="all-33">and</label>
 											</div>
 											<div class="all-15">
-												<!-- 			                                        <input type="text" id="timeend" name="timeEnd" value="%{#session.faultloadBean.temporalTriggerEnd}" class="all-66 quarter-right-space"><label for="timeend" class="all-33">ms</label> -->
 												<s:textfield id="timeend" name="timeEnd" value="%{#session.faultloadBean.temporalTriggerEnd}" cssClass="all-66 quarter-right-space" />
 												<label for="timeend" class="all-33">ms</label>
 											</div>

@@ -2,11 +2,25 @@ package faultinjector.action;
 
 import java.util.List;
 
+import faultinjector.bean.FaultloadBean;
 import faultinjector.entity.Fault;
 import faultinjector.entity.FaultClass;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.HardwareFault;
 import faultinjector.entity.HardwareFaultType;
+
+/**
+ * This Action class accesses the database and provides the necessary data to populate the <s: radio> tags present in
+ * edit_faultload_2.jsp (hardware fault types and fault classes). It also accesses the session HTTP object (Session) and
+ * gets the faultload entity instance being edited in edit_faultload_2.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see FaultloadBean
+ * @see HardwareFaultType
+ * @see FaultClass
+ */
 
 public class EditFaultload22 extends ApplicationSupport
 {

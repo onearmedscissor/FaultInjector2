@@ -1,18 +1,23 @@
 package faultinjector.action;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-
 import faultinjector.entity.Faultload;
 import faultinjector.entity.Register;
+
+/**
+ * This Action class accesses the database and gets the faultload with the specified ID, making it available for editing
+ * purposes in edit_faultload_1.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Faultload
+ */
 
 public class EditFaultload1 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
 	private Faultload faultload;
-	private EntityManager em;
-	private EntityTransaction et;
 	private int id;
 
 	@Override
@@ -45,7 +50,7 @@ public class EditFaultload1 extends ApplicationSupport
 
 		System.out.println("Faultload 2.1 FAULT TRIGGER____________________________________");
 		System.out.println("Faultload MODE = " + faultload.getFaults().get(0).getFaultMode().getName());
-		System.out.println("Faultload PROCESS ID = " + faultload.getFaults().get(0).getPid());
+		System.out.println("Faultload PROCESS ID = " + faultload.getFaults().get(0).getProcessId());
 		System.out.println("Faultload 2.2 FAULT TRIGGER TYPE____________________________________");
 		System.out.println("Faultload TRIGGER TYPE = " + faultload.getFaults().get(0).getTriggerType());
 
@@ -55,10 +60,10 @@ public class EditFaultload1 extends ApplicationSupport
 				System.out.println("Faultload TEMPORAL BETWEEN = " + faultload.getFaults().get(0).getTimeStart() + " AND " + faultload.getFaults().get(0).getTimeEnd());
 				break;
 			case "sc":
-				System.out.println("Faultload SPATIAL (CODE SEGMENT) = " + faultload.getFaults().get(0).getReadAddress() + " ON ADDRESS " + faultload.getFaults().get(0).getMemAddress());
+				System.out.println("Faultload SPATIAL (CODE SEGMENT) = " + faultload.getFaults().get(0).getReadAddress() + " ON ADDRESS " + faultload.getFaults().get(0).getMemoryAddress());
 				break;
 			case "sd":
-				System.out.println("Faultload SPATIAL (DATA SEGMENT) = " + faultload.getFaults().get(0).getReadAddress() + " ON ADDRESS " + faultload.getFaults().get(0).getMemAddress());
+				System.out.println("Faultload SPATIAL (DATA SEGMENT) = " + faultload.getFaults().get(0).getReadAddress() + " ON ADDRESS " + faultload.getFaults().get(0).getMemoryAddress());
 				break;
 		}
 

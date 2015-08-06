@@ -1,5 +1,12 @@
 package faultinjector.bean;
 
+/**
+ * This Action class defines a temporary JavaBean to store a new faultload being created, before it is persisted into
+ * the database.
+ * 
+ * @author João Fernandes
+ */
+
 public class FaultloadBean
 {
 	private String name, description, triggerType;

@@ -103,7 +103,7 @@ footer {
 				<div class="all-15">
 					<nav class="ink-navigation">
 						<ul class="breadcrumbs green align-center">
-							<li><a href="#">Logout jaff</a></li>
+							<li><a href="#"><!-- Logout jaff --></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -124,14 +124,6 @@ footer {
 						<div class="control-group column-group gutters required">
 							<p class="label all-20 align-right push-middle">Hardware fault type</p>
 							<ul id="hwfaulttype" class="control unstyled all-80 inline">
-<%-- 								<s:if test="%{#session.faultloadBean.hardwareFaultType == 'r'}"> --%>
-<!-- 									<li><input type="radio" id="reg" name="hardwareFaultType" value="r" checked><label for="reg">register</label></li> -->
-<!-- 									<li><input type="radio" id="mem" name="hardwareFaultType" value="m"><label for="mem">memory</label></li> -->
-<%-- 								</s:if> --%>
-<%-- 								<s:else> --%>
-<!-- 									<li><input type="radio" id="reg" name="hardwareFaultType" value="r"><label for="reg">register</label></li> -->
-<!-- 									<li><input type="radio" id="mem" name="hardwareFaultType" value="m" checked><label for="mem">memory</label></li> -->
-<%-- 								</s:else> --%>
 								<li><s:radio label="hardwarefaulttype" name="hardwareFaultTypeId" list="hardwareFaultTypes" listKey="hardwareFaultTypeId" listValue="name" value="defaultHardwareFaultTypeId" /></li>
 							</ul>
 						</div>
@@ -141,7 +133,7 @@ footer {
 								<div class="column-group gutters">
 									<label for="memstart" class="all-66 align-right">Memory fault range</label>
 									<div class="control all-33">
-										<s:textfield id="memstart" name="memStart" value="%{#session.faultloadBean.memoryFaultRangeStart}" />
+										<s:textfield id="memorystart" name="memoryStart" value="%{#session.faultloadBean.memoryFaultRangeStart}" />
 									</div>
 								</div>
 							</div>
@@ -150,7 +142,7 @@ footer {
 									<div class="all-5"></div>
 									<label for="memend" class="all-35 align-left">-</label>
 									<div class="control all-60">
-										<s:textfield id="memend" name="memEnd" value="%{#session.faultloadBean.memoryFaultRangeEnd}" />
+										<s:textfield id="memoryend" name="memoryEnd" value="%{#session.faultloadBean.memoryFaultRangeEnd}" />
 									</div>
 								</div>
 							</div>
@@ -178,17 +170,10 @@ footer {
 					<fieldset>
 						<div class="control-group column-group gutters required">
 							<p class="label all-20 align-right push-middle">Fault class</p>
-							<ul class="control unstyled all-80 inline">															
-								<li><s:radio label="faultclasses" name="faultClassId" list="faultClasses" listKey="faultClassId" listValue="name" value="defaultFaultClassId"/></li>															
+							<ul class="control unstyled all-80 inline">
+								<li><s:radio label="faultclasses" name="faultClassId" list="faultClasses" listKey="faultClassId" listValue="name" value="defaultFaultClassId" /></li>
 							</ul>
 						</div>
-
-						<!-- 							<div class="control-group column-group gutters"> -->
-						<!-- 					            <p class="label all-20 align-right push-top">Fault class</p> -->
-						<!--   					            <div class="all-80"> -->
-						<%-- 									<s:radio label="faultclass" name="faultClass" list="faultClasses" value="defaultFaultClass" cssClass="push-middle"/> --%>
-						<!--   					            </div> -->
-						<!-- 					        </div> -->
 
 						<div class="column-group gutters">
 							<div class="control-group all-30 required">
@@ -246,13 +231,14 @@ footer {
 	<script src="js/my-jquery.js"></script>
 
 	<script type="text/javascript">
-		var check10, check11, value = $('input[name=hardwareFaultType]:checked').val();
+		var check10, check11, value = $('input[name=hardwareFaultTypeId]:checked + label').text();
 
 		if (value == "memory")
 		{
 			$('#memstart').attr("disabled", false);
 			$('#memend').attr("disabled", false);
-		} else
+		}
+		else
 		{
 			$('#memstart').attr("disabled", true);
 			$('#memend').attr("disabled", true);
@@ -269,7 +255,8 @@ footer {
 				else
 					check10 = "false";
 			}
-		} else
+		}
+		else
 			check10 = "false";
 
 		if ($('#bitstart').val().match(/^\d+$/) && $('#bitend').val().match(/^\d+$/) && $('#bitstart').val() >= 0 && parseInt($('#bitstart').val()) <= parseInt($('#bitend').val()))
@@ -284,13 +271,14 @@ footer {
 
 		$("#page_2").on("input change", function()
 		{
-			value = $('input[name=hardwareFaultType]:checked').val();
+			value = $('input[name=hardwareFaultTypeId]:checked + label').text();
 
 			if (value == "memory")
 			{
 				$('#memstart').attr("disabled", false);
 				$('#memend').attr("disabled", false);
-			} else
+			}
+			else
 			{
 				$('#memstart').attr("disabled", true);
 				$('#memend').attr("disabled", true);
@@ -307,7 +295,8 @@ footer {
 					else
 						check10 = "false";
 				}
-			} else
+			}
+			else
 				check10 = "false";
 
 			if ($('#bitstart').val().match(/^\d+$/) && $('#bitend').val().match(/^\d+$/) && $('#bitstart').val() >= 0 && parseInt($('#bitstart').val()) <= parseInt($('#bitend').val()))

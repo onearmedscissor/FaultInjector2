@@ -89,9 +89,9 @@ public class Experiment implements Serializable
 		return this.creationDate;
 	}
 
-	public void setCreationDate(Timestamp creation_date)
+	public void setCreationDate(Timestamp creationDate)
 	{
-		this.creationDate = creation_date;
+		this.creationDate = creationDate;
 	}
 
 	public Timestamp getInjectionDate()
@@ -99,9 +99,9 @@ public class Experiment implements Serializable
 		return this.injectionDate;
 	}
 
-	public void setInjectionDate(Timestamp injection_date)
+	public void setInjectionDate(Timestamp injectionDate)
 	{
-		this.injectionDate = injection_date;
+		this.injectionDate = injectionDate;
 	}
 
 	public String getName()

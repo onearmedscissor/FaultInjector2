@@ -2,6 +2,16 @@ package faultinjector.action;
 
 import faultinjector.bean.FaultloadBean;
 
+/**
+ * This Action class validates and applies the form data input submitted in new_faultload_1.jsp (faultload name,
+ * description and time interval) to a temporary faultload JavaBean.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see FaultloadBean
+ */
+
 public class CreateFaultload11 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

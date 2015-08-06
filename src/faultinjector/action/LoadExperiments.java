@@ -4,6 +4,16 @@ import java.util.List;
 
 import faultinjector.entity.Experiment;
 
+/**
+ * This Action class accesses the database and provides the necessary data to display a list of the available
+ * experiments in user_main.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Experiment
+ */
+
 public class LoadExperiments extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

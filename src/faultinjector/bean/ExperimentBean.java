@@ -1,5 +1,12 @@
 package faultinjector.bean;
 
+/**
+ * This Action class defines a temporary JavaBean to store a new experiment being created, before it is persisted into
+ * the database.
+ * 
+ * @author João Fernandes
+ */
+
 public class ExperimentBean
 {
 	private String name;

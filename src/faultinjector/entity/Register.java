@@ -44,9 +44,9 @@ public class Register implements Serializable
 		return this.registerId;
 	}
 
-	public void setRegisterId(int reg_id)
+	public void setRegisterId(int registerId)
 	{
-		this.registerId = reg_id;
+		this.registerId = registerId;
 	}
 
 	public String getName()

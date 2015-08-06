@@ -61,9 +61,9 @@ public class Workload implements Serializable
 		return this.workloadId;
 	}
 
-	public void setWorkloadId(int wl_id)
+	public void setWorkloadId(int workloadlId)
 	{
-		this.workloadId = wl_id;
+		this.workloadId = workloadId;
 	}
 
 	public String getName()
@@ -78,7 +78,7 @@ public class Workload implements Serializable
 
 	public List<Application> getApplications()
 	{
-		if (this.applications==null)
+		if (this.applications == null)
 			this.applications = new ArrayList<Application>();
 
 		return applications;
@@ -91,7 +91,7 @@ public class Workload implements Serializable
 
 	public List<InjectionRun> getInjectionRuns()
 	{
-		if (this.injectionRuns==null)
+		if (this.injectionRuns == null)
 			this.injectionRuns = new ArrayList<InjectionRun>();
 
 		return this.injectionRuns;

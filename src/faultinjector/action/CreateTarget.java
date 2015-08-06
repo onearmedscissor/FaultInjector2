@@ -3,13 +3,25 @@ package faultinjector.action;
 import faultinjector.entity.Architecture;
 import faultinjector.entity.Target;
 
+/**
+ * This Action class validates the form data input submitted in new_target.jsp (target name, architecture, IP address
+ * and operating system). Upon validation, it creates and persists a new Target entity instance into the database, with
+ * the submitted data.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Target
+ * @see Architecture
+ */
+
 public class CreateTarget extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
 	private Target target;
 	private String name, ip, operatingSystem;
-	private int ip1, ip2, ip3, ip4, architectureId;
+	private int architectureId, ip1, ip2, ip3, ip4;
 
 	@Override
 	public String execute()
@@ -48,7 +60,7 @@ public class CreateTarget extends ApplicationSupport
 			addFieldError("target.ip", "Target IP address is required and blocks must contain a value between 0 and 255!");
 
 		if (operatingSystem == null || operatingSystem.length() == 0 || operatingSystem.length() > 30)
-			addFieldError("target.operating_system", "Target operating system is required and can't have more than 30 characters!");
+			addFieldError("target.operatingSystem", "Target operating system is required and can't have more than 30 characters!");
 	}
 
 	public void setName(String name)

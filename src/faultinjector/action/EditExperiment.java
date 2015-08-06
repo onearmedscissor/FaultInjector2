@@ -6,6 +6,18 @@ import faultinjector.entity.Experiment;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.InjectionRun;
 
+/**
+ * This Action class accesses the database and gets the experiment with the specified ID, for editing purposes in
+ * edit_experiment.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Experiment
+ * @see Faultload
+ * @see InjectionRun
+ */
+
 public class EditExperiment extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

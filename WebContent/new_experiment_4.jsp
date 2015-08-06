@@ -101,7 +101,7 @@
                     <div class="all-15">
                         <nav class="ink-navigation">
                             <ul class="breadcrumbs green align-center">
-                                <li><a href="#">Logout jaff</a></li>
+                                <li><a href="#"><!-- Logout jaff --></a></li>
                             </ul>
                         </nav>
                     </div>
@@ -110,6 +110,8 @@
             <div class="column-group">
                 <div class="all-100">
                     <h2 class="bottom-space">Create new experiment [4/4]</h2>
+                    
+                    <form action="createexperiment41" class="ink-form all-100 small-100 tiny-100" method="post">
 					<table class="ink-table hover alternating checkboxTable">
 	                	<thead>
 	                    	<tr>
@@ -124,12 +126,12 @@
 						</thead>
 						<tbody>
 	                  	<s:if test="faultloads.size > 0">
-							<s:iterator value="faultloads">
+							<s:iterator value="faultloads" status="flCounter">
 			                    <tr>
 			                    	<td>
 				                      	<div class="ink-form quarter-top-space">
 											<div class="control-group" style="margin:0">
-								                <ul class="control unstyled" style="margin:0">
+								                <ul class="control unstyled">
 									                <s:if test="#session.experimentBean != null">
 									                	<s:if test="#session.experimentBean.containsFaultloadId(faultloadId) == true">
 										                	<li style="margin:0"><input type="checkbox" class="cb" name="select" id="<s:property value="faultloadId"/>" value="" checked><label for=""></label></li>									            		
@@ -147,7 +149,7 @@
 			                      	</td>
 			                      <td><a href="<s:url action="showfaultload"><s:param name="id"><s:property value="faultloadId"/></s:param></s:url>" class="large all-100"><s:property value="name"/></a></td>
 <!-- 								  <td><a href="#" class="ink-button all-100">select</a></td>			                       -->
-			                      <td><a href="<s:url action="cleareditfaultload"><s:param name="id"><s:property value="faultloadId"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
+			                      <td><a href="<s:url action="replaceeditfaultload"><s:param name="id"><s:property value="faultloadId"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
 <!-- 			                      <td><a href="#" class="ink-button all-100">copy</a></td> -->
 <!-- 								  <td><a href="#" class="ink-button all-100">regenerate</a></td> -->
 			                      <td><a href="<s:url action="deletefaultload"><s:param name="id"><s:property value="faultloadId"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
@@ -175,9 +177,10 @@
                     <hr />
 					<a href="clearnewfaultloadforward" class="ink-button all-20" id="newfaultload">+ Add new faultload...</a>
 	               	<div class="column-group push-center">
-                    	<a href="loadworkloads" class="ink-button double-vertical-space all-25" id="previous">&lt; Previous</a>
-						<button class="ink-button double-vertical-space all-25 dynamicButton" id="finish" disabled>Finish</button>
+                    	<a href="loadworkloads.action" class="ink-button double-vertical-space all-25" id="previous">&lt; Previous</a>
+						<button id="finish" class="ink-button double-vertical-space all-25 dynamicButton" type="submit" disabled>Finish</button>
 	            	</div>
+	            	</form>
                 </div>
             </div>
 		</div>
@@ -245,7 +248,8 @@
     			        return this.id;
     			    }).get();
        				
-     				$.ajax({
+     				$.ajax
+     				({
      					method: "POST",
      					url: "createexperiment40.action",
      					data: { fids : fids },
@@ -253,9 +257,9 @@
      					success:
      						function()
      						{
-    	 						alert("FIDS -> "+fids);
-						    	alert("FIDS [0] -> "+fids[0]);
-     							window.location = "createexperiment40.action";
+//     	 						alert("FIDS -> "+fids);
+// 						    	alert("FIDS [0] -> "+fids[0]);
+     							window.location = "loadworkloads.action";
      						}
      				});
      			});
@@ -267,7 +271,8 @@
 			        return this.id;
 			    }).get();
 			    
- 				$.ajax({
+ 				$.ajax
+ 				({
  					method: "POST",
  					url: "createexperiment41.action",
  					data: { fids : fids },

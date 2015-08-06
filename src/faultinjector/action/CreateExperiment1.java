@@ -2,12 +2,21 @@ package faultinjector.action;
 
 import faultinjector.bean.ExperimentBean;
 
+/**
+ * This Action class validates and applies the form data input submitted in new_experiment_1.jsp (experiment name and
+ * description) to a temporary experiment JavaBean.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see ExperimentBean
+ */
+
 public class CreateExperiment1 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
 	private ExperimentBean experimentBean;
-
 	private String name, description;
 
 	@Override

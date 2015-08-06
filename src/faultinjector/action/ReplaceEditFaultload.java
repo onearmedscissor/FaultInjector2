@@ -2,7 +2,16 @@ package faultinjector.action;
 
 import faultinjector.entity.Faultload;
 
-public class ClearEditFaultload extends ApplicationSupport
+/**
+ * This Action class replaces a Faultload object stored in the session HTTP object (Session).
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Faultload
+ */
+
+public class ReplaceEditFaultload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 

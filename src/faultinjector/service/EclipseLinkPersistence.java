@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import faultinjector.action.ApplicationSupport;
 import faultinjector.entity.Architecture;
 import faultinjector.entity.Experiment;
 import faultinjector.entity.FaultClass;
@@ -17,6 +18,25 @@ import faultinjector.entity.HardwareFaultType;
 import faultinjector.entity.Register;
 import faultinjector.entity.Target;
 import faultinjector.entity.Workload;
+
+/**
+ * This class handles all the (persistence) operations concerning the communication between EclipseLink JPA and the
+ * MySQL database, making it available to all the other Action classes, which extend the ApplicationSupport Action
+ * class.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Experiment
+ * @see Target
+ * @see Architecture
+ * @see Workload
+ * @see Faultload
+ * @see Register
+ * @see FaultMode
+ * @see FaultClass
+ * @see HardwareFaultType
+ */
 
 public class EclipseLinkPersistence implements Persistable
 {

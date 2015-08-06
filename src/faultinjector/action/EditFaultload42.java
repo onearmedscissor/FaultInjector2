@@ -1,6 +1,5 @@
 package faultinjector.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import faultinjector.entity.Fault;
@@ -9,6 +8,20 @@ import faultinjector.entity.Faultload;
 import faultinjector.entity.HardwareFault;
 import faultinjector.entity.Register;
 
+/**
+ * This Action class accesses the database and provides the necessary data to populate the <s: radio> tag present in
+ * edit_faultload_4.jsp with the available fault modes. It also accesses the session HTTP object (Session) and gets the
+ * faultload entity instance being edited in edit_faultload_4.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Faultload
+ * @see HardwareFault
+ * @see Fault
+ * @see FaultMode
+ */
+
 public class EditFaultload42 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
@@ -16,22 +29,13 @@ public class EditFaultload42 extends ApplicationSupport
 	private Faultload faultload;
 	private List<Fault> faults;
 	private List<HardwareFault> hardwareFaults;
-	private List<String> accessTypes;
 	private List<FaultMode> faultModes;
-	private static final String read = "read", write = "write";
-
-	public EditFaultload42()
-	{
-		accessTypes = new ArrayList<String>();
-		accessTypes.add(read);
-		accessTypes.add(write);
-	}
 
 	public String execute()
 	{
-		faultload = (Faultload) getSession().get("editFaultload");
-
 		faultModes = this.getExperimentService().findAllFaultModes();
+
+		faultload = (Faultload) getSession().get("editFaultload");
 
 		faults = faultload.getFaults();
 		hardwareFaults = faults.get(0).getHardwareFaults();
@@ -67,11 +71,6 @@ public class EditFaultload42 extends ApplicationSupport
 	public List<HardwareFault> getHardwareFaults()
 	{
 		return hardwareFaults;
-	}
-
-	public List<String> getAccessTypes()
-	{
-		return accessTypes;
 	}
 
 	public List<FaultMode> getFaultModes()

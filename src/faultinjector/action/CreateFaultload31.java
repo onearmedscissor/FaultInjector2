@@ -4,6 +4,15 @@ import java.util.Arrays;
 
 import faultinjector.bean.FaultloadBean;
 
+/**
+ * This Action class assigns the registers selected in new_faultload_3.jsp to a temporary faultload JavaBean.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see FaultloadBean
+ */
+
 public class CreateFaultload31 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
@@ -37,11 +46,6 @@ public class CreateFaultload31 extends ApplicationSupport
 		System.out.println("New faultload SELECTED REGISTER(S) ID(S) = " + Arrays.toString(faultloadBean.getRegisterIds()));
 
 		return SUCCESS;
-	}
-
-	public void validate()
-	{
-
 	}
 
 	public void setRids(String[] rids)

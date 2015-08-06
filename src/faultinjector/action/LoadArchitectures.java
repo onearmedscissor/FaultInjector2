@@ -4,6 +4,16 @@ import java.util.List;
 
 import faultinjector.entity.Architecture;
 
+/**
+ * This Action class accesses the database and provides the necessary data to populate the <s: radio> tag present in
+ * new_target.jsp with the available architectures.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Architecture
+ */
+
 public class LoadArchitectures extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

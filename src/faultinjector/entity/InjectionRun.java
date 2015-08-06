@@ -57,9 +57,9 @@ public class InjectionRun implements Serializable
 		return this.injectionId;
 	}
 
-	public void setInjectionId(int injection_id)
+	public void setInjectionId(int injectionId)
 	{
-		this.injectionId = injection_id;
+		this.injectionId = injectionId;
 	}
 
 	public String getOutputFilename()
@@ -67,9 +67,9 @@ public class InjectionRun implements Serializable
 		return this.outputFilename;
 	}
 
-	public void setOutputFilename(String output_filename)
+	public void setOutputFilename(String outputFilename)
 	{
-		this.outputFilename = output_filename;
+		this.outputFilename = outputFilename;
 	}
 
 	public Faultload getFaultload()

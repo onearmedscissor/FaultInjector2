@@ -6,6 +6,18 @@ import faultinjector.entity.Application;
 import faultinjector.entity.InjectionRun;
 import faultinjector.entity.Workload;
 
+/**
+ * This Action class accesses the database and gets the workload with the specified ID, for editing purposes in
+ * edit_workload.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Workload
+ * @see InjectionRun
+ * @see Application
+ */
+
 public class EditWorkload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

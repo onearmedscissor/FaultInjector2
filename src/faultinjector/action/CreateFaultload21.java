@@ -2,13 +2,23 @@ package faultinjector.action;
 
 import faultinjector.bean.FaultloadBean;
 
+/**
+ * This Action class validates and applies the form data input submitted in new_faultload_2.jsp (faultload hardware
+ * fault type ID, memory fault range, number of faults, fault class ID and bit(s) to change range) to a temporary
+ * faultload JavaBean.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see FaultloadBean
+ */
+
 public class CreateFaultload21 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
 	private FaultloadBean faultloadBean;
-
-	private int hardwareFaultTypeId, memStart, memEnd, numberFaults, faultClassId, bitStart, bitEnd;
+	private int hardwareFaultTypeId, memoryStart, memoryEnd, numberFaults, faultClassId, bitStart, bitEnd;
 
 	public String execute()
 	{
@@ -21,8 +31,8 @@ public class CreateFaultload21 extends ApplicationSupport
 			faultloadBean = (FaultloadBean) getSession().get("faultloadBean");
 
 		faultloadBean.setHardwareFaultTypeId(hardwareFaultTypeId);
-		faultloadBean.setMemoryFaultRangeStart(memStart);
-		faultloadBean.setMemoryFaultRangeEnd(memEnd);
+		faultloadBean.setMemoryFaultRangeStart(memoryStart);
+		faultloadBean.setMemoryFaultRangeEnd(memoryEnd);
 		faultloadBean.setNumberFaults(numberFaults);
 		faultloadBean.setFaultClassId(faultClassId);
 		faultloadBean.setBitsChangeStart(bitStart);
@@ -45,10 +55,10 @@ public class CreateFaultload21 extends ApplicationSupport
 
 	public void validate()
 	{
-		if (memStart < 0)
+		if (memoryStart < 0)
 			addFieldError("faultloadBean.memoryFaultRangeStart", "Faultload memory fault range start is required and can't be negative!");
 
-		if (memEnd < 0)
+		if (memoryEnd < 0)
 			addFieldError("faultloadBean.memoryFaultRangeEnd", "Faultload memory fault range end is required and can't be negative!");
 
 		if (numberFaults < 0)
@@ -57,7 +67,7 @@ public class CreateFaultload21 extends ApplicationSupport
 		if (bitStart < 0 || bitStart > 31)
 			addFieldError("faultloadBean.bitsChangeStart", "Faultload bit(s) to change range is required and must be set between 0 and 31!");
 
-		if (bitStart < 0 || bitStart > 31)
+		if (bitEnd < 0 || bitEnd > 31)
 			addFieldError("faultloadBean.bitsChangeEnd", "Faultload bit(s) to change range is required and must be set between 0 and 31!");
 	}
 
@@ -71,14 +81,14 @@ public class CreateFaultload21 extends ApplicationSupport
 		this.faultClassId = faultClassId;
 	}
 
-	public void setMemStart(int memStart)
+	public void setMemoryStart(int memoryStart)
 	{
-		this.memStart = memStart;
+		this.memoryStart = memoryStart;
 	}
 
-	public void setMemEnd(int memEnd)
+	public void setMemoryEnd(int memoryEnd)
 	{
-		this.memEnd = memEnd;
+		this.memoryEnd = memoryEnd;
 	}
 
 	public void setNumberFaults(int numberFaults)

@@ -6,6 +6,17 @@ import java.util.List;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.Register;
 
+/**
+ * This Action class assigns the registers selected in edit_faultload_3.jsp to the faultload entity instance being
+ * edited, accessible via the session HTTP object (Session).
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Faultload
+ * @see Register
+ */
+
 public class EditFaultload41 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

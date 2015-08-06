@@ -27,11 +27,21 @@ public class PopulateDatabase
 
 		Experiment experiment = new Experiment();
 		/*
-		 * experiment.setEid(17); experiment.setName("Experiment_3"); experiment.setTarget_name("CentOS 6.5 32 bit"); experiment.setCreation_date("2014-12-08 00:00:00"); experiment.setCreator_name("jaff"); experiment.setWorkload_name("CentOS + YSCB"); experiment.setOutput_filename("experiment_3_2.csv"); experiment.setDescription( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla velit justo, tristique sit amet vestibulum id, molestie in nunc. Maecenas blandit turpis non lectus sollicitudin aliquet. Integer scelerisque at mauris vel porta." ); experiment.setFaultload_name("Faultload #1");
+		 * experiment.setEid(17); experiment.setName("Experiment_3"); experiment.setTarget_name("CentOS 6.5 32 bit");
+		 * experiment.setCreation_date("2014-12-08 00:00:00"); experiment.setCreator_name("jaff");
+		 * experiment.setWorkload_name("CentOS + YSCB"); experiment.setOutput_filename("experiment_3_2.csv");
+		 * experiment.setDescription(
+		 * "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla velit justo, tristique sit amet vestibulum id, molestie in nunc. Maecenas blandit turpis non lectus sollicitudin aliquet. Integer scelerisque at mauris vel porta."
+		 * ); experiment.setFaultload_name("Faultload #1");
 		 */
 
 		/*
-		 * experiment.setEid(2); experiment.setName("Experiência_3_repetição"); experiment.setTargetName("Intel i7 2.6 Ghz"); experiment.setCreationDate("2015-02-02 12:00:41"); experiment.setCreatorName("admin 1"); experiment.setWorkloadName("CentOS + YCSB + VirtualBox"); experiment.setOutputFilename("experiencia_3_2_repeticao.csv"); experiment.setDescription( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla velit justo, tristique sit amet vestibulum id, molestie in nunc. Maecenas blandit turpis non lectus sollicitudin aliquet. Integer scelerisque at mauris vel porta." ); experiment.setFaultloadName("Spatial_read");
+		 * experiment.setEid(2); experiment.setName("Experiência_3_repetição");
+		 * experiment.setTargetName("Intel i7 2.6 Ghz"); experiment.setCreationDate("2015-02-02 12:00:41");
+		 * experiment.setCreatorName("admin 1"); experiment.setWorkloadName("CentOS + YCSB + VirtualBox");
+		 * experiment.setOutputFilename("experiencia_3_2_repeticao.csv"); experiment.setDescription(
+		 * "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla velit justo, tristique sit amet vestibulum id, molestie in nunc. Maecenas blandit turpis non lectus sollicitudin aliquet. Integer scelerisque at mauris vel porta."
+		 * ); experiment.setFaultloadName("Spatial_read");
 		 */
 
 		PopulateDatabase.population.persistAll(entitymanager);
@@ -156,7 +166,7 @@ public class PopulateDatabase
 		hardwareFault.setCreationDate(getCurrentTimestamp());
 		hardwareFault.setTriggerType("sc");
 		// hardwareFault.setKernel_mode(false);
-		hardwareFault.setPid(6667);
+		hardwareFault.setProcessId(6667);
 		hardwareFault.setInjected(false);
 		hardwareFault.setReadAddress(true);
 
@@ -164,7 +174,7 @@ public class PopulateDatabase
 		hardwareFault.setBitStart(7);
 		// hardwareFault.setHw_fault_type('m');
 		hardwareFault.setBitEnd(15);
-		hardwareFault.setMemAddress(6969);
+		hardwareFault.setMemoryAddress(6969);
 
 		// softwareFault.setFaultload(faultload);
 		faultload.addFault(hardwareFault);
@@ -248,7 +258,7 @@ public class PopulateDatabase
 		hardwareFault.setCreationDate(getCurrentTimestamp());
 		hardwareFault.setTriggerType("sd");
 		// hardwareFault.setKernel_mode(true);
-		hardwareFault.setPid(3140);
+		hardwareFault.setProcessId(3140);
 		hardwareFault.setInjected(false);
 		hardwareFault.setReadAddress(false);
 		// hardwareFault.setBit_flip(true);
@@ -256,7 +266,7 @@ public class PopulateDatabase
 		// hardwareFault.setHw_fault_type('r');
 		hardwareFault.setBitEnd(4);
 		// hardwareFault.setRegister("eax");
-		hardwareFault.setMemAddress(1234);
+		hardwareFault.setMemoryAddress(1234);
 
 		// softwareFault.setFaultload(faultload);
 		faultload.addFault(hardwareFault);

@@ -5,6 +5,17 @@ import java.util.List;
 import faultinjector.entity.InjectionRun;
 import faultinjector.entity.Workload;
 
+/**
+ * This Action class accesses the database and provides the necessary data to display a list of the available workloads
+ * in new_experiment_3.jsp.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Workload
+ * @see InjectionRun
+ */
+
 public class LoadWorkloads extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

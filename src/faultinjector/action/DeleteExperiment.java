@@ -2,6 +2,15 @@ package faultinjector.action;
 
 import faultinjector.service.EclipseLinkPersistence;
 
+/**
+ * This Action class removes the Experiment entity instance with the specified ID from the database.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see EclipseLinkPersistence
+ */
+
 public class DeleteExperiment extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

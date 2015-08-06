@@ -8,6 +8,19 @@ import faultinjector.entity.Application;
 import faultinjector.entity.Target;
 import faultinjector.entity.Workload;
 
+/**
+ * This Action class validates the form data input submitted in new_workload.jsp (workload and application(s) name(s)).
+ * Upon validation, it creates and persists a new Workload entity instance into the database, with the submitted data.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see ExperimentBean
+ * @see Workload
+ * @see Application
+ * @see Target
+ */
+
 public class CreateWorkload extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;

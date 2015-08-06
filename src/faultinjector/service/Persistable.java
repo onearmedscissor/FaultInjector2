@@ -16,6 +16,14 @@ import faultinjector.entity.Register;
 import faultinjector.entity.Target;
 import faultinjector.entity.Workload;
 
+/**
+ * This class implements an interface for the EclipseLinkPersistence class.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see EclipseLinkPersistence
+ */
+
 public interface Persistable
 {
 	public void closeFactory();

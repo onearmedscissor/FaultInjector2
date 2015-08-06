@@ -5,6 +5,17 @@ import javax.persistence.EntityTransaction;
 
 import faultinjector.entity.Faultload;
 
+/**
+ * This Action class validates and applies the form data input submitted in edit_faultload_1.jsp (faultload name,
+ * description and time interval) to the faultload entity instance being edited, accessible via the session HTTP object
+ * (Session), after starting a new database entity transaction.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Faultload
+ */
+
 public class EditFaultload21 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
@@ -53,7 +64,7 @@ public class EditFaultload21 extends ApplicationSupport
 			addFieldError("faultload.description", "Faultload description is required and can't have more than 300 characters!");
 
 		if (timeInterval < 0 || timeInterval > 60000)
-			addFieldError("faultload.time_interval", "Faultload time interval is required. It can't be negative nor greater than 60.000 milliseconds!");
+			addFieldError("faultload.timeInterval", "Faultload time interval is required. It can't be negative nor greater than 60.000 milliseconds!");
 	}
 
 	public void setId(int id)

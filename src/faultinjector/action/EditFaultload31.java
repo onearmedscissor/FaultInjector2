@@ -4,14 +4,24 @@ import faultinjector.entity.FaultClass;
 import faultinjector.entity.Faultload;
 import faultinjector.entity.HardwareFaultType;
 
+/**
+ * This Action class validates and applies the form data input submitted in edit_faultload_2.jsp (faultload hardware
+ * fault type ID, memory fault range, number of faults, fault class ID and bit(s) to change range) to the faultload
+ * entity instance being edited, accessible via the session HTTP object (Session).
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Faultload
+ */
+
 public class EditFaultload31 extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
 
 	private Faultload faultload;
 
-	private String id;
-	private int hardwareFaultTypeId, memStart, memEnd, numberFaults, faultClassId, bitStart, bitEnd;
+	private int id, hardwareFaultTypeId, memoryStart, memoryEnd, numberFaults, faultClassId, bitStart, bitEnd;
 
 	public String execute()
 	{
@@ -20,8 +30,8 @@ public class EditFaultload31 extends ApplicationSupport
 		HardwareFaultType hft = this.getExperimentService().findHardwareFaultType(hardwareFaultTypeId);
 		hft.addHardwareFault(faultload.getFaults().get(0).getHardwareFaults().get(0));
 
-		faultload.setMemoryRangeBeginning(memStart);
-		faultload.setMemoryRangeEnd(memEnd);
+		faultload.setMemoryRangeBeginning(memoryStart);
+		faultload.setMemoryRangeEnd(memoryEnd);
 		faultload.setNumberFaults(numberFaults);
 
 		FaultClass fc = this.getExperimentService().findFaultClass(faultClassId);
@@ -48,14 +58,14 @@ public class EditFaultload31 extends ApplicationSupport
 
 	public void validate()
 	{
-		if (memStart < 0)
-			addFieldError("faultload.mem_range_beg", "Faultload memory fault range start is required and can't be negative!");
+		if (memoryStart < 0)
+			addFieldError("faultload.memoryRangeBeginning", "Faultload memory fault range start is required and can't be negative!");
 
-		if (memEnd < 0)
-			addFieldError("faultload.mem_range_end", "Faultload memory fault range end is required and can't be negative!");
+		if (memoryEnd < 0)
+			addFieldError("faultload.memoryRangeEnd", "Faultload memory fault range end is required and can't be negative!");
 
 		if (numberFaults < 0)
-			addFieldError("faultload.n_faults", "Faultload number of faults field is required and can't be negative!");
+			addFieldError("faultload.numberFaults", "Faultload number of faults field is required and can't be negative!");
 
 		if (bitStart < 0 || bitStart > 31)
 			addFieldError("hardwareFault.bitStart", "Faultload bit(s) to change range is required and must be set between 0 and 31!");
@@ -74,14 +84,14 @@ public class EditFaultload31 extends ApplicationSupport
 		this.faultClassId = faultClassId;
 	}
 
-	public void setMemStart(int memStart)
+	public void setMemoryStart(int memoryStart)
 	{
-		this.memStart = memStart;
+		this.memoryStart = memoryStart;
 	}
 
-	public void setMemEnd(int memEnd)
+	public void setMemoryEnd(int memoryEnd)
 	{
-		this.memEnd = memEnd;
+		this.memoryEnd = memoryEnd;
 	}
 
 	public void setNumberFaults(int numberFaults)
@@ -99,7 +109,7 @@ public class EditFaultload31 extends ApplicationSupport
 		this.bitEnd = bitEnd;
 	}
 
-	public void setId(String id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}

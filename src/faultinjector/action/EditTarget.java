@@ -5,6 +5,18 @@ import java.util.List;
 import faultinjector.entity.Architecture;
 import faultinjector.entity.Target;
 
+/**
+ * This Action class accesses the database and provides the necessary data to populate the <s: radio> tag present in
+ * edit_target.jsp, with the available architectures. It also gets the target with the specified ID from the database,
+ * for editing purposes.
+ * 
+ * @author João Fernandes
+ * @see struts.xml
+ * @see ApplicationSupport
+ * @see Target
+ * @see Architecture
+ */
+
 public class EditTarget extends ApplicationSupport
 {
 	private static final long serialVersionUID = 4L;
