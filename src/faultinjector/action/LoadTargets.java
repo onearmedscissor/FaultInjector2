@@ -26,15 +26,16 @@ public class LoadTargets extends ApplicationSupport
 		this.targets = this.getExperimentService().findAllTargets();
 
 		System.out.println("LOAD TARGETS-------------------------------");
+		System.out.println();
 
 		for (Target t : this.targets)
 		{
-			System.out.println();
 			System.out.println("Target ID = " + t.getTargetId());
 			System.out.println("Target NAME = " + t.getName());
 			System.out.println("Target ARCHITECTURE = " + t.getArchitecture().getName());
 			System.out.println("Target IP = " + t.getIp());
 			System.out.println("Target OPERATING SYSTEM = " + t.getOperatingSystem());
+			System.out.println();
 		}
 
 		return SUCCESS;

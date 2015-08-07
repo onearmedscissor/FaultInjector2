@@ -157,7 +157,7 @@ footer {
 
 				<a href="new_workload.jsp" class="ink-button all-20" id="newworkload">Create new workload...</a>
 				<div class="column-group push-center">
-					<a href="#" class="ink-button double-vertical-space all-25" id="previous">&lt; Previous</a>
+					<button class="ink-button double-vertical-space all-25" id="previous">&lt; Previous</button>
 					<button class="ink-button double-vertical-space all-25 dynamicButton" id="next" disabled>Next &gt;</button>
 				</div>
 			</div>
@@ -214,7 +214,7 @@ footer {
 			$.ajax(
 			{
 				method : "POST",
-				url : "createexperiment30.action",
+				url : "createexperiment3backward.action",
 				data :
 				{
 					wid : wid
@@ -233,7 +233,7 @@ footer {
 			$.ajax(
 			{
 				method : "POST",
-				url : "createexperiment31.action",
+				url : "createexperiment3forward.action",
 				data :
 				{
 					wid : wid

@@ -102,7 +102,9 @@ footer {
 				<div class="all-15">
 					<nav class="ink-navigation">
 						<ul class="breadcrumbs green align-center">
-							<li><a href="#"><!-- Logout jaff --></a></li>
+							<li><a href="#">
+									<!-- Logout jaff -->
+							</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -130,11 +132,11 @@ footer {
 								<s:else>
 									<tr id="<s:property value="targetId"/>">
 								</s:else>
-									<td><a href="<s:url action="showtarget"><s:param name="id"><s:property value="targetId"/></s:param></s:url>" class="large all-100"><s:property value="name" /></a></td>
-									<td><a class="select ink-button all-100">select</a></td>
-									<td><a href="<s:url action="edittarget"><s:param name="id"><s:property value="targetId"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
-									<td><a href="<s:url action="deletetarget"><s:param name="id"><s:property value="targetId"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
-									<td class="align-center"><a class="help all-100">?</a></td>
+								<td><a href="<s:url action="showtarget"><s:param name="id"><s:property value="targetId"/></s:param></s:url>" class="large all-100"><s:property value="name" /></a></td>
+								<td><a class="select ink-button all-100">select</a></td>
+								<td><a href="<s:url action="edittarget"><s:param name="id"><s:property value="targetId"/></s:param></s:url>" class="ink-button all-100">edit</a></td>
+								<td><a href="<s:url action="deletetarget"><s:param name="id"><s:property value="targetId"/></s:param></s:url>" class="ink-button all-100 delete">delete</a></td>
+								<td class="align-center"><a class="help all-100">?</a></td>
 								</tr>
 							</s:iterator>
 						</s:if>
@@ -142,11 +144,11 @@ footer {
 				</table>
 
 				<div id="confirm-delete" class="ink-alert block" role="alert" style="display: none">
-				    <h4>Confirm delete: do you really want to delete this target?</h4>
-				    <button id="no" class="ink-button quarter-space all-20">Cancel</button>
-	                <button id="yes" class="ink-button quarter-space all-20">Confirm</button>
+					<h4>Confirm delete: do you really want to delete this target?</h4>
+					<button id="no" class="ink-button quarter-space all-20">Cancel</button>
+					<button id="yes" class="ink-button quarter-space all-20">Confirm</button>
 				</div>
-				
+
 				<div id="help-targets" class="ink-alert block info" role="alert" style="display: none">
 					<button class="ink-dismiss">&times;</button>
 					<h4>Target options menu</h4>
@@ -155,7 +157,7 @@ footer {
 
 				<a href="loadarchitectures" class="ink-button all-20" id="newtarget">Create new target...</a>
 				<div class="column-group push-center">
-					<a href="new_experiment_1.jsp" class="ink-button double-top-space all-25" id="previous">&lt; Previous</a>
+					<button class="ink-button double-top-space all-25" id="previous">&lt; Previous</button>
 					<button class="ink-button double-top-space all-25 dynamicButton" id="next" disabled>Next &gt;</button>
 				</div>
 			</div>
@@ -183,7 +185,7 @@ footer {
 			{
 				$('#help-targets').show();
 			});
-			
+
 			$('.delete').click(function(e)
 			{
 				e.preventDefault();
@@ -196,7 +198,7 @@ footer {
 					window.location.href = href;
 					$('#confirm-delete').hide();
 				});
-				
+
 				$('#no').click(function(event)
 				{
 					$('#confirm-delete').hide();
@@ -210,15 +212,18 @@ footer {
 		{
 			var tid = $('.highlight').attr("id");
 
-			$.ajax({
-				method: "POST",
-				url: "createexperiment2.action",
-				data: { tid : tid },
-				success:
-					function()
-					{
-						window.location = "createexperiment2.action";
-					}
+			$.ajax(
+			{
+				method : "POST",
+				url : "createexperiment2backward.action",
+				data :
+				{
+					tid : tid
+				},
+				success : function()
+				{
+					window.location = "new_experiment_1.jsp";
+				}
 			});
 		});
 
@@ -229,7 +234,7 @@ footer {
 			$.ajax(
 			{
 				method : "POST",
-				url : "createexperiment2.action",
+				url : "createexperiment2forward.action",
 				data :
 				{
 					tid : tid

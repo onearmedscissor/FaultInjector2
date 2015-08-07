@@ -49,6 +49,10 @@
 			<result name="success" type="redirectAction">loadtargets</result>
 			<result name="input">/new_experiment_1.jsp</result>
 		</action>
+		
+		<action name="createexperiment2backward" class="faultinjector.action.CreateExperiment2" method="execute">
+			<result name="success">/new_experiment_1.jsp</result>
+		</action>
 
 		<action name="clearnewexperimentbackward" class="faultinjector.action.ClearNewExperiment" method="execute">
 			<result name="success" type="redirectAction">loadexperiments</result>
@@ -87,11 +91,11 @@
 			<result name="input" type="redirectAction">loadarchitectures</result>
 		</action>
 
-		<action name="createexperiment2" class="faultinjector.action.CreateExperiment2" method="execute">
+		<action name="createexperiment2forward" class="faultinjector.action.CreateExperiment2" method="execute">
 			<result name="success" type="redirectAction">loadworkloads</result>
 		</action>
 
-		<action name="createexperiment30" class="faultinjector.action.CreateExperiment3" method="execute">
+		<action name="createexperiment3backward" class="faultinjector.action.CreateExperiment3" method="execute">
 			<result name="success" type="redirectAction">loadtargets</result>
 		</action>
 
@@ -124,12 +128,12 @@
 			<result name="input">/new_workload.jsp</result>
 		</action>
 
-		<action name="createexperiment31" class="faultinjector.action.CreateExperiment3" method="execute">
+		<action name="createexperiment3forward" class="faultinjector.action.CreateExperiment3" method="execute">
 			<result name="success" type="redirectAction">loadfaultloads</result>
 		</action>
 		
-		<action name="createexperiment40" class="faultinjector.action.CreateExperiment41" method="execute">
-			<result name="success">loadworkloads</result>
+		<action name="createexperiment4backward" class="faultinjector.action.CreateExperiment41" method="execute">
+			<result name="success" type="redirectAction">loadworkloads</result>
 		</action>
 
 		<action name="loadfaultloads" class="faultinjector.action.LoadFaultloads" method="execute">
@@ -235,7 +239,7 @@
 			<result name="input" type="redirectAction">createfaultload32</result>
 		</action>
 
-		<action name="createexperiment41" class="faultinjector.action.CreateExperiment41" method="execute">
+		<action name="createexperiment4forward" class="faultinjector.action.CreateExperiment41" method="execute">
 			<result name="success" type="redirectAction">createexperiment42</result>
 		</action>
 		

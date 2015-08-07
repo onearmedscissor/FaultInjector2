@@ -37,28 +37,32 @@ public class ShowWorkload extends ApplicationSupport
 
 		this.workload = service.findWorkload(id);
 
-		applications = workload.getApplications();
-
 		System.out.println("SHOW WORKLOAD-------------------------------");
-		System.out.println("Workload ID = " + workload.getWorkloadId());
-		System.out.println("Workload NAME = " + workload.getName());
 
-		for (Application a : applications)
+		if (workload != null)
 		{
-			System.out.println("Workload APP " + n + " NAME = " + a.getName());
+			applications = workload.getApplications();
 
-			n++;
+			System.out.println("Workload ID = " + workload.getWorkloadId());
+			System.out.println("Workload NAME = " + workload.getName());
+
+			for (Application a : applications)
+			{
+				System.out.println("Workload APP " + n + " NAME = " + a.getName());
+
+				n++;
+			}
+
+			injectionRuns = workload.getInjectionRuns();
+
+			for (InjectionRun i : injectionRuns)
+			{
+				System.out.println("Workload FAULTLOAD NAME = " + i.getFaultload().getName());
+				System.out.println("Workload OUTPUT FILENAME = " + i.getOutputFilename());
+			}
+
+			System.out.println("Workload TARGET NAME = " + workload.getTarget().getName());
 		}
-
-		injectionRuns = workload.getInjectionRuns();
-
-		for (InjectionRun i : injectionRuns)
-		{
-			System.out.println("Workload FAULTLOAD NAME = " + i.getFaultload().getName());
-			System.out.println("Workload OUTPUT FILENAME = " + i.getOutputFilename());
-		}
-
-		System.out.println("Workload TARGET NAME = " + workload.getTarget().getName());
 
 		return SUCCESS;
 	}

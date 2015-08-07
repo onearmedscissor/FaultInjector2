@@ -61,7 +61,7 @@ public class Workload implements Serializable
 		return this.workloadId;
 	}
 
-	public void setWorkloadId(int workloadlId)
+	public void setWorkloadId(int workloadId)
 	{
 		this.workloadId = workloadId;
 	}

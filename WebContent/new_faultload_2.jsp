@@ -131,7 +131,7 @@ footer {
 						<div class="column-group gutters">
 							<div class="control-group all-30 required">
 								<div class="column-group gutters">
-									<label for="memstart" class="all-66 align-right">Memory fault range</label>
+									<label for="memorystart" class="all-66 align-right">Memory fault range</label>
 									<div class="control all-33">
 										<s:textfield id="memorystart" name="memoryStart" value="%{#session.faultloadBean.memoryFaultRangeStart}" />
 									</div>
@@ -140,7 +140,7 @@ footer {
 							<div class="control-group all-15">
 								<div class="column-group">
 									<div class="all-5"></div>
-									<label for="memend" class="all-35 align-left">-</label>
+									<label for="memoryend" class="all-35 align-left">-</label>
 									<div class="control all-60">
 										<s:textfield id="memoryend" name="memoryEnd" value="%{#session.faultloadBean.memoryFaultRangeEnd}" />
 									</div>
@@ -235,22 +235,22 @@ footer {
 
 		if (value == "memory")
 		{
-			$('#memstart').attr("disabled", false);
-			$('#memend').attr("disabled", false);
+			$('#memorystart').attr("disabled", false);
+			$('#memoryend').attr("disabled", false);
 		}
 		else
 		{
-			$('#memstart').attr("disabled", true);
-			$('#memend').attr("disabled", true);
+			$('#memorystart').attr("disabled", true);
+			$('#memoryend').attr("disabled", true);
 		}
 
 		if ($('#numberfaults').val().match(/^\d+$/) && $('#numberfaults').val() > 0)
 		{
-			if ($('#memstart').is(':disabled') && $('#memend').is(':disabled'))
+			if ($('#memorystart').is(':disabled') && $('#memoryend').is(':disabled'))
 				check10 = "true";
 			else
 			{
-				if ($('#memstart').val().match(/^\d+$/) && $('#memend').val().match(/^\d+$/) && $('#memstart').val() > 0 && parseInt($('#memstart').val()) <= parseInt($('#memend').val()))
+				if ($('#memorystart').val().match(/^\d+$/) && $('#memoryend').val().match(/^\d+$/) && $('#memorystart').val() > 0 && parseInt($('#memorystart').val()) <= parseInt($('#memoryend').val()))
 					check10 = "true";
 				else
 					check10 = "false";
@@ -275,22 +275,22 @@ footer {
 
 			if (value == "memory")
 			{
-				$('#memstart').attr("disabled", false);
-				$('#memend').attr("disabled", false);
+				$('#memorystart').attr("disabled", false);
+				$('#memoryend').attr("disabled", false);
 			}
 			else
 			{
-				$('#memstart').attr("disabled", true);
-				$('#memend').attr("disabled", true);
+				$('#memorystart').attr("disabled", true);
+				$('#memoryend').attr("disabled", true);
 			}
 
 			if ($('#numberfaults').val().match(/^\d+$/) && $('#numberfaults').val() > 0)
 			{
-				if ($('#memstart').is(':disabled') && $('#memend').is(':disabled'))
+				if ($('#memorystart').is(':disabled') && $('#memoryend').is(':disabled'))
 					check10 = "true";
 				else
 				{
-					if ($('#memstart').val().match(/^\d+$/) && $('#memend').val().match(/^\d+$/) && $('#memstart').val() > 0 && parseInt($('#memstart').val()) <= parseInt($('#memend').val()))
+					if ($('#memorystart').val().match(/^\d+$/) && $('#memoryend').val().match(/^\d+$/) && $('#memorystart').val() > 0 && parseInt($('#memorystart').val()) <= parseInt($('#memoryend').val()))
 						check10 = "true";
 					else
 						check10 = "false";

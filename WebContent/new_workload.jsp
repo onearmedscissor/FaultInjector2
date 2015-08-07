@@ -175,8 +175,8 @@
 			var max_fields = 10; //maximum input boxes allowed
 			var wrapper = $("#textbox1"); //Fields wrapper
 			var add_button = $("#addapplication"); //Add button ID
-
-			var x = 1; //initlal text box count
+			
+			var x = 1; //initial text box count
 
 			$("#newworkload").on("click", "#addapplication", function(e)
 			{
@@ -187,7 +187,7 @@
 					x++; //text box increment
 
 					//add input box
-					$(wrapper).after('<div id="textbox'+x+'" class="control-group column-group gutters required">' + '<label for="app'+x+'name" class="all-20 align-right">Application #' + x + '</label>' + '<div class="control all-50">' + '<s:textfield id="app' + x + 'name" name="app' + x + 'Name" value="%{app' + x + 'Name}" />' + '</div>' + '<div class="all-5"><a class="remove_field">remove</a></div>' + '<div class="all-25"></div>' + '</div>');
+					$(wrapper).after('<div id="textbox'+x+'" class="control-group column-group gutters">' + '<label for="app'+x+'name" class="all-20 align-right">Application #' + x + '</label>' + '<div class="control all-50">' + '<s:textfield id="app' + x + 'name" name="app' + x + 'Name" value="%{app' + x + 'Name}" />' + '</div>' + '<div class="all-5"><a class="remove_field">remove</a></div>' + '<div class="all-25"></div>' + '</div>');
 
 					wrapper = $("#textbox" + x);
 

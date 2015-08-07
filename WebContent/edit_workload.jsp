@@ -118,7 +118,7 @@ footer {
 		<div class="column-group">
 			<div class="all-100">
 				<form action="saveworkload" class="ink-form all-100 small-100 tiny-100" method="post">
-					<fieldset>
+					<fieldset id="editworkload">
 						<s:hidden name="id" value="%{workload.workloadId}" />
 
 						<div class="control-group column-group gutters required">
@@ -129,18 +129,35 @@ footer {
 							<div class="all-30"></div>
 						</div>
 						
-						<s:iterator value="applications" status="appCounter">
-							<div class="control-group column-group gutters">
-								<s:label for="app%{#appCounter.count}name" cssClass="all-20 align-right" value="Application #%{#appCounter.count}" />
-								<div class="control all-50">
-									<s:textfield id="app%{#appCounter.count}name" name="app%{#appCounter.count}Name" value="%{name}" />
-								</div>
-								<div class="all-5"><a class="remove_field">remove</a></div>
-								<div class="all-25"></div>
+						<div id="textbox1" class="control-group column-group gutters required">
+							<label for="app1name" class="all-20 align-right">Application #1</label>
+							<div class="control all-50">
+								<s:textfield id="app1name" name="app1Name" value="%{applications[0].name}" />
 							</div>
-						</s:iterator>
-
+							<div class="all-30"></div>
+						</div>
+						
+						<s:if test="applications.size > 1">
+							<s:iterator value="applications" status="appCounter" begin="1">
+								<s:div id="textbox%{#appCounter.count+1}" cssClass="control-group column-group gutters">
+									<s:label for="app%{#appCounter.count+1}name" cssClass="all-20 align-right" value="Application #%{#appCounter.count+1}" />
+									<div class="control all-50">
+										<s:textfield id="app%{#appCounter.count+1}name" name="app%{#appCounter.count+1}Name" value="%{name}" />
+									</div>
+									<div class="all-5"><a class="remove_field">remove</a></div>
+									<div class="all-25"></div>
+								</s:div>
+							</s:iterator>
+						</s:if>
+						
 						<div class="column-group gutters">
+							<div class="all-20"></div>
+							<div class="all-80">
+								<button class="ink-button all-25" id="addapplication">+ Add new application...</button>
+							</div>
+						</div>
+
+						<div class="column-group gutters double-top-space">
 							<div class="all-20"></div>
 							<div class="all-80">
 								<button class="ink-button all-25" type="submit">Submit</button>
@@ -164,5 +181,59 @@ footer {
 
 	<script src="js/jquery/jquery-1.11.2.js"></script>
 	<script src="js/my-jquery.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			var max_fields = 10; //maximum input boxes allowed
+			var x = parseInt("<s:property value="applications.size"/>"); //initial text box count is the number of applications for this workload in the DB
+			var wrapper = $("#textbox" + x); //Fields wrapper
+			var add_button = $("#addapplication"); //Add button ID
+
+			$("#editworkload").on("click", "#addapplication", function(e)
+			{
+				e.preventDefault();
+
+				if (x < max_fields)
+				{ //max input box allowed
+					x++; //text box increment
+
+					//add input box
+					$(wrapper).after('<div id="textbox'+x+'" class="control-group column-group gutters">' + '<label for="app'+x+'name" class="all-20 align-right">Application #' + x + '</label>' + '<div class="control all-50">' + '<s:textfield id="app' + x + 'name" name="app' + x + 'Name" value="%{app' + x + 'Name}" />' + '</div>' + '<div class="all-5"><a class="remove_field">remove</a></div>' + '<div class="all-25"></div>' + '</div>');
+
+					wrapper = $("#textbox" + x);
+
+					if (x == max_fields)
+						$('#addapplication').attr("disabled", true);
+				}
+			});
+
+			$("#editworkload").on("click", ".remove_field", function(e) //user click on remove text
+			{
+				e.preventDefault();
+
+				var parent = $(this).parent('div').parent('div');
+
+				var n = $(parent).children('label').text().match(/[\d]/);
+				$(parent).remove();
+
+				var nextIndex = parseInt(n, 10);
+
+				// update label text and respective div IDs
+				$("label").slice(nextIndex).each(function(index)
+				{
+					$(this).text("Application #" + n);
+					$(this).parent('div').attr('id', 'textbox' + n);
+					n++;
+				});
+
+				x--;
+
+				wrapper = $("#textbox" + x);
+
+				$('#addapplication').attr("disabled", false);
+			});
+		});
+	</script>
 </body>
 </html>

@@ -40,35 +40,39 @@ public class ShowFaultload extends ApplicationSupport
 		this.faultload = service.findFaultload(id);
 
 		System.out.println("SHOW FAULTLOAD-------------------------------");
-		System.out.println("Faultload ID = " + faultload.getFaultloadId());
-		System.out.println("Faultload NAME = " + faultload.getName());
-		System.out.println("Faultload CREATION DATE = " + faultload.getCreationDate());
-		System.out.println("Faultload MEMORY RANGE BEGINNING = " + faultload.getMemoryRangeBeginning());
-		System.out.println("Faultload MEMORY RANGE END = " + faultload.getMemoryRangeEnd());
-		System.out.println("Faultload NUMBER OF FAULTS = " + faultload.getNumberFaults());
-		System.out.println("Faultload MEMORY TIME INTERVAL = " + faultload.getTimeInterval());
-		System.out.println("Faultload DESCRIPTION = " + faultload.getDescription());
 
-		if (faultload.getExperiment() != null)
-			System.out.println("Faultload EXPERIMENT NAME = " + faultload.getExperiment().getName());
-
-		injectionRuns = faultload.getInjectionRuns();
-
-		for (InjectionRun i : injectionRuns)
+		if (faultload != null)
 		{
-			System.out.println("Faultoad WORKLOAD NAME = " + i.getWorkload().getName());
-			System.out.println("Faultload OUTPUT FILENAME = " + i.getOutputFilename());
+			System.out.println("Faultload ID = " + faultload.getFaultloadId());
+			System.out.println("Faultload NAME = " + faultload.getName());
+			System.out.println("Faultload CREATION DATE = " + faultload.getCreationDate());
+			System.out.println("Faultload MEMORY RANGE BEGINNING = " + faultload.getMemoryRangeBeginning());
+			System.out.println("Faultload MEMORY RANGE END = " + faultload.getMemoryRangeEnd());
+			System.out.println("Faultload NUMBER OF FAULTS = " + faultload.getNumberFaults());
+			System.out.println("Faultload MEMORY TIME INTERVAL = " + faultload.getTimeInterval());
+			System.out.println("Faultload DESCRIPTION = " + faultload.getDescription());
+
+			if (faultload.getExperiment() != null)
+				System.out.println("Faultload EXPERIMENT NAME = " + faultload.getExperiment().getName());
+
+			injectionRuns = faultload.getInjectionRuns();
+
+			for (InjectionRun i : injectionRuns)
+			{
+				System.out.println("Faultoad WORKLOAD NAME = " + i.getWorkload().getName());
+				System.out.println("Faultload OUTPUT FILENAME = " + i.getOutputFilename());
+			}
+
+			faults = faultload.getFaults();
+
+			for (Fault f : faults)
+			{
+				System.out.println("Faultoad FAULT ID = " + f.getFaultId());
+				System.out.println("Faultload FAULT TYPE = " + f.getFaultType());
+			}
+
+			hardwareFaults = faults.get(0).getHardwareFaults();
 		}
-
-		faults = faultload.getFaults();
-
-		for (Fault f : faults)
-		{
-			System.out.println("Faultoad FAULT ID = " + f.getFaultId());
-			System.out.println("Faultload FAULT TYPE = " + f.getFaultType());
-		}
-
-		hardwareFaults = faults.get(0).getHardwareFaults();
 
 		return SUCCESS;
 	}

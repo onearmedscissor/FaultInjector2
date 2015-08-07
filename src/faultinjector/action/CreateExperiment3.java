@@ -29,8 +29,7 @@ public class CreateExperiment3 extends ApplicationSupport
 		else
 			experimentBean = (ExperimentBean) getSession().get("experimentBean");
 
-		if (wid != 0)
-			experimentBean.setWorkloadId(wid);
+		experimentBean.setWorkloadId(wid);
 
 		System.out.println("NEW EXPERIMENT 3-------------------------------");
 		System.out.println("New experiment NAME = " + experimentBean.getName());

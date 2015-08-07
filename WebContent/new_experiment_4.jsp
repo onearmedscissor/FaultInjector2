@@ -111,7 +111,6 @@
                 <div class="all-100">
                     <h2 class="bottom-space">Create new experiment [4/4]</h2>
                     
-                    <form action="createexperiment41" class="ink-form all-100 small-100 tiny-100" method="post">
 					<table class="ink-table hover alternating checkboxTable">
 	                	<thead>
 	                    	<tr>
@@ -126,12 +125,12 @@
 						</thead>
 						<tbody>
 	                  	<s:if test="faultloads.size > 0">
-							<s:iterator value="faultloads" status="flCounter">
+							<s:iterator value="faultloads">
 			                    <tr>
 			                    	<td>
 				                      	<div class="ink-form quarter-top-space">
 											<div class="control-group" style="margin:0">
-								                <ul class="control unstyled">
+								                <ul class="control unstyled" style="margin:0">
 									                <s:if test="#session.experimentBean != null">
 									                	<s:if test="#session.experimentBean.containsFaultloadId(faultloadId) == true">
 										                	<li style="margin:0"><input type="checkbox" class="cb" name="select" id="<s:property value="faultloadId"/>" value="" checked><label for=""></label></li>									            		
@@ -177,10 +176,9 @@
                     <hr />
 					<a href="clearnewfaultloadforward" class="ink-button all-20" id="newfaultload">+ Add new faultload...</a>
 	               	<div class="column-group push-center">
-                    	<a href="loadworkloads.action" class="ink-button double-vertical-space all-25" id="previous">&lt; Previous</a>
+                    	<button class="ink-button double-vertical-space all-25" id="previous">&lt; Previous</button>
 						<button id="finish" class="ink-button double-vertical-space all-25 dynamicButton" type="submit" disabled>Finish</button>
 	            	</div>
-	            	</form>
                 </div>
             </div>
 		</div>
@@ -251,7 +249,7 @@
      				$.ajax
      				({
      					method: "POST",
-     					url: "createexperiment40.action",
+     					url: "createexperiment4backward.action",
      					data: { fids : fids },
      					traditional: true,
      					success:
@@ -274,7 +272,7 @@
  				$.ajax
  				({
  					method: "POST",
- 					url: "createexperiment41.action",
+ 					url: "createexperiment4forward.action",
  					data: { fids : fids },
  					traditional: true,
  					success:

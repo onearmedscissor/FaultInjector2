@@ -29,8 +29,7 @@ public class CreateExperiment2 extends ApplicationSupport
 		else
 			experimentBean = (ExperimentBean) getSession().get("experimentBean");
 
-		if (tid != 0)
-			experimentBean.setTargetId(tid);
+		experimentBean.setTargetId(tid);
 
 		System.out.println("NEW EXPERIMENT 2-------------------------------");
 		System.out.println("New experiment NAME = " + experimentBean.getName());

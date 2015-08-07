@@ -26,7 +26,7 @@ public class ClearNewExperiment extends ApplicationSupport
 		{
 			experimentBean = (ExperimentBean) getSession().get("experimentBean");
 
-			System.out.println("EXPERIMENT BEAN RESET-------------------------------");
+			System.out.println("EXPERIMENT BEAN BEFORE RESET-------------------------------");
 			System.out.println("New experiment NAME = " + experimentBean.getName());
 			System.out.println("New experiment DESCRIPTION = " + experimentBean.getDescription());
 			System.out.println("New experiment SELECTED TARGET ID = " + experimentBean.getTargetId());

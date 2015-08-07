@@ -134,8 +134,8 @@ footer {
 							<td class="all-75 fw-300"><s:property value="faultload.description" /></td>
 						</tr>
 						<tr>
-							<td class="all-25 align-right fw-400">Time interval (ms)</td>
-							<td class="all-75 fw-300"><s:property value="faultload.timeInterval" /></td>
+							<td class="all-25 align-right fw-400">Time interval</td>
+							<td class="all-75 fw-300"><s:property value="faultload.timeInterval" /> ms</td>
 						</tr>
 						<s:iterator value="faults">
 							<s:iterator value="hardwareFaults">
@@ -179,7 +179,7 @@ footer {
 						</s:iterator>
 						<s:iterator value="faults">
 							<tr>
-								<td class="all-25 align-right fw-400">Mode</td>
+								<td class="all-25 align-right fw-400">Fault mode</td>
 								<td class="all-75 fw-300"><s:property value="faultMode.name" /></td>
 							</tr>
 							<tr>
@@ -192,36 +192,35 @@ footer {
 									<td class="all-75 fw-300">temporal</td>
 								</tr>
 								<tr>
-									<td class="all-25 align-right fw-400">Temporal trigger start (ms)</td>
-									<td class="all-75 fw-300"><s:property value="timeStart" /></td>
+									<td class="all-25 align-right fw-400">Temporal trigger start</td>
+									<td class="all-75 fw-300"><s:property value="timeStart" /> ms</td>
 								</tr>
 								<tr>
-									<td class="all-25 align-right fw-400">Temporal trigger end (ms)</td>
-									<td class="all-75 fw-300"><s:property value="timeEnd" /></td>
+									<td class="all-25 align-right fw-400">Temporal trigger end</td>
+									<td class="all-75 fw-300"><s:property value="timeEnd" /> ms</td>
 								</tr>
 							</s:if>
-							<s:elseif test="triggerType=='sc'">
-								<tr>
-									<td class="all-25 align-right fw-400">Fault trigger type</td>
-									<td class="all-75 fw-300">spatial (code segment)</td>
-								</tr>
-								<tr>
-									<td class="all-25 align-right fw-400">Mode</td>
-									<td class="all-75 fw-300"><s:property value="readAddress" /></td>
-								</tr>
-								<tr>
-									<td class="all-25 align-right fw-400">Memory address</td>
-									<td class="all-75 fw-300"><s:property value="memoryAddress" /></td>
-								</tr>
-							</s:elseif>
 							<s:else>
+								<s:if test="triggerType=='sc'">
+									<tr>
+										<td class="all-25 align-right fw-400">Fault trigger type</td>
+										<td class="all-75 fw-300">spatial (code segment)</td>
+									</tr>
+								</s:if>
+								<s:else>
+									<tr>
+										<td class="all-25 align-right fw-400">Fault trigger type</td>
+										<td class="all-75 fw-300">spatial (data segment)</td>
+									</tr>
+								</s:else>
 								<tr>
-									<td class="all-25 align-right fw-400">Fault trigger type</td>
-									<td class="all-75 fw-300">spatial (data segment)</td>
-								</tr>
-								<tr>
-									<td class="all-25 align-right fw-400">Mode</td>
-									<td class="all-75 fw-300"><s:property value="readAddress" /></td>
+									<td class="all-25 align-right fw-400">Access type</td>
+									<s:if test="readAddress">
+										<td class="all-75 fw-300">read</td>
+									</s:if>
+									<s:else>
+										<td class="all-75 fw-300">write</td>
+									</s:else>
 								</tr>
 								<tr>
 									<td class="all-25 align-right fw-400">Memory address</td>
